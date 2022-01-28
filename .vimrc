@@ -12,3 +12,5 @@ autocmd BufWritePre * %s/\s\+$//e
 nnoremap my_templates :-1read $HOME/bin/my_templates/
 " to read the concrete file, do not name command with insert character such as aAiIoO, <CR> => ENTER
 " nnoremap <cmdname> :-3read $HOME/path/to/file<CR>4j2wf#a
+" to fix color problem in tmux
+set background=dark
