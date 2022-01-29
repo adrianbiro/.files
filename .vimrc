@@ -1,4 +1,6 @@
 syntax on
+filetype plugin on
+set nocompatible
 set tabstop=4 softtabstop=4
 set exrc
 set nu
