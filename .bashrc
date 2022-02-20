@@ -6,6 +6,6 @@ export PATH=$HOME/bin:$PATH
 # to edit content of cmdline in vim crtl x ctrl e
 export EDITOR="/usr/bin/vim"
 alias path='echo -e ${PATH//:/\\n}'
-alias cg='cd ~/bin/gits/'
-alias clp='cd ~/bin/gits/learn/python/'
-alias cr='cd ~/bin/gits/ROZROBENE/'
+alias cg='cd ~/bin/gits/; ls'
+alias clp='cd ~/bin/gits/learn/python/; ls'
+alias cr='cd ~/bin/gits/ROZROBENE/; ls'
