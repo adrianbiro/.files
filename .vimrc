@@ -29,7 +29,8 @@ imap <F4> <ESC> :set list! <CR>i
 nnoremap my_tm :-1read $HOME/bin/gits/my_templates/
 " to read the concrete file, do not name command with insert character such as aAiIoO, <CR> (ENTER)
 " nnoremap <cmdname> :-3read $HOME/path/to/file<CR>4j2wf#a
-" to fix color problem in tmux
+""""""""""
+" to fix color problem in TMUX
 set background=dark
 "Autocorrect
 abbr zyper zypper
@@ -44,8 +45,11 @@ autocmd BufWinLeave *.* silent loadview
 
 """""""""""""""""""""""""""""""""""""""""""""""""""
 "NETWR :Explore :Vex
-" !!!try <f2>!!! :qa! fo error 162: No write since last change for buffer
 
+" deletes netrw's hidden buffer
+autocmd FileType netrw setl bufhidden=delete
+"recursive search of dirs for search find [file name]
+set path+=**
 " Tree like displaying of files
 let g:netrw_liststyle = 3
 " recursive copy
@@ -60,5 +64,5 @@ let g:netrw_banner=0
 let ghregex='\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_list_hide=ghregex
 "current dir and browsing dir are synced
-"let g:netrw_keepdir = 0
+"let g:netrw_keepdir = 20
 
