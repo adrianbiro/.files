@@ -26,9 +26,10 @@ nmap <F4> :set list! <CR>
 imap <F4> <ESC> :set list! <CR>i
 
 " read file template a from directory, to chose file use wildmenu with TAB
-nnoremap my_tm :-1read $HOME/bin/gits/my_templates/
+nnoremap my_tm :-1read ~/.vim/my_templates/
 " to read the concrete file, do not name command with insert character such as aAiIoO, <CR> (ENTER)
 " nnoremap <cmdname> :-3read $HOME/path/to/file<CR>4j2wf#a
+nmap <F12> :tabe ~/.vim/pomoc.md <CR>
 """"""""""
 " to fix color problem in TMUX
 set background=dark
@@ -64,5 +65,5 @@ let g:netrw_banner=0
 let ghregex='\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_list_hide=ghregex
 "current dir and browsing dir are synced
-"let g:netrw_keepdir = 20
+"let g:netrw_keepdir = 0
 
