@@ -37,3 +37,28 @@ abbr zyper zypper
 set showbreak=\ \ \ \ \ \ \ \
 "Map F2 Buffers to tabs Normal mode
 nmap <F2> :tab ball <CR>
+
+"to save folding select text 'zf' to fold 'zo' to unfold
+autocmd BufWinLeave *.* mkview
+autocmd BufWinLeave *.* silent loadview
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+"NETWR :Explore :Vex
+" !!!try <f2>!!! :qa! fo error 162: No write since last change for buffer
+
+" Tree like displaying of files
+let g:netrw_liststyle = 3
+" recursive copy
+let g:netrw_localcopydircmd = 'cp -r'
+" open splits to the right
+let g:netrw_prewiev=1
+"default window size on split 0 to equal
+let g:netrw_winsize = 0
+"Turn off help banner I to show
+let g:netrw_banner=0
+"Hide the dot files on startup 'gh' to show
+let ghregex='\(^\|\s\s\)\zs\.\S\+'
+let g:netrw_list_hide=ghregex
+"current dir and browsing dir are synced
+"let g:netrw_keepdir = 0
+
