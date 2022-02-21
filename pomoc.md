@@ -15,7 +15,7 @@ buffers to tab normal \<F2\>
 
 ## Netwr
 
-:Vex open in vertacal split
+:Vex open in vertiacal split
 
 I show help banner
 
