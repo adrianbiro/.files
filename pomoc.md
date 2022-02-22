@@ -2,6 +2,8 @@
 
 THIS HELP \<12\>
 
+syntax checker \<leader\> \\1234
+
 relativenumber on/off normal/insert \<F3\>
 
 number on/off normal \<leader\> \\ \<F3\>

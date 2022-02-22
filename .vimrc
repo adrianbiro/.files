@@ -18,7 +18,7 @@ set wildmenu
 autocmd BufWritePre * %s/\s\+$//e
 
 "to show tab character like ^I and space on end of line like $
-set list
+"set list
 "custom format of list
 set listchars=eol:⏎,tab:>-,trail:␣,extends:>,precedes:<
 "to toge this by <F4> in Normal and Insert modes
@@ -29,7 +29,7 @@ imap <F4> <ESC> :set list! <CR>i
 nnoremap my_tm :-1read ~/.vim/my_templates/
 " to read the concrete file, do not name command with insert character such as aAiIoO, <CR> (ENTER)
 " nnoremap <cmdname> :-3read $HOME/path/to/file<CR>4j2wf#a
-nmap <F12> :tabe ~/.vim/pomoc.md <CR>
+nmap <F12> :! clear; cat ~/.vim/pomoc.md <CR>
 """"""""""
 " to fix color problem in TMUX
 set background=dark
@@ -66,4 +66,20 @@ let ghregex='\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_list_hide=ghregex
 "current dir and browsing dir are synced
 "let g:netrw_keepdir = 0
+
+
+""""""""""""""""""""""""""""""
+"Plugin
+nmap <leader>1234 :let g:syntastic_check_on_open       = 1 <CR> :w <CR>
+set runtimepath^=~/.vim/pack/syntastic-master
+"let g:syntastic_check_on_open       = 1
+let g:syntastic_check_on_wq         = 0
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+
+
+
 
