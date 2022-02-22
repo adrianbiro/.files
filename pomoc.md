@@ -2,7 +2,7 @@
 
 THIS HELP \<12\>
 
-syntax checker \<leader\> \\1234
+syntax checker \<leader\> \\4
 
 relativenumber on/off normal/insert \<F3\>
 
