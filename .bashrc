@@ -9,3 +9,16 @@ alias path='echo -e ${PATH//:/\\n}'
 alias cg='cd ~/bin/gits/; ls'
 alias clp='cd ~/bin/gits/learn/python/; ls'
 alias cr='cd ~/bin/gits/ROZROBENE/; ls'
+
+export GITS="~/bin/gits"
+export DOTFILES="$GITS/.files"
+export LEARN="$GITS/learn"
+export CDPATH=".:$GITS:$DOTFILES:$LEARN:$HOME"
+alias cdpath='echo -e ${CDPATH//:/\\n}'
+
+
+# in man bash PROMPTING
+PS1="\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/') "
+#PS1="\u@\h:\w> "
+
+
