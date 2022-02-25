@@ -9,6 +9,24 @@ alias path='echo -e ${PATH//:/\\n}'
 alias cg='cd ~/bin/gits/; ls'
 alias clp='cd ~/bin/gits/learn/python/; ls'
 alias cr='cd ~/bin/gits/ROZROBENE/; ls'
+alias egrep='egrep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias grep='grep --color=auto'
+alias ip='ip --color=auto'
+alias l='ls -alF'
+alias la='ls -la'
+alias ll='ls -l'
+alias ls='_ls'
+alias ls-l='ls -l'
+alias dir='ls -l'
+alias md='mkdir -p'
+alias o='less'
+alias rd='rmdir'
+alias rehash='hash -r'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias cd..='cd ..'
+
 
 export GITS="~/bin/gits"
 export DOTFILES="$GITS/.files"
@@ -21,4 +39,9 @@ alias cdpath='echo -e ${CDPATH//:/\\n}'
 PS1="\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/') "
 #PS1="\u@\h:\w> "
 
-
+function cl() {
+	if [ ! -z "$1" ]; then
+		builtin cd $1 && ls
+	else cd ~ && ls
+	fi
+}

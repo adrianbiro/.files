@@ -29,7 +29,8 @@ imap <F4> <ESC> :set list! <CR>i
 nnoremap my_tm :-1read ~/.vim/my_templates/
 " to read the concrete file, do not name command with insert character such as aAiIoO, <CR> (ENTER)
 " nnoremap <cmdname> :-3read $HOME/path/to/file<CR>4j2wf#a
-nmap <F12> :! clear; cat ~/.vim/pomoc.md <CR>
+nmap <F12> :! less ~/.vim/pomoc.md <CR>
+"nmap <F12> :vsp ~/.vim/pomoc.md <CR>
 """"""""""
 " to fix color problem in TMUX
 set background=dark
