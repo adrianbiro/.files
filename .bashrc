@@ -9,6 +9,7 @@ alias path='echo -e ${PATH//:/\\n}'
 alias cg='cd ~/bin/gits/; ls'
 alias clp='cd ~/bin/gits/learn/python/; ls'
 alias cr='cd ~/bin/gits/ROZROBENE/; ls'
+alias ch='cd ~/bin/gits/ROZROBENE/hint.md/; ls'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
@@ -28,6 +29,14 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias cd..='cd ..'
 
+# Pretty-print man(1) pages.
+export LESS_TERMCAP_mb=$'\E[1;31m'
+export LESS_TERMCAP_md=$'\E[1;31m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[1;33m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[1;32m'
 
 export GITS="~/bin/gits"
 export DOTFILES="$GITS/.files"
