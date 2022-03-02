@@ -39,7 +39,7 @@ export LESS_TERMCAP_se=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[1;32m'
 
 export GITS="~/bin/gits"
-export DOTFILES="$GITS/.files"
+export DOTFILES="$GITS/dot_files"
 export LEARN="$GITS/learn"
 export CDPATH=".:$GITS:$DOTFILES:$LEARN:$HOME"
 alias cdpath='echo -e ${CDPATH//:/\\n}'
