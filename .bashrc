@@ -44,7 +44,6 @@ export LEARN="$GITS/learn"
 export CDPATH=".:$GITS:$DOTFILES:$LEARN:$HOME"
 alias cdpath='echo -e ${CDPATH//:/\\n}'
 
-#alias dockrmall="docker rm -f $(docker ps -a | awk 'NR>1 {print $NF}')"
 
 # in man bash PROMPTING
 PS1="\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/') "
@@ -55,4 +54,8 @@ function cl() {
 		builtin cd $1 && ls
 	else cd ~ && ls
 	fi
+}
+
+function dockrmall() {
+	docker rm -f $(docker ps -a | awk 'NR>1 {print $NF}')
 }
