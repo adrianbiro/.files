@@ -20,7 +20,7 @@ alias ll='ls -l'
 alias ls='_ls'
 alias ls-l='ls -l'
 #alias dir='echo -e "UnixMode     User   Group Size LastWriteTime   Name\n--------     ----   ----- ---- -------------   ----"; ls -l'
-alias dir='green="\033[0;32m"; clear="\033[0m"; printf "\n\tDirectory: $(pwd)\n\n${green}UnixMode     User   Group Size LastWriteTime Name\n--------     ----   ----- ---- ------------- ----${clear}\n\t"; ls -l'
+#alias dir='green="\033[0;32m"; clear="\033[0m"; printf "\n\tDirectory: $(pwd)\n\n${green}UnixMode     User   Group Size LastWriteTime Name\n--------     ----   ----- ---- ------------- ----${clear}\n\t"; ls -l'
 alias md='mkdir -p'
 alias o='less'
 alias rd='rmdir'
@@ -44,6 +44,7 @@ export LEARN="$GITS/learn"
 export CDPATH=".:$GITS:$DOTFILES:$LEARN:$HOME"
 alias cdpath='echo -e ${CDPATH//:/\\n}'
 
+#alias dockrmall="docker rm -f $(docker ps -a | awk 'NR>1 {print $NF}')"
 
 # in man bash PROMPTING
 PS1="\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/') "
