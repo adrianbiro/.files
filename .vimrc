@@ -71,8 +71,8 @@ let g:netrw_list_hide=ghregex
 
 """"""""""""""""""""""""""""""
 "Plugin
-nmap <leader>4 :let g:syntastic_check_on_open       = 1 <CR> :w <CR>
-set runtimepath^=~/.vim/pack/syntastic-master
+"nmap <leader>4 :let g:syntastic_check_on_open       = 1 <CR> :w <CR>
+"set runtimepath^=~/.vim/pack/syntastic-master
 "let g:syntastic_check_on_open       = 1
 let g:syntastic_check_on_wq         = 0
 let g:syntastic_always_populate_loc_list = 1
