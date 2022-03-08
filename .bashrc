@@ -45,6 +45,8 @@ export LEARN="$GITS/learn"
 export CDPATH=".:$GITS:$DOTFILES:$LEARN:$HOME"
 alias cdpath='echo -e ${CDPATH//:/\\n}'
 
+alias mtree='tree -pFRC -h --dirsfirst .'
+alias atree='tree -apFRC -h -L 3 --dirsfirst -I .git .'
 
 # in man bash PROMPTING
 PS1="\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/') "
@@ -60,3 +62,5 @@ function cl() {
 function dockrmall() {
 	docker rm -f $(docker ps -a | awk 'NR>1 {print $NF}')
 }
+
+
