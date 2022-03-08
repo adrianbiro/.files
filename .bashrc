@@ -48,6 +48,10 @@ alias cdpath='echo -e ${CDPATH//:/\\n}'
 alias mtree='tree -pFRC -h --dirsfirst .'
 alias atree='tree -apFRC -h -L 3 --dirsfirst -I .git .'
 
+# to disable -u	it's for extended glob patterns like ls **/*
+# grep -d skip 'text_string' **/* this is similar to grep -d skip -R 'text_string'
+shopt -s globstar
+
 # in man bash PROMPTING
 PS1="\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/') "
 #PS1="\u@\h:\w> "
