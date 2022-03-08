@@ -31,13 +31,21 @@ alias cd..='cd ..'
 
 alias pscpu='ps aux --sort -pcpu | head -n30 | less -S'
 # Pretty-print man(1) pages.
-export LESS_TERMCAP_mb=$'\E[1;31m'
-export LESS_TERMCAP_md=$'\E[1;31m'
+#export LESS_TERMCAP_mb=$'\E[1;31m'
+#export LESS_TERMCAP_md=$'\E[1;31m'
+#export LESS_TERMCAP_me=$'\E[0m'
+#export LESS_TERMCAP_ue=$'\E[0m'
+#export LESS_TERMCAP_so=$'\E[1;33m'
+#export LESS_TERMCAP_se=$'\E[0m'
+#export LESS_TERMCAP_us=$'\E[1;32m'
+
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;33m'
 export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m' # end the info box
+export LESS_TERMCAP_so=$'\E[01;42;30m' # begin the info box
 export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[1;33m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[1;32m'
+export LESS_TERMCAP_us=$'\E[01;36m'
 
 export GITS="~/bin/gits"
 export DOTFILES="$GITS/dot_files"
@@ -51,6 +59,9 @@ alias atree='tree -apFRC -h -L 3 --dirsfirst -I .git .'
 # to disable -u	it's for extended glob patterns like ls **/*
 # grep -d skip 'text_string' **/* this is similar to grep -d skip -R 'text_string'
 shopt -s globstar
+# Allow multiple terminals write to history file
+shopt -s histappend
+
 
 # in man bash PROMPTING
 PS1="\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/') "
