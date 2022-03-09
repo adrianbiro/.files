@@ -1,5 +1,3 @@
-# Stopwatch
-alias timer='echo "Timer started. Stop with Ctrl-D." && date && time cat && date'
 alias nnn='nnn -l'
 MAN_POSIXLY_CORRECT=1
 export PATH=$HOME/bin:$PATH
@@ -69,7 +67,8 @@ PS1="\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/
 
 function cl() {
 	if [ ! -z "$1" ]; then
-		builtin cd $1 && ls
+		cd $1 && ls
+#		builtin cd $1 && ls
 	else cd ~ && ls
 	fi
 }
@@ -79,3 +78,9 @@ function dockrmall() {
 }
 
 
+# Stopwatch
+function timer() {
+  local green="\033[0;32m"
+  local clear="\033[0m"
+  printf "${green}Timer started. Stop with Ctrl-D.${clear}\n" && date && time cat && date
+}
