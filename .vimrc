@@ -1,3 +1,5 @@
+" UNFOLD by z o
+" SYNTAX, FILETYPE, etc "{{{
 syntax on
 filetype plugin on
 filetype indent on
@@ -14,17 +16,20 @@ augroup configgroup
 augroup END
 set encoding=utf-8
 set fileformats=unix,dos,mac
-
+" auto delete all trailing whitespace on save
+autocmd BufWritePre * %s/\s\+$//e
+" I dont like wrapping lines to mix with the line numbers
+set showbreak=\ \ \ \ \ \ \ \
+"}}}
+" MIX "{{{
 "set ruler
 "set paste
 set showcmd
 set incsearch
 set scrolloff=8
 set wildmenu
-" auto delete all trailing whitespace on save
-autocmd BufWritePre * %s/\s\+$//e
 set exrc
-
+"}}}
 " REMAPPING and co. {{{
 set nu
 set relativenumber
@@ -52,7 +57,6 @@ nmap <F12> :! less ~/.vim/pomoc.md <CR>
 "Map F2 Buffers to tabs Normal mode
 nmap <F2> :tab ball <CR>
 "}}}
-
 " TMUX {{{
 " to fix color problem in TMUX
 set background=dark
@@ -68,19 +72,14 @@ set timeoutlen=1000	"time(ms) to wait for key mappings
 "    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 "endif
 "}}}
-
-"Autocorrect
+"AUTOCORECT "{{{
 abbr zyper zypper
-" I dont like wrapping lines to mix with the line numbers
-set showbreak=\ \ \ \ \ \ \ \
-
+"}}}
 " FOLDING {{{
 "to save folding select text 'zf' to fold 'zo' to unfold
 autocmd BufWinLeave *.* mkview
 autocmd BufWinLeave *.* silent loadview
 "}}}
-
-
 "NETWR :Explore :Vex {{{
 
 " deletes netrw's hidden buffer
@@ -103,9 +102,8 @@ let g:netrw_list_hide=ghregex
 "current dir and browsing dir are synced
 "let g:netrw_keepdir = 0
 "}}}
-
-
-"Plugin	{{{
+"{{{
+"Plugin	{{{}}}
 "nmap <leader>4 :let g:syntastic_check_on_open       = 1 <CR> :w <CR>
 "set runtimepath^=~/.vim/pack/syntastic-master
 "let g:syntastic_check_on_open       = 1
@@ -116,12 +114,10 @@ set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 "}}}
-
-"folding for this file
-"foldmethod=marker {{{ "}}}
-"foldlevel=0
-"set modelines=1
-"vim:foldmethod=marker:foldlevel=0
-
+"folding for this file "{{{
+set foldmethod=marker
+set foldlevel=0
+set modelines=1
+"}}}
 
 
