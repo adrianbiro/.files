@@ -20,7 +20,7 @@ set fileformats=unix,dos,mac
 autocmd BufWritePre * %s/\s\+$//e
 " I dont like wrapping lines to mix with the line numbers
 set showbreak=\ \ \ \ \ \ \ \
-"}}}
+"}}}{{{}}}
 
 " MIX "{{{
 "set ruler
@@ -84,12 +84,6 @@ set timeoutlen=1000	"time(ms) to wait for key mappings
 abbr zyper zypper
 "}}}
 
-" FOLDING {{{
-"to save folding select text 'zf' to fold 'zo' to unfold
-autocmd BufWinLeave *.* mkview
-autocmd BufWinLeave *.* silent loadview
-"}}}
-
 "NETWR :Explore :Vex {{{
 " deletes netrw's hidden buffer
 autocmd FileType netrw setl bufhidden=delete
@@ -125,8 +119,12 @@ let g:netrw_list_hide=ghregex
 "}}}
 
 "folding for this file "{{{
-set foldmethod=marker
-set foldlevel=0
+"to save folding select text 'zf' to fold 'zo' to unfold
+autocmd BufWinLeave *.* mkview
+autocmd BufWinLeave *.* silent loadview
+set foldmethod=marker       " fold by marks no by indentation
+"foldmethod=indent
+set foldlevel=0             " close folds by default
 set modelines=1
 "}}}
 

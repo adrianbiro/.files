@@ -109,5 +109,7 @@ function timer() {
   local clear="\033[0m"
   printf "${green}Timer started. Stop with Ctrl-D.${clear}\n" && date && time cat && date
 }
+#TODO #{{{
 #alias dir='echo -e "UnixMode     User   Group Size LastWriteTime   Name\n--------     ----   ----- ---- -------------   ----"; ls -l'
 #alias dir='green="\033[0;32m"; clear="\033[0m"; printf "\n\tDirectory: $(pwd)\n\n${green}UnixMode     User   Group Size LastWriteTime Name\n--------     ----   ----- ---- ------------- ----${clear}\n\t"; ls -l'
+#}}}
