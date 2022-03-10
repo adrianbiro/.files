@@ -1,5 +1,6 @@
 #global config
 MAN_POSIXLY_CORRECT=1
+HISTTIMEFORMAT="%Y-%m-%d %T "
 export PATH=$HOME/bin:$PATH
 # to edit content of cmdline in vim crtl x ctrl e; to set vi mode for readline "set -o vi"
 export EDITOR="/usr/bin/vim"
