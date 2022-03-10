@@ -20,7 +20,7 @@ set fileformats=unix,dos,mac
 autocmd BufWritePre * %s/\s\+$//e
 " I dont like wrapping lines to mix with the line numbers
 set showbreak=\ \ \ \ \ \ \ \
-"}}}{{{}}}
+"}}}
 
 " MIX "{{{
 set showcmd
