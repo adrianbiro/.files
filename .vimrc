@@ -23,16 +23,16 @@ set showbreak=\ \ \ \ \ \ \ \
 "}}}{{{}}}
 
 " MIX "{{{
-"set ruler
-"set paste
 set showcmd
 set incsearch
-set scrolloff=8
+set scrolloff=10
 set wildmenu
 set exrc
 set title       "set window title by currently edited file (terminal tab dialog)
-set mouse=a
-set confirm     "when closing an unsaved file
+"set ruler
+"set paste
+"set mouse=a
+"set confirm     "when closing an unsaved file
 "}}}
 
 " REMAPPING, NUMBERS, TABS and co. {{{
@@ -67,9 +67,9 @@ set tabpagemax=30
 " TMUX {{{
 " to fix color problem in TMUX
 set background=dark
-set esckeys		"allows function keys to be recognized in Insert mode
-set ttimeoutlen=20	"timeout for a key code mapping
-set timeoutlen=1000	"time(ms) to wait for key mappings
+"set esckeys		"allows function keys to be recognized in Insert mode
+"set ttimeoutlen=20	"timeout for a key code mapping
+"set timeoutlen=1000	"time(ms) to wait for key mappings
 " allows cursor change in tmux mode
 "if exists('$TMUX')
 "    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
