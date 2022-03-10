@@ -1,6 +1,6 @@
 " UNFOLD by z o
 " SYNTAX, FILETYPE, etc "{{{
-syntax on
+syntax on"
 filetype plugin on
 filetype indent on
 set autoindent smartindent
@@ -8,12 +8,12 @@ set nocompatible
 set tabstop=4 softtabstop=4
 set expandtab
 augroup configgroup
-  autocmd FileType python setl tabstop=4|setl shiftwidth=4|setl softtabstop=4
+  autocmd FileType python setl tabstop=4|setl shiftwidth=4|setl softtabstop=4"
   autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab autoindent
   autocmd BufEnter *.sh setlocal tabstop=2
   autocmd BufEnter *.sh setlocal shiftwidth=2
   autocmd BufEnter *.sh setlocal softtabstop=2
-augroup END
+augroup END"
 set encoding=utf-8
 set fileformats=unix,dos,mac
 " auto delete all trailing whitespace on save
@@ -21,6 +21,7 @@ autocmd BufWritePre * %s/\s\+$//e
 " I dont like wrapping lines to mix with the line numbers
 set showbreak=\ \ \ \ \ \ \ \
 "}}}
+
 " MIX "{{{
 "set ruler
 "set paste
@@ -29,8 +30,12 @@ set incsearch
 set scrolloff=8
 set wildmenu
 set exrc
+set title       "set window title by currently edited file (terminal tab dialog)
+set mouse=a
+set confirm     "when closing an unsaved file
 "}}}
-" REMAPPING and co. {{{
+
+" REMAPPING, NUMBERS, TABS and co. {{{
 set nu
 set relativenumber
 "Map F3 to togle relativenumbers Normal mode
@@ -56,7 +61,9 @@ nmap <F12> :! less ~/.vim/pomoc.md <CR>
 "nmap <F12> :vsp ~/.vim/pomoc.md <CR>
 "Map F2 Buffers to tabs Normal mode
 nmap <F2> :tab ball <CR>
+set tabpagemax=30
 "}}}
+
 " TMUX {{{
 " to fix color problem in TMUX
 set background=dark
@@ -72,16 +79,18 @@ set timeoutlen=1000	"time(ms) to wait for key mappings
 "    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 "endif
 "}}}
+
 "AUTOCORECT "{{{
 abbr zyper zypper
 "}}}
+
 " FOLDING {{{
 "to save folding select text 'zf' to fold 'zo' to unfold
 autocmd BufWinLeave *.* mkview
 autocmd BufWinLeave *.* silent loadview
 "}}}
-"NETWR :Explore :Vex {{{
 
+"NETWR :Explore :Vex {{{
 " deletes netrw's hidden buffer
 autocmd FileType netrw setl bufhidden=delete
 "recursive search of dirs for search find [file name]
@@ -102,22 +111,22 @@ let g:netrw_list_hide=ghregex
 "current dir and browsing dir are synced
 "let g:netrw_keepdir = 0
 "}}}
-"{{{
-"Plugin	{{{}}}
+
+"PLUGIN "{{{
 "nmap <leader>4 :let g:syntastic_check_on_open       = 1 <CR> :w <CR>
 "set runtimepath^=~/.vim/pack/syntastic-master
 "let g:syntastic_check_on_open       = 1
-let g:syntastic_check_on_wq         = 0
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"let g:syntastic_check_on_wq         = 0
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 1
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 "}}}
+
 "folding for this file "{{{
 set foldmethod=marker
 set foldlevel=0
 set modelines=1
 "}}}
-
 
