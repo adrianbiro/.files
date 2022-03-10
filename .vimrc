@@ -1,7 +1,18 @@
 syntax on
 filetype plugin on
+filetype indent on
+set autoindent smartindent
 set nocompatible
 set tabstop=4 softtabstop=4
+augroup configgroup
+  autocmd FileType python setl tabstop=4|setl shiftwidth=4|setl softtabstop=4
+  autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab autoindent
+  autocmd BufEnter *.sh setlocal tabstop=2
+  autocmd BufEnter *.sh setlocal shiftwidth=2
+  autocmd BufEnter *.sh setlocal softtabstop=2
+augroup END
+"set ruler
+"set paste
 set exrc
 set nu
 set relativenumber
@@ -34,6 +45,14 @@ nmap <F12> :! less ~/.vim/pomoc.md <CR>
 """"""""""
 " to fix color problem in TMUX
 set background=dark
+" allows cursor change in tmux mode
+"if exists('$TMUX')
+"    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+"    let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+"else
+"    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+"    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+"endif
 "Autocorrect
 abbr zyper zypper
 " I dont like wrapping lines to mix with the line numbers
