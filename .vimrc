@@ -4,6 +4,7 @@ filetype indent on
 set autoindent smartindent
 set nocompatible
 set tabstop=4 softtabstop=4
+set expandtab
 augroup configgroup
   autocmd FileType python setl tabstop=4|setl shiftwidth=4|setl softtabstop=4
   autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab autoindent
@@ -11,9 +12,20 @@ augroup configgroup
   autocmd BufEnter *.sh setlocal shiftwidth=2
   autocmd BufEnter *.sh setlocal softtabstop=2
 augroup END
+set encoding=utf-8
+set fileformats=unix,dos,mac
+
 "set ruler
 "set paste
+set showcmd
+set incsearch
+set scrolloff=8
+set wildmenu
+" auto delete all trailing whitespace on save
+autocmd BufWritePre * %s/\s\+$//e
 set exrc
+
+" REMAPPING and co. {{{
 set nu
 set relativenumber
 "Map F3 to togle relativenumbers Normal mode
@@ -22,11 +34,6 @@ nmap <F3> :set relativenumber! <CR>
 imap <F3> <ESC> :set relativenumber! <CR>i
 "Map \ <leader>F3 to togle numbers Normal mode
 nmap <leader><F3> :set nu! <CR>
-set incsearch
-set scrolloff=8
-set wildmenu
-" auto delete all trailing whitespace on save
-autocmd BufWritePre * %s/\s\+$//e
 
 "to show tab character like ^I and space on end of line like $
 "set list
@@ -42,9 +49,16 @@ nnoremap my_tm :-1read ~/.vim/my_templates/
 " nnoremap <cmdname> :-3read $HOME/path/to/file<CR>4j2wf#a
 nmap <F12> :! less ~/.vim/pomoc.md <CR>
 "nmap <F12> :vsp ~/.vim/pomoc.md <CR>
-""""""""""
+"Map F2 Buffers to tabs Normal mode
+nmap <F2> :tab ball <CR>
+"}}}
+
+" TMUX {{{
 " to fix color problem in TMUX
 set background=dark
+set esckeys		"allows function keys to be recognized in Insert mode
+set ttimeoutlen=20	"timeout for a key code mapping
+set timeoutlen=1000	"time(ms) to wait for key mappings
 " allows cursor change in tmux mode
 "if exists('$TMUX')
 "    let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
@@ -53,19 +67,21 @@ set background=dark
 "    let &t_SI = "\<Esc>]50;CursorShape=1\x7"
 "    let &t_EI = "\<Esc>]50;CursorShape=0\x7"
 "endif
+"}}}
+
 "Autocorrect
 abbr zyper zypper
 " I dont like wrapping lines to mix with the line numbers
 set showbreak=\ \ \ \ \ \ \ \
-"Map F2 Buffers to tabs Normal mode
-nmap <F2> :tab ball <CR>
 
+" FOLDING {{{
 "to save folding select text 'zf' to fold 'zo' to unfold
 autocmd BufWinLeave *.* mkview
 autocmd BufWinLeave *.* silent loadview
+"}}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""
-"NETWR :Explore :Vex
+
+"NETWR :Explore :Vex {{{
 
 " deletes netrw's hidden buffer
 autocmd FileType netrw setl bufhidden=delete
@@ -86,10 +102,10 @@ let ghregex='\(^\|\s\s\)\zs\.\S\+'
 let g:netrw_list_hide=ghregex
 "current dir and browsing dir are synced
 "let g:netrw_keepdir = 0
+"}}}
 
 
-""""""""""""""""""""""""""""""
-"Plugin
+"Plugin	{{{
 "nmap <leader>4 :let g:syntastic_check_on_open       = 1 <CR> :w <CR>
 "set runtimepath^=~/.vim/pack/syntastic-master
 "let g:syntastic_check_on_open       = 1
@@ -99,7 +115,13 @@ let g:syntastic_auto_loc_list = 1
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
+"}}}
 
+"folding for this file
+"foldmethod=marker {{{ "}}}
+"foldlevel=0
+"set modelines=1
+"vim:foldmethod=marker:foldlevel=0
 
 
 

@@ -9,11 +9,10 @@ alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
 alias ip='ip --color=auto'
 alias l='ls -alF'
-alias la='ls -la'
-alias ll='ls -l'
+alias la="ls -AlSGhB --ignore='.*.swp'"
+alias ll='ls -lh'
 alias ls='_ls'
 alias ls-l='ls -l'
-alias md='mkdir -p'
 alias o='less'
 alias rd='rmdir'
 alias rehash='hash -r'
@@ -21,8 +20,14 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias cd..='cd ..'
 alias pscpu='ps aux --sort -pcpu | head -n30 | less -S'
-alias mtree='tree -pFRC -h --dirsfirst .'
-alias atree='tree -apFRC -h -L 3 --dirsfirst -I .git .'
+alias mtree='tree -pFRC -h --dirsfirst . | less -R'
+alias atree='tree -apFRC -h -L 3 --dirsfirst -I .git . | less -R'
+alias mmnt='mount | column -t | less -S'
+# If not running interactively, don't do anything
+case $- in
+  *i*) ;;
+  *) return;;
+esac
 ##local config
 #custom cd
 export GITS="~/bin/gits"
@@ -86,6 +91,17 @@ function dockrmall() {
     docker rm -f $(docker ps -a | awk 'NR>1 {print $NF}')
   fi
 }
+
+
+mdcd() {
+  mkdir -p -- "$1" && builtin cd "$1"
+}
+
+
+function hladaj(){
+  grep -irnT --word-regexp --color=always "$*" --binary-files=without-match --exclude=GLOB".*.swp" --exclude-dir=".git" . | less -R
+}
+
 
 # Stopwatch
 function timer() {
