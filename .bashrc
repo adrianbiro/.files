@@ -75,11 +75,11 @@ function cl() {
   fi
 }
 
-# Removes all containers, and prints their names. "q" argument will suppress output, but "q" followed by "v" prints container id.
+# Removes all containers, and prints their names and image base. "q" argument will suppress output, but "q" followed by "v" prints container id.
 function dockrmall() {
   local all=$(docker ps -aq)
   if [[ -z $all ]];then
-    echo "No containers found."
+    printf '\e[21m%s\n\033[0m' "No containers found."
   return
   fi
   if [[ "$1" == "q" ]]; then
@@ -89,7 +89,10 @@ function dockrmall() {
       docker rm -f $all > /dev/null
     fi
   else
-    docker rm -f $(docker ps -a | awk 'NR>1 {print $NF}')
+    local DNI=$(docker ps -a --format '{{.Names}}:{{.Image}}')
+#    docker rm -f $(docker ps -a | awk 'NR>1 {print $NF}')
+    docker -f rm $(docker ps -a --format '{{.Names}}') > /dev/null
+    printf '%s\n' "$DNI"
   fi
 }
 
