@@ -1,6 +1,5 @@
 #global config
 MAN_POSIXLY_CORRECT=1
-HISTTIMEFORMAT="%Y-%m-%d %T "
 export PATH=$HOME/bin:$PATH
 # to edit content of cmdline in vim crtl x ctrl e; to set vi mode for readline "set -o vi"
 export EDITOR="/usr/bin/vim"
@@ -67,6 +66,14 @@ PS1="\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/
 #PS1="\u@\h:\w> " #SUSE default
 
 ## functions
+
+
+function thistory(){
+  local HISTTIMEFORMAT="%Y-%m-%d %T "
+  history
+}
+
+
 function cl() {
   if [[ ! -z "$1" ]]; then
 	builtin cd $1 && ls
@@ -91,9 +98,42 @@ function dockrmall() {
   else
     local DNI=$(docker ps -a --format '{{.Names}}:{{.Image}}')
 #    docker rm -f $(docker ps -a | awk 'NR>1 {print $NF}')
-    docker -f rm $(docker ps -a --format '{{.Names}}') > /dev/null
+    docker rm -f $(docker ps -a --format '{{.Names}}') > /dev/null
     printf '%s\n' "$DNI"
   fi
+}
+
+
+function dlatestpull() {
+  docker images \
+          | grep -v REPOSITORY \
+          | awk '{print $1}' \
+          | xargs -L1 docker pull
+  printf '\n%s\n%s\n' "Delete old images?" "yes no"
+  docker images | grep '<none>'
+  read answer
+  case $answer in
+          y|j|o|ok|yes)
+                    docker images \
+                            | grep '<none>' \
+                            | awk '{print  $3}' \
+                            | xargs -L1 docker rmi
+                    ;;
+            *)
+                    return
+                    ;;
+
+    esac
+}
+
+
+function perlrun() {
+  docker run -it \
+          --rm --name "PERL" \
+          -v "$PWD":/usr/src/myapp \
+          -w /usr/src/myapp \
+          perl:latest \
+          perl "$1"
 }
 
 
