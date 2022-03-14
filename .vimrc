@@ -1,4 +1,4 @@
-" UNFOLD by z o
+" UNFOLD by zo; close zc; open all zR; close all zM; make one zf
 " SYNTAX, FILETYPE, etc "{{{
 syntax on"
 filetype plugin on
@@ -20,6 +20,7 @@ set fileformats=unix,dos,mac
 autocmd BufWritePre * %s/\s\+$//e
 " I dont like wrapping lines to mix with the line numbers
 set showbreak=\ \ \ \ \ \ \ \
+"set nowrap "extend long lines as far as the line can go
 "}}}
 
 " MIX "{{{
@@ -27,6 +28,11 @@ set showcmd
 set incsearch
 set scrolloff=10
 set wildmenu
+"set wildmode=list:longest "pipe all to more
+" ignore files with these extensions
+set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
+set hlsearch
+set history=1000
 set exrc
 set title       "set window title by currently edited file (terminal tab dialog)
 "set ruler
