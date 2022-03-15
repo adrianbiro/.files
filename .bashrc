@@ -8,10 +8,15 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
 alias ip='ip --color=auto'
+alias portstate='ss -ltpn'
+alias mip="curl http://ipecho.net/plain; echo"
+alias cp='cp -v'
+alias cpv='rsync -ah --info=progress2'
 alias l='ls -alF'
 alias la="ls -AlSGhB --ignore='.*.swp'"
 alias ll='ls -lh'
 alias ls='_ls'
+alias lt='du -sh * | sort -h'
 alias ls-l='ls -l'
 alias o='less'
 alias rd='rmdir'
@@ -20,9 +25,13 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias cd..='cd ..'
 alias pscpu='ps aux --sort -pcpu | head -n30 | less -S'
+alias mps='ps aux | grep -v grep | grep -i -e VSZ -e' #$1
 alias mtree='tree -pFRC -h --dirsfirst . | less -R'
 alias atree='tree -apFRC -h -L 3 --dirsfirst -I .git . | less -R'
 alias mmnt='mount | column -t | less -S'
+alias gh='history | grep'
+alias count='find . -type f | wc -l'
+alias rfree="watch -n 5 -d 'free -mht'"
 # If not running interactively, don't do anything
 case $- in
   *i*) ;;
@@ -41,6 +50,9 @@ alias cr='cd ~/bin/gits/ROZROBENE/; ls'
 alias ch='cd ~/bin/gits/hint.md/; ls'
 alias cdf='cd ~/bin/gits/dot_files/; ls -AF'
 alias nnn='nnn -l'
+alias pve='python3 -m venv ./venv'
+alias pva='source ./venv/bin/activate'
+alias pir="pip install -r requirements.txt"
 #export MANPAGER="vim -M +MANPAGER -"
 # Pretty-print man(1) pages.
 #export LESS_TERMCAP_md=$'\E[1;31m'
@@ -74,13 +86,66 @@ function thistory(){
 }
 
 
-function cl() {
+# man XDG-OPEN(1)
+function gopen() {
   if [[ ! -z "$1" ]]; then
-	builtin cd $1 && ls
+    xdg-open $1
   else
-    cd ~ && ls
+    xdg-open .
   fi
 }
+
+
+function mnt() {
+  mount \
+          | awk -F' ' '{print $1,$3}' \
+          | column -t \
+          | egrep '^/dev/' \
+          | sort
+}
+
+
+function cl() {
+  if [[ ! -z "$1" ]]; then
+	builtin cd $1
+  else
+    cd ~
+  fi
+  ls -F --color=auto
+}
+
+
+function cdtg() {
+  cd $(git rev-parse --show-toplevel)
+}
+
+
+function gita() {
+  cd $(git rev-parse --show-toplevel)
+  git status -s
+  git add .
+  if [[ ${1} = "m" ]]; then
+    git commit -m "small fixes"
+  fi
+  git status -s
+  cd -
+}
+
+
+function gitap() {
+  local cbranch; cbranch=$(git branch | sed -e '/^[^*]/d' -e 's/* //')
+  printf '\e[36m%s\033[0m%s\n' "This will add, commit and push all the files to branch " "$cbranch"
+  read -p "Do you want that? y/n " -n 1 -r
+  if [[ "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]
+  then
+    git add .
+    git commit -m "small fixes"
+    git push origin "$cbranch"
+  else
+    printf '\e[31m%s\033[0m\n' "Quit."
+  fi
+}
+
 
 # Removes all containers, and prints their names and image base. "q" argument will suppress output, but "q" followed by "v" prints container id.
 function dockrmall() {
@@ -137,13 +202,17 @@ function perlrun() {
 }
 
 
-mdcd() {
+mcd() {
   mkdir -p -- "$1" && builtin cd "$1"
 }
 
 
 function hladaj(){
-  grep -irnT --word-regexp --color=always "$*" --binary-files=without-match --exclude=GLOB".*.swp" --exclude-dir=".git" . | less -R
+  if [[ ! "$1" = "-f" ]]; then
+    grep -irnT --word-regexp --color=always "$*" --binary-files=without-match --exclude=GLOB".*.swp" --exclude-dir=".git" . | less -R
+  else
+    find . -name "$2" | less -R
+  fi
 }
 
 
