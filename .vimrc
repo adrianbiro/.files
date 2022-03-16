@@ -13,6 +13,7 @@ augroup configgroup
   autocmd BufEnter *.sh setlocal tabstop=2
   autocmd BufEnter *.sh setlocal shiftwidth=2
   autocmd BufEnter *.sh setlocal softtabstop=2
+  autocmd BufNewFile,BufRead *.groff set filetype=groff
 augroup END"
 set encoding=utf-8
 set fileformats=unix,dos,mac
@@ -88,6 +89,8 @@ set background=dark
 
 "AUTOCORECT "{{{
 abbr zyper zypper
+abbr mmmgroff .SH NAME<CR>.B<CR>\-<CR>.SS SYNOPSIS<CR>\fB \fR<CR>.TP<CR>.\fB \fR<CR>.TP<CR>S\fB \fR<CR>.TP<CR>.B<CR>[\fI\, $1, $2 \/\fR]<CR>.TP<CR>.SS DESCRIPTION<CR><CR>.SS SEE ALSO<CR>
+abbr mmmstartgroff .\" Manpage for<CR>.\" Contact Adrián Bíro to correct errors or typos.<CR>.TH TODOname 1 "15 March 2022" "0.1" "TODOname man page"<CR>.SH NAME<CR>.B<CR>\-<CR>.SS SYNOPSIS<CR>\fB \fR<CR>.TP<CR>.\fB \fR<CR>.TP<CR>S\fB \fR<CR>.TP<CR>S\fB \fR<CR>.TP<CR> DESCRIPTION<CR><CR>.SS SEE ALSO<CR><CR><CR><CR>.SH AUTHOR<CR>Adrián Bíro<CR>.SH BUGS<CR>I'm the bug.<CR>.SH SEE ALSO<Cr>BASH(1), vimrc(1), tmux.conf(1)TODO<CR>.PP<CR>.br<CR><https://github.com/adrianbiro/.files>TODO<CR>.br
 "}}}
 
 "NETWR :Explore :Vex {{{

@@ -1,0 +1,226 @@
+.\" Manpage for bashrc
+.\" Contact Adrián Bíro to correct errors or typos.
+.TH bashrc 1 "15 March 2022" "0.1" "bashrc man page"
+.SH NAME
+.B bashrc
+\- Commentary for collection of custom config, functions, and aliases located in the ~/.bashrc.
+.SH SYNOPSIS
+\fB . .bashrc \fR
+.TP
+\fB source .bashrc \fR
+.SH DESCRIPTION
+After editing restart shell or source file.
+.SH OPTIONS
+The .bashrc does not take any options.
+
+
+.SH NAME
+.B LS
+\- ls commands so convoluted that I need this to remember what each of them does.
+.SS SYNOPSIS
+\fB l \fR ls -alF
+.TP
+\fB la \fR ls -AlSGhB --ignore='.*.swp'
+.TP
+\fB ll \fR ls -lh
+.TP
+\fB lt \fR du -sh * | sort -h
+.TP
+\fB mtree \fR tree -pFRC -h --dirsfirst . | less -R
+.TP
+\fB atree \fR tree -apFRC -h -L 3 --dirsfirst -I .git . | less -R
+.TP
+\fB cl \fR A function that
+.I cd
+to the directory and then
+.I ls.
+.TP
+\fB count \fR find . -type f | wc -l
+.TP
+.B hladaj
+[\fI\, $1, $2 \/\fR] Search for the content of the file recursively, or if the first argument
+.B -f
+is specified, then it searches for filename.
+.TP
+.SS DESCRIPTION
+.PP
+.B hladaj
+If the first argument
+.I $1
+is
+.B -f
+then the second argument
+.I $2
+is the
+.I file name,
+that needs to be found. If only one argument
+.I $1
+is provided, then it's treated like a
+.I string
+that needs to be found in files.
+.PP
+.B count
+It counts files recursively from the current working directory.
+.SS SEE ALSO
+ls(), tree()
+
+.SH NAME
+.B PATH, CD
+\- path, cd path, manpath
+.SS SYNOPSIS
+\fB path \fR echo -e ${PATH//:/\\n}
+\fB cdpath \fR echo -e ${CDPATH//:/\\n}
+.TP
+.B mcd
+[\fI\, $1 \/\fR] It makes directory and
+.I cd
+to it.
+.TP
+.SS DESCRIPTION
+.PP
+export CDPATH=".:$GITS:$DOTFILES:$LEARN:$HOME"
+.PP
+export PATH=$HOME/bin:$PATH
+TODO
+
+.SH NAME
+.B IP
+\- ip stuff
+.SS SYNOPSIS
+\fB mip \fR curl http://ipecho.net/plain; echo
+.TP
+\fB portstate \fR ss -ltpn
+.TP
+.SS DESCRIPTION
+TODO
+
+.SH NAME
+.B OPEN
+\- open stuff
+.SS SYNOPSIS
+\fB o \fR less
+.TP
+\fB gopen \fR the function that opens files and directories in graphical editor or file manager
+
+
+.SH NAME
+.B SYSTEM
+\- process, mount and memory management
+.SS SYNOPSIS
+\fB pscpu \fR ps aux --sort -pcpu | head -n30 | less -S
+.TP
+.B mps
+[\fI\, $1 \/\fR] ps aux | grep -v grep | grep -i -e VSZ -e
+.I $1
+.TP
+\fB rfree \fR watch -n 5 -d 'free -mht'
+.TP
+\fB mmnt \fR mount | column -t | less -S
+.TP
+\fB mnt \fR mount | awk -F' ' '{print $1,$3}' | column -t | egrep '^/dev/' | sort
+.TP
+.SS DESCRIPTION
+.B mps
+needs one argument
+.B mnt
+is function
+.SS SEE ALSO
+man
+
+.SH NAME
+.B HISTORY
+\- browsing through history
+.SS SYNOPSIS
+.B gh
+[\fI\, $1 \/\fR] history | grep
+.I $1
+.TP
+\fB thistory \fR the function that displays history with timestamp
+.TP
+.SS DESCRIPTION
+.PP
+.B gh
+needs one argument, the thing to search.
+.PP
+To allow multiple terminals write to history file set
+.B hopt -s histappend
+
+
+.SH NAME
+.B PYTHON, PERL
+\- .py, .pl, stuff
+.SS SYNOPSIS
+\fB pve \fR python3 -m venv ./venv
+.TP
+\fB pva \fR source ./venv/bin/activate
+.TP
+\fB pir \fR pip install -r requirements.txt
+.TP
+\fB perlrun \fR see DOCKER
+
+
+.SH NAME
+.B DOCKER
+\- docker stuff
+.SS SYNOPSIS
+.B dockrmall
+[\fI\, q v \/\fR] Removes all containers.
+.TP
+\fB dlatestpull \fR Pull latest docker images in bulk.
+.TP
+.B perlrun
+[\fI\, $1 \/\fR] It runs a program that is specified ass $1 argument.
+.TP
+.SS DESCRIPTION
+.PP
+.B dockrmall
+Removes all containers, and prints their names and image base. $1
+.B q
+argument will suppress output, but $1
+.B q
+followed by $2
+.B v
+prints container id.
+.PP
+.B dlatestpull
+Pull latest docker images in bulk, then, list old ones and prompt for approval of deletion of these.
+.PP
+.B perlrun
+Mounts current working directory to the container, and run a program that is specified ass $1 argument. Then remove the container.
+.SS SEE ALSO
+PYTHON, PERL
+
+
+.SH NAME
+.B GIT
+\- git staff
+.SS SYNOPSIS
+\fB cdtg \fR
+.I cd
+to to the  root of git repo
+.TP
+.B gita
+[\fI\, m \/\fR] Adds files to the staging area, if argument
+.I $1
+.B m
+ is provided then it commits with a generic message.
+.TP
+\fB gitap\fR Function add, commit and push to current branch on remote.
+.TP
+.SS DESCRIPTION
+popis
+.SS SEE ALSO
+manpage
+
+
+
+.SH AUTHOR
+Adrián Bíro
+.SH BUGS
+I'm the bug.
+.SH SEE ALSO
+BASH(1), vimrc(1), tmux.conf(1)
+.PP
+.br
+<https://github.com/adrianbiro/.files>
+.br
