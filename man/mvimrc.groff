@@ -1,0 +1,46 @@
+.\" Manpage for vimrc
+.\" Contact Adrián Bíro to correct errors or typos.
+.TH vimrc 1 "16 March 2022" "0.1" "vimrc man page"
+.SH NAME
+.B vimrc
+\- Commentary for collection of custom config located in the ~/.vimrc.
+.SS SYNOPSIS
+\fB \fR
+TODO how to run this
+.TP
+ DESCRIPTION
+
+ .SS SEE ALSO
+
+
+.SH NAME
+.B
+\-
+.SS SYNOPSIS
+\fB \fR
+.TP
+.\fB \fR
+.TP
+S\fB \fR
+.TP
+.B
+[\fI\, $1, $2 \/\fR]
+.TP
+.SS DESCRIPTION
+
+.SS SEE ALSO
+
+
+
+ .SH AUTHOR
+ Adrián Bíro
+ .SH BUGS
+ I'm the bug.
+ .SH SEE ALSO
+ mbashrc(1), mtmux.conf(1)
+ .PP
+ .br
+ <https://github.com/adrianbiro/.files>TODO
+ .br
+
+
