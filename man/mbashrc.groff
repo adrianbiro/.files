@@ -20,6 +20,8 @@ The .bashrc does not take any options.
 .SS SYNOPSIS
 \fB l \fR ls -alF
 .TP
+\fb lsa \fR ls --classify --almost-all
+.TP
 \fB la \fR ls -AlSGhB --ignore='.*.swp'
 .TP
 \fB ll \fR ls -lh

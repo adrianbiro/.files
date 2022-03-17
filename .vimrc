@@ -28,6 +28,7 @@ set showbreak=\ \ \ \ \ \ \ \
 set showcmd
 set incsearch
 set scrolloff=10
+runtime! ftplugin/man.vim   "to read man page in vim split :Man 8 ln or pres K on the word you want to find
 set wildmenu
 "set wildmode=list:longest "pipe all to more
 " ignore files with these extensions

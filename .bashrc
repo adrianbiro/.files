@@ -14,8 +14,9 @@ alias cp='cp -v'
 alias cpv='rsync -ah --info=progress2'
 alias l='ls -alF'
 alias la="ls -AlSGhB --ignore='.*.swp'"
+alias lsa="ls --classify --almost-all"
 alias ll='ls -lh'
-alias ls='_ls'
+[[ $(type -t _ls) == function ]] && alias ls='_ls'
 alias lt='du -sh * | sort -h'
 alias ls-l='ls -l'
 alias o='less'
@@ -75,9 +76,15 @@ shopt -s histappend
 
 # in man bash PROMPTING
 PS1="\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/') "
-#PS1="\u@\h:\w> " #SUSE default
+#PS1="\u@\h:\w> " #SUSE default prompt
 
 ## functions
+
+# SUSE predefined alias for this function
+#function _ls () {
+#  local IFS=' ';
+#  command ls $LS_OPTIONS ${1+"$@"}
+#}
 
 
 function thistory(){
@@ -105,13 +112,15 @@ function mnt() {
 }
 
 
+#Auto complete directory names.
+complete -A directory cl
 function cl() {
   if [[ ! -z "$1" ]]; then
 	builtin cd $1
   else
     cd ~
   fi
-  ls -F --color=auto
+  ls --color=auto --classify --almost-all
 }
 
 
@@ -215,6 +224,12 @@ function hladaj(){
   fi
 }
 
+
+#function completitionlists(){
+#  COMPRELY=($(compgen -W "gitstat gita gitap" "${COMP_WORDS[1]}"))
+#
+#}
+#complete -F completitionlists run #TODO
 
 # Stopwatch
 function timer() {
