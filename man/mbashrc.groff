@@ -97,13 +97,18 @@ TODO
 TODO
 
 .SH NAME
-.B OPEN
+.B OPEN, TMUX
 \- open stuff
 .SS SYNOPSIS
 \fB o \fR less
 .TP
 \fB gopen \fR the function that opens files and directories in graphical editor or file manager
-
+.TP
+.B tmuxv
+[\fI\, $1 \/\fR] Tmux with vertical split, bottom one is adjusted. The first argument
+.I $1
+is the
+.B session name.
 
 .SH NAME
 .B SYSTEM
@@ -171,16 +176,21 @@ To allow multiple terminals write to history file set
 \fB dlatestpull \fR Pull latest docker images in bulk.
 .TP
 .B perlrun
-[\fI\, $1 \/\fR] It runs a program that is specified ass $1 argument.
+[\fI\, $1 \/\fR] It runs a program that is specified ass
+.I $1
+argument.
 .TP
 .SS DESCRIPTION
 .PP
 .B dockrmall
-Removes all containers, and prints their names and image base. $1
+Removes all containers, and prints their names and image base.
+.I $1
 .B q
-argument will suppress output, but $1
+argument will suppress output, but
+.I $1
 .B q
-followed by $2
+followed by
+.I $2
 .B v
 prints container id.
 .PP
@@ -188,7 +198,9 @@ prints container id.
 Pull latest docker images in bulk, then, list old ones and prompt for approval of deletion of these.
 .PP
 .B perlrun
-Mounts current working directory to the container, and run a program that is specified ass $1 argument. Then remove the container.
+Mounts current working directory to the container, and run a program that is specified ass
+.I $1
+argument. Then remove the container.
 .SS SEE ALSO
 PYTHON, PERL
 

@@ -25,6 +25,7 @@ alias rehash='hash -r'
 alias ..='cd ..'
 alias ...='cd ../..'
 alias cd..='cd ..'
+alias ncdu="ncdu --color=dark -x"
 alias pscpu='ps aux --sort -pcpu | head -n30 | less -S'
 alias mps='ps aux | grep -v grep | grep -i -e VSZ -e' #$1
 alias mtree='tree -pFRC -h --dirsfirst . | less -R'
@@ -85,6 +86,11 @@ PS1="\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/
 #  local IFS=' ';
 #  command ls $LS_OPTIONS ${1+"$@"}
 #}
+
+
+function tmuxv() {
+  tmux new-session -s "$1" \; split-window -v \; resize-pane -D 18 \; attach
+}
 
 
 function thistory(){
