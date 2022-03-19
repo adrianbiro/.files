@@ -92,6 +92,9 @@ function tmuxv() {
   tmux new-session -s "$1" \; split-window -v \; resize-pane -D 18 \; attach
 }
 
+#function tmuxe() {
+#  tmux new-session -s "${sname##*/}" \vim $"1" \; split-window -v \; resize-pane -D 18 \; attach
+#}
 
 function thistory(){
   local HISTTIMEFORMAT="%Y-%m-%d %T "
