@@ -88,13 +88,24 @@ PS1="\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/
 #}
 
 
-function tmuxv() {
-  tmux new-session -s "$1" \; split-window -v \; resize-pane -D 18 \; attach
+function bak() {
+  cp -r "$1" "${1}.bak"
+  if [[ "$2" == "+i" ]]; then
+    sudo chattr -R +i "${1}.bak"
+  elif [[ "$2" == "+a" ]]; then
+    sudo chattr -R +a "${1}.bak"
+  fi
 }
 
-#function tmuxe() {
-#  tmux new-session -s "${sname##*/}" \vim $"1" \; split-window -v \; resize-pane -D 18 \; attach
-#}
+
+function tmuxs() {
+  tmux new-session -s "${1^^}" \; split-window -v \; resize-pane -D 18 \; attach
+}
+
+function tmuxe() {
+  local dir; dir=$(pwd); dir="${dir##*/}"
+  tmux new-session -s "${dir^^}" \vim $1 \; split-window -v \; resize-pane -D 18 \; attach
+}
 
 function thistory(){
   local HISTTIMEFORMAT="%Y-%m-%d %T "

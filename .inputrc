@@ -1,1 +1,1 @@
-"\C-n": menu-complete
+set history-size 1000

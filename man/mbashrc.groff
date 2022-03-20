@@ -97,18 +97,39 @@ TODO
 TODO
 
 .SH NAME
-.B OPEN, TMUX
+.B OPEN, TMUX, CP
 \- open stuff
 .SS SYNOPSIS
 \fB o \fR less
 .TP
 \fB gopen \fR the function that opens files and directories in graphical editor or file manager
 .TP
-.B tmuxv
+.B tmuxs
 [\fI\, $1 \/\fR] Tmux with vertical split, bottom one is adjusted. The first argument
 .I $1
 is the
 .B session name.
+.TP
+.B tmuxe
+[\fI\, $1 \/\fR] In the main pane open the file specified as
+.I $1
+the first argument. The name of the session is the current working directory.
+.TP
+.B bak
+[\fI\, $1, $2 \/\fR] Makes a backup of file or directory specified by
+.I $1
+argument with
+.B .bak
+extension. To change attributes witch
+.B chattr
+specify
+.I
+$2
+.B
++i
+or
+.B +a
+as the second argument.
 
 .SH NAME
 .B SYSTEM
