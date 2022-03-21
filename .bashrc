@@ -55,6 +55,7 @@ alias nnn='nnn -l'
 alias pve='python3 -m venv ./venv'
 alias pva='source ./venv/bin/activate'
 alias pir="pip install -r requirements.txt"
+alias pfr="pip freeze --local > requirements.txt"
 #export MANPAGER="vim -M +MANPAGER -"
 # Pretty-print man(1) pages.
 #export LESS_TERMCAP_md=$'\E[1;31m'

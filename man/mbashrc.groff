@@ -184,6 +184,8 @@ To allow multiple terminals write to history file set
 .TP
 \fB pir \fR pip install -r requirements.txt
 .TP
+\fB pfr \fR pip freeze --local > requirements.txt
+.TP
 \fB perlrun \fR see DOCKER
 
 
