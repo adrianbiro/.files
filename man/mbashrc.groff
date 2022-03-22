@@ -244,6 +244,17 @@ to to the  root of git repo
 .TP
 \fB gitap\fR Function add, commit and push to current branch on remote.
 .TP
+\fB gitstat \fR This provides an overview of git repositories \
+located in one central location by looping through the directories structure. \
+In case of git repo isn't there, it examines directories plus one level in depth. \
+No additional arguments are needed, on the top output, \
+it prints formatted time, location of the central directory where gits are stored, \
+and name of the owner. The script is stored in
+.B ~/bin
+, and output is the product of
+.B git status -bs
+command.
+.TP
 .SS DESCRIPTION
 popis
 .SS SEE ALSO
