@@ -10,6 +10,7 @@ alias grep='grep --color=auto'
 alias ip='ip --color=auto'
 alias portstate='ss -ltpn'
 alias mip="curl http://ipecho.net/plain; echo"
+alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -"
 alias cp='cp -v'
 alias cpv='rsync -ah --info=progress2'
 alias l='ls -alF'
@@ -34,6 +35,7 @@ alias mmnt='mount | column -t | less -S'
 alias gh='history | grep'
 alias count='find . -type f | wc -l'
 alias rfree="watch -n 5 -d 'free -mht'"
+alias mcache="sudo sh -c \"echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'\""
 # If not running interactively, don't do anything
 case $- in
   *i*) ;;
@@ -56,6 +58,7 @@ alias pve='python3 -m venv ./venv'
 alias pva='source ./venv/bin/activate'
 alias pir="pip install -r requirements.txt"
 alias pfr="pip freeze --local > requirements.txt"
+alias cpath="pwd | xclip -selection clipboard"
 #export MANPAGER="vim -M +MANPAGER -"
 # Pretty-print man(1) pages.
 #export LESS_TERMCAP_md=$'\E[1;31m'
