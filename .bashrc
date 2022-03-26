@@ -235,6 +235,16 @@ function perlrun() {
 }
 
 
+function pythonrun() {
+  docker run -it \
+          --rm --name "PYTHON" \
+          -v "$PWD":/usr/src/myapp \
+          -w /usr/src/myapp \
+          python:latest \
+          python3 "$1"
+}
+
+
 mcd() {
   mkdir -p -- "$1" && builtin cd "$1"
 }

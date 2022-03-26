@@ -25,7 +25,7 @@ set showbreak=\ \ \ \ \ \ \ \
 "}}}
 
 " MIX "{{{
-set textwidth=72
+"set textwidth=72
 set showcmd
 set incsearch
 fu! Mclear()                " To clear the last used search pattern
