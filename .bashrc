@@ -91,6 +91,10 @@ PS1="\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/
 #  command ls $LS_OPTIONS ${1+"$@"}
 #}
 
+function TODO() {
+  python3 -c "import webbrowser; webbrowser.open('https://www.notion.so/')"
+}
+
 
 function mhelp() {
   whatis $1
