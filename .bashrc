@@ -257,6 +257,15 @@ function pythonrun() {
 }
 
 
+function blackrun() {
+  docker run --rm \
+          --volume $(pwd):/src \
+          --workdir /src \
+          pyfound/black:latest \
+          black --check -l 120 -S "$@"
+}
+
+
 mcd() {
   mkdir -p -- "$1" && builtin cd "$1"
 }

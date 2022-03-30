@@ -1,1 +1,2 @@
 TODO opens todo app in browser
+blackrun black --check -l 120 -S "$@"
