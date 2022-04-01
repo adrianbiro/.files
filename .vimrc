@@ -32,15 +32,6 @@ fu! Mclear()                " To clear the last used search pattern
   :let @/ = ""
 endf
 command! Mclear call Mclear()
-" norm i# | norm x
-"fu! Mcmt()                " To comment
-"| s/^/#/ | Mclear
-"endf
-"command! Mcmt call Mcmt()
-"fu! Muncmt()                " To uncomment
-"  :'<,'>s/^/#/ | Mclear
-"endf
-"command! Mucmt call Mucmt()
 set scrolloff=10
 runtime! ftplugin/man.vim   " to read man page in vim split :Man 8 ln or pres K on the word you want to find
 set wildmenu
