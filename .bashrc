@@ -3,6 +3,7 @@ MAN_POSIXLY_CORRECT=1
 export PATH=$HOME/bin:$PATH
 # to edit content of cmdline in vim crtl x ctrl e; to set vi mode for readline "set -o vi"
 export EDITOR="/usr/bin/vim"
+alias getpurebash="bash --norc"
 alias path='echo -e ${PATH//:/\\n}'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'

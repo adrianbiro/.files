@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<description xmlns="http://openoffice.org/extensions/description/2006" xmlns:d="http://openoffice.org/extensions/description/2006" xmlns:l="http://libreoffice.org/extensions/description/2011" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <version value="2020.05.10" />
+    <identifier value="openoffice.libreoffice.sk.dictionaries" />
+    <display-name>
+        <name lang="en">Slovak spelling dictionary, hyphenation rules, and thesaurus</name>
+	<name lang="sk">Slovenský slovník na kontrolu pravopisu, pravidlá na delenie slov a tezaurus</name>
+    </display-name>
+    <platform value="all" />
+    <dependencies>
+        <OpenOffice.org-minimal-version value="3.0" d:name="OpenOffice.org 3.0" />
+        <l:LibreOffice-minimal-version value="3.5" d:name="LibreOffice 3.5" />
+     </dependencies>
+     <publisher>
+        <name xlink:href="http://sk-spell.sk.cx" lang="sk">sk-spell</name>
+     </publisher>
+</description>
