@@ -108,6 +108,7 @@ function mhelp() {
 
 function bak() {
   cp -r "$1" "${1}.bak"
+#  cp --backup=numbered --recursive "$1"
   if [[ "$2" == "+i" ]]; then
     sudo chattr -R +i "${1}.bak"
   elif [[ "$2" == "+a" ]]; then
