@@ -61,8 +61,7 @@ nmap <leader><F3> :set nu! <CR>
 "to show tab character like ^I and space on end of line like $
 "set list
 "custom format of list ° · »
-"set listchars=eol:⏎,tab:>-,trail:␣,extends:>,precedes:<
-set listchars=tab:…\s,trail:·,extends:>,precedes:<
+set listchars=eol:⏎,tab:>-,trail:␣,extends:>,precedes:<
 "to toge this by <F4> in Normal and Insert modes
 nmap <F4> :set list! <CR>
 imap <F4> <ESC> :set list! <CR>i
