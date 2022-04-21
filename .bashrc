@@ -45,16 +45,16 @@ case $- in
 esac
 ##local config
 #custom cd
-export GITS="~/bin/gits"
+export GITS="~/gits"
 export DOTFILES="$GITS/dot_files"
 export LEARN="$GITS/learn"
 export CDPATH=".:$GITS:$DOTFILES:$LEARN:$HOME"
 alias cdpath='echo -e ${CDPATH//:/\\n}'
-alias cg='cd ~/bin/gits/; ls'
-alias clp='cd ~/bin/gits/learn/python/; ls'
-alias cr='cd ~/bin/gits/ROZROBENE/; ls'
-alias ch='cd ~/bin/gits/hint.md/; ls'
-alias cdf='cd ~/bin/gits/dot_files/; ls -AF'
+alias cg='cd ~/gits/; ls'
+alias clp='cd ~/gits/learn/python/; ls'
+alias cr='cd ~/gits/ROZROBENE/; ls'
+alias ch='cd ~/gits/hint.md/; ls'
+alias cdf='cd ~/gits/dot_files/; ls -AF'
 alias nnn='nnn -l'
 alias pve='python3 -m venv ./venv'
 alias pva='source ./venv/bin/activate'
