@@ -101,6 +101,10 @@ shopt -s autocd #cd just by typing the name of directory; to unset -u
 
 # in man bash PROMPTING
 PS1="\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/') "
+function mprompt()
+{
+  PS1="\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')\n> "
+}
 #PS1="\u@\h:\w> " #SUSE default prompt
 
 ## functions
