@@ -35,6 +35,7 @@ alias mtree='tree -pFRC -h --dirsfirst . | less -R'
 alias atree='tree -apFRC -h -L 3 --dirsfirst -I .git . | less -R'
 alias mmnt='mount | column -t | less -S'
 alias gh='history | grep'
+alias xecho='xclip -o clip'
 alias count='find . -type f | wc -l'
 alias rfree="watch -n 5 -d 'free -mht'"
 alias mcache="sudo sh -c \"echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'\""
