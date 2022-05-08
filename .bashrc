@@ -231,6 +231,10 @@ function gitap() {
 }
 
 
+function dins() {
+  docker inspect "$@" | jq '.' -C | less -R
+}
+
 # Removes all containers, and prints their names and image base. "q" argument will suppress output, but "q" followed by "v" prints container id.
 function dockrmall() {
   local all=$(docker ps -aq)
