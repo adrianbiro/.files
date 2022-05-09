@@ -1,3 +1,5 @@
 [user]
 	email = biroadrian@protonmail.com
 	name = Adrián Bíro
+[core]
+	pager = less -R

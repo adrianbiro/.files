@@ -1,4 +1,4 @@
 \set ON_ERROR_ROLLBACK interactive
 \set COMP_KEYWORD_CASE upper
 \pset pager always
-\pset null '(null)'
+\pset null '[null]'
