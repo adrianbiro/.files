@@ -15,7 +15,7 @@ alias mip="curl http://ipecho.net/plain; echo"
 alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -"
 alias cp='cp -v'
 alias cpv='rsync -ah --info=progress2'
-alias l='ls -alF'
+alias l='ls -AlF'
 alias la="ls -AlSGhB --ignore='.*.swp'"
 alias lsa="ls --classify --almost-all"
 alias ll='ls -lh'
