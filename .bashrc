@@ -142,6 +142,11 @@ function mhelp() {
 }
 
 
+function mman() {
+  man ${1} |\
+  grep -e ${2}
+}
+
 function bak() {
   cp -r "$1" "${1}.bak"
 #  cp --backup=numbered --recursive "$1"
