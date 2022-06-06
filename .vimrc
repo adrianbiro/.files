@@ -42,6 +42,8 @@ set wildmenu
 set history=1000
 set exrc
 set title       "set window title by currently edited file (terminal tab dialog)
+set colorcolumn=80
+highlight ColorColumn ctermbg=DarkMagenta guibg=DarkMagenta
 "set ruler
 "set paste
 "set mouse=a
