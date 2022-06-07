@@ -54,12 +54,16 @@ highlight ColorColumn ctermbg=DarkMagenta guibg=DarkMagenta
 set nu
 set relativenumber
 "Map F3 to togle relativenumbers Normal mode
-nmap <F3> :set relativenumber! <CR>
+"nmap <F3> :set relativenumber! <CR>
 "Map F3 to togle relativenumbers Insert mode
-imap <F3> <ESC> :set relativenumber! <CR>i
+"imap <F3> <ESC> :set relativenumber! <CR>i
 "Map \ <leader>F3 to togle numbers Normal mode
-nmap <leader><F3> :set nu! <CR>
-
+"nmap <leader><F3> :set nu! <CR>
+function! Mnum()
+    set nu!
+    set relativenumber!
+endfunction
+command! Mnum call Mnum()
 "to show tab character like ^I and space on end of line like $
 "set list
 "custom format of list ° · »
