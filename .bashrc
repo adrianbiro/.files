@@ -1,5 +1,5 @@
 #global config
-MAN_POSIXLY_CORRECT=1
+#MAN_POSIXLY_CORRECT=1
 export PATH=$HOME/bin:$PATH
 # to edit content of cmdline in vim crtl x ctrl e; to set vi mode for readline "set -o vi"
 export EDITOR="/usr/bin/vim"
@@ -292,6 +292,13 @@ function perlrun() {
           -w /usr/src/myapp \
           perl:latest \
           perl "$1"
+}
+
+
+function jupyrun() {
+    docker run -it --rm \
+            -v $(pwd):/home/jovyan/work -p 8888:8888 \
+            jupyter/scipy-notebook
 }
 
 
