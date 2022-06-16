@@ -61,6 +61,11 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
+# set go path
+if [ -d "/usr/local/go/" ] ; then
+    PATH="/usr/local/go/bin:$PATH"
+fi
+
 
 ##local config
 #custom cd
@@ -115,6 +120,14 @@ function mprompt()
 #  local IFS=' ';
 #  command ls $LS_OPTIONS ${1+"$@"}
 #}
+
+function completego()
+# Bash completion for go
+{
+  local wordlist; wordlist=$(go help | awk 'NR==9, NR==26{ printf "%s%s", $1, sp = NR==26? "\n": " "}')
+  complete -W "${wordlist}" go
+}
+completego
 
 
 function curljson()
