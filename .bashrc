@@ -61,11 +61,6 @@ if [ -x /usr/bin/dircolors ]; then
     alias egrep='egrep --color=auto'
 fi
 
-# set go path
-if [ -d "/usr/local/go/" ] ; then
-    PATH="/usr/local/go/bin:$PATH"
-fi
-
 
 ##local config
 #custom cd
@@ -98,6 +93,21 @@ export LESS_TERMCAP_so=$'\E[01;42;30m' # begin the info box
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;36m'
 
+
+## golnang
+function completego()
+# Bash completion for go
+{
+  local wordlist; wordlist=$(go help | awk 'NR==9, NR==26{ printf "%s%s", $1, sp = NR==26? "\n": " "}')
+  complete -W "${wordlist}" go
+}
+
+# set go path and call completego func
+if [ -d "/usr/local/go/" ] ; then
+    PATH="/usr/local/go/bin:$PATH"
+    completego
+fi
+
 # to disable -u	it's for extended glob patterns like ls **/*
 # grep -d skip 'text_string' **/* this is similar to grep -d skip -R 'text_string'
 shopt -s globstar
@@ -120,14 +130,6 @@ function mprompt()
 #  local IFS=' ';
 #  command ls $LS_OPTIONS ${1+"$@"}
 #}
-
-function completego()
-# Bash completion for go
-{
-  local wordlist; wordlist=$(go help | awk 'NR==9, NR==26{ printf "%s%s", $1, sp = NR==26? "\n": " "}')
-  complete -W "${wordlist}" go
-}
-completego
 
 
 function curljson()
