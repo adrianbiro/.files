@@ -98,10 +98,15 @@ export LESS_TERMCAP_us=$'\E[01;36m'
 function completego()
 # Bash completion for go
 {
-  local wordlist; wordlist=$(go help | awk 'NR==9, NR==26{ printf "%s%s", $1, sp = NR==26? "\n": " "}')
-  complete -W "${wordlist}" go
+  #local wordlist; wordlist=$(go help | awk 'NR==9, NR==26{ printf "%s%s", $1, sp = NR==26? "\n": " "}')
+  #complete -W "${wordlist}" go
+  . "/home/adrian/gits/dot_files/go-pkg-completion"
 }
-
+function gomih()
+{
+    local here; here=$(pwd)
+    go mod init ${here##*/}
+}
 # set go path and call completego func
 if [ -d "/usr/local/go/" ] ; then
     PATH="/usr/local/go/bin:$PATH"
