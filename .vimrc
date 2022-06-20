@@ -46,6 +46,7 @@ set exrc
 set title       "set window title by currently edited file (terminal tab dialog)
 set colorcolumn=80
 highlight ColorColumn ctermbg=DarkMagenta guibg=DarkMagenta
+highlight LineNr ctermfg=DarkGrey
 "set ruler
 "set paste
 "set mouse=a
@@ -55,6 +56,7 @@ highlight ColorColumn ctermbg=DarkMagenta guibg=DarkMagenta
 " REMAPPING, NUMBERS, TABS and co. {{{
 set nu
 set relativenumber
+"set highlight Normal LineNumber ctermfg=grey ctermbg=black
 "Map F3 to togle relativenumbers Normal mode
 "nmap <F3> :set relativenumber! <CR>
 "Map F3 to togle relativenumbers Insert mode
@@ -104,6 +106,10 @@ set background=dark
 "AUTOCORECT "{{{
 abbr zyper zypper
 abbr sefl self
+abbr retunr return
+abbr Meuro €
+abbr Mcelsius °
+iabbrev Mtime  <C-R>=strftime("%Y-%m-%d %H:%M:%S")
 abbr mmmgroff .SH NAME<CR>.B<CR>\-<CR>.SS SYNOPSIS<CR>\fB \fR<CR>.TP<CR>.\fB \fR<CR>.TP<CR>S\fB \fR<CR>.TP<CR>.B<CR>[\fI\, $1, $2 \/\fR]<CR>.TP<CR>.SS DESCRIPTION<CR><CR>.SS SEE ALSO<CR>
 abbr mmmstartgroff .\" Manpage for<CR>.\" Contact Adrián Bíro to correct errors or typos.<CR>.TH TODOname 1 "15 March 2022" "0.1" "TODOname man page"<CR>.SH NAME<CR>.B<CR>\-<CR>.SS SYNOPSIS<CR>\fB \fR<CR>.TP<CR>.\fB \fR<CR>.TP<CR>S\fB \fR<CR>.TP<CR>S\fB \fR<CR>.TP<CR> DESCRIPTION<CR><CR>.SS SEE ALSO<CR><CR><CR><CR>.SH AUTHOR<CR>Adrián Bíro<CR>.SH BUGS<CR>I'm the bug.<CR>.SH SEE ALSO<Cr>BASH(1), vimrc(1), tmux.conf(1)TODO<CR>.PP<CR>.br<CR><https://github.com/adrianbiro/.files>TODO<CR>.br
 "}}}
