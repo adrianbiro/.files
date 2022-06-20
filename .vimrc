@@ -20,9 +20,20 @@ augroup END"
 set encoding=utf-8
 set fileformats=unix,dos,mac
 " auto delete all trailing whitespace on save
-autocmd BufWritePre * %s/\s\+$//e
+fun! StripTrailingWhitespace()
+    " ignore this file, to make show break work
+    "autocmd FileType ruby,javascript,perl let b:noStripWhitespace=1
+    let b:noStripWhitespace=1
+    if exists('b:noStripWhitespace')
+        return
+    endif
+    %s/\s\+$//e
+endfun
+autocmd BufWritePre * call StripTrailingWhitespace()
+"let b:noStripWhitespace=1
 " I dont like wrapping lines to mix with the line numbers
-set showbreak=\ \ \ \ \ \ \ \
+"set showbreak=\ \ \ \ \ \ \ \ 
+set showbreak=𝂅𝂅𝂅\ \ \ \ \ 
 "set nowrap "extend long lines as far as the line can go
 "}}}
 
