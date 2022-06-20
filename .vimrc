@@ -17,18 +17,18 @@ augroup configgroup
   autocmd BufEnter *.sh setlocal softtabstop=2
   autocmd BufNewFile,BufRead *.groff set filetype=groff
 augroup END"
-set encoding=utf-8
+set encoding=utf-8    
 set fileformats=unix,dos,mac
 " auto delete all trailing whitespace on save
 fun! StripTrailingWhitespace()
     " ignore this file, to make show break work
-    "autocmd FileType ruby,javascript,perl let b:noStripWhitespace=1
-    let b:noStripWhitespace=1
     if exists('b:noStripWhitespace')
         return
     endif
     %s/\s\+$//e
 endfun
+" :echo &filetype and comma separed vim,perl
+autocmd FileType vim let b:noStripWhitespace=1 
 autocmd BufWritePre * call StripTrailingWhitespace()
 "let b:noStripWhitespace=1
 " I dont like wrapping lines to mix with the line numbers
