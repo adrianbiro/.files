@@ -8,7 +8,7 @@ set nocompatible
 set tabstop=4 softtabstop=4
 set expandtab
 augroup configgroup
-  autocmd BufWinEnter,WinEnter,BufWritePost *.go silent execute "%!gofmt" 
+  "autocmd BufWinEnter,WinEnter,BufWritePost *.go silent execute "%!gofmt" 
   autocmd FileType go set noet ci pi sts=0 sw=4 ts=4 " abbreviated for next line
  "autocmd FileType go setl tabstop=4|setl shiftwidth=4|setl softtabstop=0| set noexpandtab| set copyindent set preserveindent"
   autocmd FileType python setl tabstop=4|setl shiftwidth=4|setl softtabstop=4"
@@ -18,6 +18,10 @@ augroup configgroup
   autocmd BufEnter *.sh setlocal softtabstop=2
   autocmd BufNewFile,BufRead *.groff set filetype=groff
 augroup END"
+fun! FormatGOfmt()
+    silent execute "%!gofmt"
+endfun
+command! Fmt call FormatGOfmt()
 set encoding=utf-8    
 set fileformats=unix,dos,mac
 " auto delete all trailing whitespace on save
