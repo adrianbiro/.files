@@ -9,6 +9,7 @@ set tabstop=4 softtabstop=4
 set expandtab
 augroup configgroup
   "autocmd BufWinEnter,WinEnter,BufWritePost *.go silent execute "%!gofmt" 
+  autocmd BufWinEnter,WinEnter,BufWritePost *.go call FormatGOfmt()
   autocmd FileType go set noet ci pi sts=0 sw=4 ts=4 " abbreviated for next line
  "autocmd FileType go setl tabstop=4|setl shiftwidth=4|setl softtabstop=0| set noexpandtab| set copyindent set preserveindent"
   autocmd FileType python setl tabstop=4|setl shiftwidth=4|setl softtabstop=4"
@@ -19,7 +20,29 @@ augroup configgroup
   autocmd BufNewFile,BufRead *.groff set filetype=groff
 augroup END"
 fun! FormatGOfmt()
+    let view = winsaveview()
     silent execute "%!gofmt"
+    if v:shell_error
+        let errors = []
+        for line in getline(1, line('$'))
+            let tokens = matchlist(line, '^\(.\{-}\):\(\d\+\):\(\d\+\)\s*\(.*\)')
+            if !empty(tokens)
+                call add(errors, {"filename": @%,
+                                 \"lnum":     tokens[2],
+                                 \"col":      tokens[3],
+                                 \"text":     tokens[4]})
+            endif
+        endfor
+        if empty(errors)
+            % | " Couldn't detect gofmt error format, output errors
+        endif
+        undo
+        if !empty(errors)
+            call setloclist(0, errors, 'r')
+        endif
+        echohl Error | echomsg "Gofmt returned error" | echohl None
+    endif
+    call winrestview(view)
 endfun
 command! Fmt call FormatGOfmt()
 set encoding=utf-8    
