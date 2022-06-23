@@ -3,12 +3,13 @@
 syntax on"
 filetype plugin on
 filetype indent on
+set encoding=utf-8    
+set fileformat=unix
 set autoindent smartindent
 set nocompatible
 set tabstop=4 softtabstop=4
 set expandtab
 augroup configgroup
-  "autocmd BufWinEnter,WinEnter,BufWritePost *.go silent execute "%!gofmt" 
   autocmd BufWinEnter,WinEnter,BufWritePost *.go call FormatGOfmt()
   autocmd FileType go set noet ci pi sts=0 sw=4 ts=4 " abbreviated for next line
  "autocmd FileType go setl tabstop=4|setl shiftwidth=4|setl softtabstop=0| set noexpandtab| set copyindent set preserveindent"
@@ -19,8 +20,10 @@ augroup configgroup
   autocmd BufEnter *.sh setlocal softtabstop=2
   autocmd BufNewFile,BufRead *.groff set filetype=groff
 augroup END"
+""""""""""""""""""""""""""""""""""""""""
 fun! FormatGOfmt()
     let view = winsaveview()
+    " call format tool
     silent execute "%!gofmt"
     if v:shell_error
         let errors = []
@@ -45,8 +48,7 @@ fun! FormatGOfmt()
     call winrestview(view)
 endfun
 command! Fmt call FormatGOfmt()
-set encoding=utf-8    
-set fileformats=unix,dos,mac
+""""""""""""""""""""""""""""""""""""""""""""
 " auto delete all trailing whitespace on save
 fun! StripTrailingWhitespace()
     " ignore this file, to make show break work
@@ -63,10 +65,11 @@ autocmd BufWritePre * call StripTrailingWhitespace()
 "set showbreak=\ \ \ \ \ \ \ \ 
 set showbreak=𝂅𝂅𝂅\ \ \ \ \ 
 "set nowrap "extend long lines as far as the line can go
+"""""""""""""""""""""""""""""""
 "}}}
 
 " MIX "{{{
-"set textwidth=72
+"set hlsearch
 set showcmd
 set incsearch
 fu! Mclear()                " To clear the last used search pattern
@@ -74,20 +77,22 @@ fu! Mclear()                " To clear the last used search pattern
 endf
 command! Mclear call Mclear()
 set scrolloff=10
-runtime! ftplugin/man.vim   " to read man page in vim split :Man 8 ln or pres K on the word you want to find
+" to read man page in vim split :Man 8 ln or pres K on the word you want to find
+runtime! ftplugin/man.vim 
 set wildmenu
 "set wildmode=list:longest "pipe all to more
 " ignore files with these extensions
 "set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
-"set hlsearch
 set history=1000
 set exrc
 set title       "set window title by currently edited file (terminal tab dialog)
+""""""""""""""""""""""""""""""""""""""""""
 set colorcolumn=80
 highlight ColorColumn ctermbg=DarkMagenta guibg=DarkMagenta
 highlight LineNr ctermfg=DarkGrey
+""""""""""""""""""""""""""""""""""""""""""
+"set textwidth=72
 "set ruler
-"set paste
 "set mouse=a
 "set confirm     "when closing an unsaved file
 "}}}
@@ -107,6 +112,7 @@ function! Mnum()
     set relativenumber!
 endfunction
 command! Mnum call Mnum()
+"""""""""""""""""""""""""""""""""""""
 "to show tab character like ^I and space on end of line like $
 "set list
 "custom format of list ° · » ⦙ ┊ 𝀠 ⏎ 𝂅␣ 𝁓¶ § ⸿
@@ -114,11 +120,7 @@ set listchars=eol:§,tab:⦙𝂅,trail:𝂅,extends:>,precedes:<
 "to toge this by <F4> in Normal and Insert modes
 nmap <F4> :set list! <CR>
 imap <F4> <ESC> :set list! <CR>i
-
-" read file template a from directory, to chose file use wildmenu with TAB
-nnoremap my_tm :-1read ~/.vim/my_templates/
-" to read the concrete file, do not name command with insert character such as aAiIoO, <CR> (ENTER)
-" nnoremap <cmdname> :-3read $HOME/path/to/file<CR>4j2wf#a
+""""""""""""""""""""""""""""""""""""""
 nmap <F12> :! less ~/.vim/pomoc.md <CR>
 "nmap <F12> :vsp ~/.vim/pomoc.md <CR>
 "Map F2 Buffers to tabs Normal mode
