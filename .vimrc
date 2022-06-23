@@ -3,6 +3,8 @@
 syntax on"
 filetype plugin on
 filetype indent on
+" enable omni-completion ctrl-x ctrl-o
+set omnifunc=syntaxcomplete#Complete
 set encoding=utf-8    
 set fileformat=unix
 set autoindent smartindent
@@ -69,6 +71,10 @@ set showbreak=𝂅𝂅𝂅\ \ \ \ \
 "}}}
 
 " MIX "{{{
+" avoid most of the 'Hit Enter ...' messages
+"set shortmess=aoOtTI
+" prevents truncated yanks, deletes, etc.
+set viminfo='20,<1000,s1000
 "set hlsearch
 set showcmd
 set incsearch
@@ -86,6 +92,8 @@ set wildmenu
 set history=1000
 set exrc
 set title       "set window title by currently edited file (terminal tab dialog)
+"TODO color of TODO
+"hi Todo ctermbg=DarkGray ctermfg=NONE
 """"""""""""""""""""""""""""""""""""""""""
 set colorcolumn=80
 highlight ColorColumn ctermbg=DarkMagenta guibg=DarkMagenta
