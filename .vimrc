@@ -5,6 +5,7 @@ filetype plugin on
 filetype indent on
 " enable omni-completion ctrl-x ctrl-o
 set omnifunc=syntaxcomplete#Complete
+set completeopt=menu,menuone
 set encoding=utf-8    
 set fileformat=unix
 set autoindent smartindent
