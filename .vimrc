@@ -13,8 +13,8 @@ set nocompatible
 set tabstop=4 softtabstop=4
 set expandtab
 augroup configgroup
-  autocmd BufWinEnter,WinEnter,BufWritePost *.go call FormatGOfmt()
-  autocmd FileType go set noet ci pi sts=0 sw=4 ts=4 " abbreviated for next line
+"  autocmd BufWinEnter,WinEnter,BufWritePost *.go call FormatGOfmt()
+"  autocmd FileType go set noet ci pi sts=0 sw=4 ts=4 " abbreviated for next line
  "autocmd FileType go setl tabstop=4|setl shiftwidth=4|setl softtabstop=0| set noexpandtab| set copyindent set preserveindent"
   autocmd FileType python setl tabstop=4|setl shiftwidth=4|setl softtabstop=4"
   autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab autoindent
@@ -102,7 +102,7 @@ highlight LineNr ctermfg=DarkGrey
 """"""""""""""""""""""""""""""""""""""""""
 "set textwidth=72
 "set ruler
-"set mouse=a
+set mouse=a
 "set confirm     "when closing an unsaved file
 "}}}
 
