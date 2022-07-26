@@ -104,6 +104,8 @@ highlight LineNr ctermfg=DarkGrey
 "set ruler
 set mouse=a
 "set confirm     "when closing an unsaved file
+"jump to the last position when reopening a file
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 "}}}
 
 " REMAPPING, NUMBERS, TABS and co. {{{

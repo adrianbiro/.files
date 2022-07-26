@@ -316,6 +316,11 @@ function dlatestpull() {
     esac
 }
 
+#complete -W $(docker images | awk 'NR>1{printf("%s ", $1)} END{print ""}') drun
+function drun()
+{
+  docker run -it --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp "${@}"
+}
 
 function perlrun() {
   docker run -it \

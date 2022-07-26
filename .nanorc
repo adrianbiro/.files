@@ -1,0 +1,11 @@
+
+
+set autoindent
+set mouse
+set nowrap
+#set const  # c-c show line numbers c-g 9 go to line 9
+#set linenumbers  # c-#
+
+
+
+
