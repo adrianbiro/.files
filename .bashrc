@@ -88,6 +88,7 @@ alias pva='source ./venv/bin/activate'
 alias pir="pip install -r requirements.txt"
 alias pfr="pip freeze --local > requirements.txt"
 alias cpath="pwd | xclip -selection clipboard"
+
 #export MANPAGER="vim -M +MANPAGER -"
 # Pretty-print man(1) pages.
 #export LESS_TERMCAP_md=$'\E[1;31m'
@@ -101,6 +102,12 @@ export LESS_TERMCAP_so=$'\E[01;42;30m' # begin the info box
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;36m'
 
+## fortran
+alias ,fprettify='fprettify.py -i 4 -l 80 --strict-indent'
+function ,gfortran()
+{
+  clear; gfortran ${1} && ./a.out
+}
 
 ## golnang
 function completego()
@@ -131,7 +138,16 @@ shopt -s autocd #cd just by typing the name of directory; to unset -u
 # in man bash PROMPTING
 function prompt()
 {
-  PS1="\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/') "
+  local emulator; emulator=$(basename "/"$(ps -o cmd -f -p $(cat /proc/$(echo $$)/stat \
+          | cut -d \  -f 4) | tail -1 | sed 's/ .*$//'))
+  case $emulator in
+        code)
+                PS1="% "
+                ;;
+        *)
+                PS1="\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/') "
+                ;;
+  esac
 }
 prompt
 function mprompt()
