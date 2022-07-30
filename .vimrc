@@ -137,6 +137,16 @@ nmap <F12> :! less ~/.vim/pomoc.md <CR>
 "Map F2 Buffers to tabs Normal mode
 nmap <F2> :tab ball <CR>
 set tabpagemax=30
+""""""""""""""""""""""""""""""""""""""
+"terminal
+function! Mterm()
+    below terminal ++rows=15!
+endfunction
+command! Mterm call Mterm()
+nmap <F5> :Mterm <CR>
+"ESC or C-[ to close terminal
+"tnoremap <ESC> <C-w>:q!<CR>  
+tnoremap <F5> <C-w>:q!<CR>  
 "}}}
 
 " TMUX {{{

@@ -109,6 +109,12 @@ function ,gfortran()
   clear; gfortran ${1} && ./a.out
 }
 
+## c
+function ,gcc()
+{
+  clear; gcc ${1} && ./a.out && rm a.out
+}
+
 ## golnang
 function completego()
 # Bash completion for go
@@ -145,7 +151,7 @@ function prompt()
                 PS1="% "
                 ;;
         *)
-                PS1="\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/') "
+                PS1="\e[36m\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')\e[0m "
                 ;;
   esac
 }
