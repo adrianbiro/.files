@@ -151,7 +151,11 @@ function prompt()
                 PS1="% "
                 ;;
         *)
-                PS1="\e[36m\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')\e[0m "
+                local col; col="\[\033[36m\]"
+                local cl; cl="\[\033[0m\]"
+                local ps1; ps1="\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/') "
+                ps1=""${col}""${ps1}""${cl}""
+                PS1="${ps1}"
                 ;;
   esac
 }
@@ -396,11 +400,6 @@ function hladaj(){
 }
 
 
-#function completitionlists(){
-#  COMPRELY=($(compgen -W "gitstat gita gitap" "${COMP_WORDS[1]}"))
-#
-#}
-#complete -F completitionlists run #TODO
 
 # Stopwatch
 function timer() {
@@ -408,7 +407,3 @@ function timer() {
   local clear="\033[0m"
   printf "${green}Timer started. Stop with Ctrl-D.${clear}\n" && date && time cat && date
 }
-#TODO #{{{
-#alias dir='echo -e "UnixMode     User   Group Size LastWriteTime   Name\n--------     ----   ----- ---- -------------   ----"; ls -l'
-#alias dir='green="\033[0;32m"; clear="\033[0m"; printf "\n\tDirectory: $(pwd)\n\n${green}UnixMode     User   Group Size LastWriteTime Name\n--------     ----   ----- ---- ------------- ----${clear}\n\t"; ls -l'
-#}}}
