@@ -102,7 +102,7 @@ highlight LineNr ctermfg=DarkGrey
 """"""""""""""""""""""""""""""""""""""""""
 "set textwidth=72
 "set ruler
-set mouse=a
+"set mouse=a
 "set confirm     "when closing an unsaved file
 "jump to the last position when reopening a file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
