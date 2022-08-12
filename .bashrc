@@ -29,6 +29,7 @@ alias ..='cd ..'
 alias ...='cd ../..'
 alias cd..='cd ..'
 alias ncdu="ncdu --color=dark -x"
+alias mnetstat='sudo netstat -ltnp'
 alias pscpu='ps aux --sort -pcpu | head -n30 | less -S'
 alias mps='ps aux | grep -v grep | grep -i -e VSZ -e' #$1
 alias mtree='tree -pFRC -h --dirsfirst . | less -R'
