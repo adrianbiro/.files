@@ -9,7 +9,7 @@ os.makedirs(config_targetdir, exist_ok=True)
 renamed = []
 
 for i in os.listdir():
-    if i.startswith((".git", ".gitignore", "README.md", "set_up_dot.py", ".config", "mman")) or i.endswith((".swp",)):
+    if i.startswith((".git", ".gitignore", "README.md", "set_up_dot.py", ".config", "mman")) or i.endswith((".swp", ".json")):
         continue
     src = os.path.abspath(i)
     if i.startswith("pomoc.md"):
