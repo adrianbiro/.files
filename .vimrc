@@ -192,8 +192,8 @@ let g:netrw_winsize = 0
 "Turn off help banner I to show
 let g:netrw_banner=0
 "Hide the dot files on startup 'gh' to show
-let ghregex='\(^\|\s\s\)\zs\.\S\+'
-let g:netrw_list_hide=ghregex
+"let ghregex='\(^\|\s\s\)\zs\.\S\+'
+"let g:netrw_list_hide=ghregex
 "current dir and browsing dir are synced
 "let g:netrw_keepdir = 0
 "}}}
