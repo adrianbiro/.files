@@ -73,7 +73,8 @@ esac
 
 ##local config
 #custom cd
-DRIVE="/run/user/${UID}/gvfs/$(ls /run/user/${UID}/gvfs/)"
+$(ls /run/user/${UID}/gvfs > /dev/null 2>&1) && \
+        DRIVE="/run/user/${UID}/gvfs/$(ls /run/user/${UID}/gvfs/)"
 alias glsla='"gio list -a "standard::display-name"'
 alias gls='"gio list -d"'
 alias gcp='gio copy -p'
