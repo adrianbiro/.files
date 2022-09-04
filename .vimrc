@@ -111,6 +111,10 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " REMAPPING, NUMBERS, TABS and co. {{{
 set nu
 set relativenumber
+""""""""" cursor
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+""""""""""""""""""
 "set highlight Normal LineNumber ctermfg=grey ctermbg=black
 "Map F3 to togle relativenumbers Normal mode
 "nmap <F3> :set relativenumber! <CR>
