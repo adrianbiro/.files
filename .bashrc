@@ -73,9 +73,11 @@ esac
 
 ##local config
 #custom cd
+[[ -d '/mnt/c/Users/AdriánBíro' ]] && WHOME='/mnt/c/Users/AdriánBíro'
 #$(ls /run/user/${UID}/gvfs > /dev/null 2>&1) && \
 [[ -d '/run/user/${UID}/gvfs' ]] && \
         DRIVE="/run/user/${UID}/gvfs/$(ls /run/user/${UID}/gvfs/)"
+eval `ssh-agent` > /dev/null
 alias glsla='"gio list -a "standard::display-name"'
 alias gls='"gio list -d"'
 alias gcp='gio copy -p'
