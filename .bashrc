@@ -77,7 +77,8 @@ esac
 #$(ls /run/user/${UID}/gvfs > /dev/null 2>&1) && \
 [[ -d '/run/user/${UID}/gvfs' ]] && \
         DRIVE="/run/user/${UID}/gvfs/$(ls /run/user/${UID}/gvfs/)"
-eval `ssh-agent` > /dev/null
+#eval `ssh-agent` > /dev/null
+eval `keychain --quiet --eval --agents ssh ~/.ssh/id_ed25519_GIT`
 alias glsla='"gio list -a "standard::display-name"'
 alias gls='"gio list -d"'
 alias gcp='gio copy -p'
@@ -97,6 +98,7 @@ alias pva='source ./venv/bin/activate'
 alias pir="pip install -r requirements.txt"
 alias pfr="pip freeze --local > requirements.txt"
 alias cpath="pwd | xclip -selection clipboard"
+alias dless="jq '.' -C | less -R"
 
 #export MANPAGER="vim -M +MANPAGER -"
 # Pretty-print man(1) pages.
@@ -358,6 +360,13 @@ function dlatestpull() {
 function drun()
 {
   docker run -it --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp "${@}"
+}
+
+function netrun() {
+        docker run -it \
+                --network host \
+                --rm --name netwb \
+                jonlabelle/network-tools
 }
 
 function perlrun() {
