@@ -4,7 +4,7 @@ export PATH=$HOME/bin:$PATH
 # to edit content of cmdline in vim crtl x ctrl e; to set vi mode for readline "set -o vi"
 export EDITOR="/usr/bin/vim"
 alias getpurebash="bash --norc"
-alias getpurevim='touch /tmp/.vimrc && vim -u /tmp/.vimrc'
+alias getpurevim='vim -u $(mktemp)'
 alias path='echo -e ${PATH//:/\\n}'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
@@ -25,8 +25,6 @@ alias ls-l='ls -l'
 $(type batcat > /dev/null 2>&1) && alias o='batcat --pager "less -RF"' || alias o='less'
 alias rd='rmdir'
 alias rehash='hash -r'
-alias ..='cd ..'
-alias ...='cd ../..'
 alias cd..='cd ..'
 alias ncdu="ncdu --color=dark -x"
 alias mnetstat='sudo netstat -ltnp'
@@ -36,7 +34,6 @@ alias mtree='tree -pFRC -h --dirsfirst . | less -R'
 alias atree='tree -apFRC -h -L 3 --dirsfirst -I .git . | less -R'
 alias mmnt='mount | column -t | less -S'
 alias gh='history | grep'
-alias xecho='xclip -o clip'
 alias count='find . -type f | wc -l'
 alias rfree="watch -n 5 -d 'free -mht'"
 alias mcache="sudo sh -c \"echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'\""
@@ -98,7 +95,8 @@ alias pva='source ./venv/bin/activate'
 alias pir="pip install -r requirements.txt"
 alias pfr="pip freeze --local > requirements.txt"
 alias cpath="pwd | xclip -selection clipboard"
-alias dless="jq '.' -C | less -R"
+alias jless="jq '.' -C | less -R"
+alias xecho='xclip -o clip'
 
 #export MANPAGER="vim -M +MANPAGER -"
 # Pretty-print man(1) pages.
