@@ -69,13 +69,13 @@ case ${TERM} in
 esac
 
 ##local config
-#custom cd
+# wsl
 [[ -d '/mnt/c/Users/AdriánBíro' ]] && WHOME='/mnt/c/Users/AdriánBíro'
+[[ -n "${WHOME}" ]] && \
+        eval `keychain --quiet --eval --agents ssh ~/.ssh/id_ed25519_GIT`
 #$(ls /run/user/${UID}/gvfs > /dev/null 2>&1) && \
 [[ -d '/run/user/${UID}/gvfs' ]] && \
         DRIVE="/run/user/${UID}/gvfs/$(ls /run/user/${UID}/gvfs/)"
-#eval `ssh-agent` > /dev/null
-eval `keychain --quiet --eval --agents ssh ~/.ssh/id_ed25519_GIT`
 alias glsla='"gio list -a "standard::display-name"'
 alias gls='"gio list -d"'
 alias gcp='gio copy -p'
