@@ -273,6 +273,7 @@ function cl() {
   ls --color=auto --classify --almost-all
 }
 
+alias ,gofetch="git checkout ${1} && git fetch origin && git pull origin ${1}"
 
 function gitt() {
   cd $(git rev-parse --show-toplevel)
