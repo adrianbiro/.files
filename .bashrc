@@ -70,7 +70,8 @@ esac
 
 ##local config
 # wsl
-[[ -d '/mnt/c/Users/AdriánBíro' ]] && WHOME='/mnt/c/Users/AdriánBíro'
+[[ -d '/mnt/c/Users/AdriánBíro' ]] && WHOME='/mnt/c/Users/AdriánBíro'; \
+        ONEDRIVE='/mnt/c/Users/AdriánBíro/OneDrive\ -\ IC\ GROUP/'
 [[ -n "${WHOME}" ]] && \
         eval `keychain --quiet --eval --agents ssh ~/.ssh/id_ed25519_GIT`
 #$(ls /run/user/${UID}/gvfs > /dev/null 2>&1) && \
