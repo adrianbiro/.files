@@ -71,7 +71,7 @@ esac
 ##local config
 # wsl
 [[ -d '/mnt/c/Users/AdriánBíro' ]] && WHOME='/mnt/c/Users/AdriánBíro'; \
-        alias cwh="cd $WHOME"
+        alias cwh="cd $WHOME"; \
         ONEDRIVE='/mnt/c/Users/AdriánBíro/OneDrive\ -\ IC\ GROUP/'
 [[ -n "${WHOME}" ]] && \
         eval `keychain --quiet --eval --agents ssh ~/.ssh/id_ed25519_GIT`
