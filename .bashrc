@@ -72,6 +72,7 @@ esac
 # wsl
 [[ -d '/mnt/c/Users/AdriánBíro' ]] && WHOME='/mnt/c/Users/AdriánBíro'; \
         alias cwh="cd $WHOME"; \
+        alias dockerdesktop="/mnt/c/Program\ Files/docker/Docker/Docker\ Desktop.exe"; \
         ONEDRIVE='/mnt/c/Users/AdriánBíro/OneDrive\ -\ IC\ GROUP/'
 [[ -n "${WHOME}" ]] && \
         eval `keychain --quiet --eval --agents ssh ~/.ssh/id_ed25519_GIT`
