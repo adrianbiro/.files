@@ -1,6 +1,5 @@
 #global config
 #MAN_POSIXLY_CORRECT=1
-export PATH=$HOME/bin:$PATH
 # to edit content of cmdline in vim crtl x ctrl e; to set vi mode for readline "set -o vi"
 export EDITOR="/usr/bin/vim"
 alias getpurebash="bash --norc"
@@ -37,6 +36,54 @@ alias gh='history | grep'
 alias count='find . -type f | wc -l'
 alias rfree="watch -n 5 -d 'free -mht'"
 alias mcache="sudo sh -c \"echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'\""
+## PATH
+#export PATH=$HOME/bin:$PATH
+#PATH="/usr/local/go/bin:$PATH"
+pathappend() {
+  declare arg
+  for arg in "$@"; do
+    test -d "$arg" || continue
+    PATH=${PATH//":$arg:"/:}
+    PATH=${PATH/#"$arg:"/}
+    PATH=${PATH/%":$arg"/}
+    export PATH="${PATH:+"$PATH:"}$arg"
+  done
+} && export -f pathappend
+
+pathprepend() {
+  for arg in "$@"; do
+    test -d "$arg" || continue
+    PATH=${PATH//:"$arg:"/:}
+    PATH=${PATH/#"$arg:"/}
+    PATH=${PATH/%":$arg"/}
+    export PATH="$arg${PATH:+":${PATH}"}"
+  done
+} && export -f pathprepend
+
+# remember last arg will be first in path
+pathprepend \
+  "$HOME/bin" \
+  "$HOME/.local/bin" \
+  /usr/local/go/bin \
+  /usr/local/opt/openjdk/bin \
+  /usr/local/bin
+
+pathappend \
+  /usr/local/opt/coreutils/libexec/gnubin \
+  '/mnt/c/Program Files/Oracle/VirtualBox' \
+  '/mnt/c/Windows' \
+  '/mnt/c/Program Files (x86)/VMware/VMware Workstation' \
+  /mingw64/bin \
+  /usr/local/bin \
+  /usr/local/sbin \
+  /usr/local/games \
+  /usr/games \
+  /usr/sbin \
+  /usr/bin \
+  /snap/bin \
+  /sbin \
+  /bin
+
 # If not running interactively, don't do anything
 case $- in
   *i*) ;;
@@ -142,7 +189,7 @@ function gomih()
 }
 # set go path and call completego func
 if [ -d "/usr/local/go/" ] ; then
-    PATH="/usr/local/go/bin:$PATH"
+    #PATH="/usr/local/go/bin:$PATH"
     completego
 fi
 
