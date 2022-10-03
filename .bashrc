@@ -107,8 +107,8 @@ if [ -x /usr/bin/dircolors ]; then
 fi
 
 case ${TERM} in
-  xterm*|rxvt*|Eterm|aterm|kterm|gnome*|interix)
-      PROMPT_COMMAND='echo -ne "\033]0;${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}\007"'
+  xterm*?|rxvt*|Eterm|aterm|kterm|gnome*|interix)
+      PROMPT_COMMAND='echo -ne "\033]0;${PWD/$HOME/~}\007"'
       ;;
   screen) # tmux too
       PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}\033\\"'
