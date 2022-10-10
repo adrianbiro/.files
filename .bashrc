@@ -21,9 +21,14 @@ alias ll='ls -lh'
 [[ $(type -t _ls) == function ]] && alias ls='_ls'
 alias lt='du -sh * | sort -h'
 alias ls-l='ls -l'
-#TODO fix in case
-$(type batcat > /dev/null 2>&1) && alias o='batcat --pager "less -RF"' || alias o='less'
-$(type bat > /dev/null 2>&1) && alias o='bat --pager "less -RF"' || alias o='less'
+# $(type bat > /dev/null 2>&1) && alias o='bat --pager "less -RF"' || alias o='less'
+if [ $(type batcat > /dev/null 2>&1) ]; then
+  alias o='batcat --pager "less -RF"'
+elif [ $(type bat > /dev/null 2>&1) ]; then
+  alias o='bat --pager "less -RF"'
+else
+  alias o='less'
+fi
 alias rd='rmdir'
 alias rehash='hash -r'
 alias cd..='cd ..'
