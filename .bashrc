@@ -115,7 +115,8 @@ fi
 
 case ${TERM} in
   xterm*?|rxvt*|Eterm|aterm|kterm|gnome*|interix)
-      PROMPT_COMMAND='echo -ne "\033]0;${PWD/$HOME/~}\007"'
+      #PROMPT_COMMAND='echo -ne "\033]0;${PWD/$HOME/~}\007"'
+      PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}\033\\"'
       ;;
   screen) # tmux too
       PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}\033\\"'
