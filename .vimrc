@@ -66,7 +66,8 @@ autocmd BufWritePre * call StripTrailingWhitespace()
 "let b:noStripWhitespace=1
 " I dont like wrapping lines to mix with the line numbers
 "set showbreak=\ \ \ \ \ \ \ \ 
-set showbreak=𝂅𝂅𝂅\ \ \ \ \ 
+"set showbreak=𝂅𝂅𝂅\ \ \ \ \ 
+set showbreak=...\ \ \ \ \ 
 "set nowrap "extend long lines as far as the line can go
 """""""""""""""""""""""""""""""
 "}}}

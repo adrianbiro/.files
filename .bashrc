@@ -222,8 +222,9 @@ function prompt()
                 #local col; col=$(( "${?}" == 0 ? "\[\033[36m\]" : "\[\033[31m\]" ))
                 #local col; if [ "{?}" == 0 ]; then col="\[\033[36m\]"; else col="\[\033[31m\]"; fi
                 local cl; cl="\[\033[0m\]"
-                local ps1; ps1="\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/') "
-                ps1=""${col}""${ps1}""${cl}""
+                #local ps1; ps1="\u@\h:\w>\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/') "
+                local ps1; ps1="\w%\$(git branch 2>/dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/') "
+                #ps1=""${col}""${ps1}""${cl}""
                 PS1="${ps1}"
                 ;;
   esac
