@@ -112,18 +112,8 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
-
-case ${TERM} in
-  xterm*?|rxvt*|Eterm|aterm|kterm|gnome*|interix)
-      #PROMPT_COMMAND='echo -ne "\033]0;${PWD/$HOME/~}\007"'
-      PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}\033\\"'
-      ;;
-  screen) # tmux too
-      PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}\033\\"'
-      ;;
-esac
-
 ##local config
+
 # wsl
 [[ -d '/mnt/c/Users/AdriánBíro' ]] && WHOME='/mnt/c/Users/AdriánBíro'; \
         alias cwh="cd $WHOME"; \
@@ -236,6 +226,17 @@ function mprompt()
   PS1="$ "
 }
 #PS1="\u@\h:\w> " #SUSE default prompt
+
+#case ${TERM} in
+#  xterm*?|rxvt*|Eterm|aterm|kterm|gnome*|interix)
+#      #PROMPT_COMMAND='echo -ne "\033]0;${PWD/$HOME/~}\007"'
+#      PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}\033\\"'
+#      #PROMPT_COMMAND='echo -ne "${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}"'
+#      ;;
+#  screen) # tmux too
+#      PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}\033\\"'
+#      ;;
+#esac
 
 ## functions
 

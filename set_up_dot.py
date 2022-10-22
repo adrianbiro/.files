@@ -1,6 +1,10 @@
 #!/usr/bin/python3
 import os
 
+if os.getcwd() == os.path.expanduser("~"):
+    print("Run from dot_files directory.")
+    exit(1)
+
 vim_targetdir = os.path.join(os.path.expanduser("~"), ".vim")
 config_targetdir = os.path.join(os.path.expanduser("~"), ".config")
 os.makedirs(vim_targetdir, exist_ok=True)
