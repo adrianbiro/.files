@@ -120,7 +120,7 @@ fi
         alias dockerdesktop="/mnt/c/Program\ Files/docker/Docker/Docker\ Desktop.exe"; \
         ONEDRIVE='/mnt/c/Users/AdriánBíro/OneDrive\ -\ IC\ GROUP/'
 [[ -n "${WHOME}" ]] && \
-        eval `keychain --quiet --eval --agents ssh ~/.ssh/id_ed25519_GIT`
+        eval `keychain --quiet --eval --agents ssh ~/.ssh/win11GITed25519-8-11-2022`
 #$(ls /run/user/${UID}/gvfs > /dev/null 2>&1) && \
 [[ -d '/run/user/${UID}/gvfs' ]] && \
         DRIVE="/run/user/${UID}/gvfs/$(ls /run/user/${UID}/gvfs/)"
