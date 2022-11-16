@@ -117,6 +117,7 @@ fi
 # wsl
 [[ -d '/mnt/c/Users/AdriánBíro' ]] && WHOME='/mnt/c/Users/AdriánBíro'; \
         alias cwh="cd $WHOME"; \
+        alias cwd="cd $WHOME/Downloads"; \
         alias dockerdesktop="/mnt/c/Program\ Files/docker/Docker/Docker\ Desktop.exe"; \
         ONEDRIVE='/mnt/c/Users/AdriánBíro/OneDrive\ -\ IC\ GROUP/'
 [[ -n "${WHOME}" ]] && \
@@ -130,7 +131,7 @@ alias gcp='gio copy -p'
 export GITS="~/gits"
 export DOTFILES="$GITS/dot_files"
 export LEARN="$GITS/learn"
-export CDPATH=".:$GITS:$DOTFILES:$LEARN:$HOME"
+export CDPATH=".:$HOME"  #CDPATH=".:$DOTFILES:$HOME"
 alias cdpath='echo -e ${CDPATH//:/\\n}'
 alias cg='cd ~/gits/; ls'
 alias clp='cd ~/gits/learn/python/; ls'
