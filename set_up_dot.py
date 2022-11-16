@@ -13,11 +13,11 @@ os.makedirs(config_targetdir, exist_ok=True)
 renamed = []
 
 for i in os.listdir():
-    if i.startswith((".git", ".gitignore", "README.md", "set_up_dot.py", ".config", "mman")) or i.endswith((".swp", ".json")):
+    if i.startswith((".git", ".gitignore", "README.md", "set_up_dot.py", ".config", "dotvim", "mman")) or i.endswith((".swp", ".json")):
         continue
     src = os.path.abspath(i)
-    if i.startswith("pomoc.md"):
-        dest = os.path.join(vim_targetdir, i)
+    #if i.startswith("pomoc.md"):
+    #    dest = os.path.join(vim_targetdir, i)
     else:
         dest = os.path.join(os.path.expanduser("~"), i)
     if os.path.islink(dest):
