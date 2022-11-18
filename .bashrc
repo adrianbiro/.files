@@ -145,7 +145,6 @@ alias pir="pip install -r requirements.txt"
 alias pfr="pip freeze --local > requirements.txt"
 alias cpath="pwd | xclip -selection clipboard"
 alias jless="jq '.' -C | less -R"
-alias xecho='xclip -o clip'
 
 #export MANPAGER="vim -M +MANPAGER -"
 # Pretty-print man(1) pages.
@@ -248,6 +247,13 @@ function mprompt()
 #}
 
 
+function xecho(){
+    if [[ "${WHOME}" ]]; then
+        powershell.exe -c 'Get-Clipboard'
+    else
+        xclip -o clip
+    fi
+}
 function curljson()
 {
   curl "${1}" | jq -C . | less -R
