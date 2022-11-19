@@ -2,6 +2,10 @@
 #MAN_POSIXLY_CORRECT=1
 # to edit content of cmdline in vim crtl x ctrl e; to set vi mode for readline "set -o vi"
 export EDITOR="/usr/bin/vim"
+export HISTSIZE=10000
+export HISTFILESIZE=1000000
+export HISTCONTROL=ignoredups:ignoreboth:ignorespace
+export HISTIGNORE="exit:pwd"
 alias getpurebash="bash --norc"
 alias getpurevim='vim -u $(mktemp)'
 alias path='echo -e ${PATH//:/\\n}'
@@ -398,7 +402,6 @@ function dockrmall() {
     printf '%s\n' "$DNI"
   fi
 }
-
 
 function dlatestpull() {
   docker images \
