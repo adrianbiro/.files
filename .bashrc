@@ -249,7 +249,7 @@ function mprompt()
 
 function xecho(){
     if [[ "${WHOME}" ]]; then
-        powershell.exe -c 'Get-Clipboard'
+        powershell.exe -c 'Get-Clipboard -Value'
     else
         xclip -o clip
     fi
