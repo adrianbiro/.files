@@ -1,3 +1,4 @@
+#!/bin/bash
 #global config
 #MAN_POSIXLY_CORRECT=1
 # to edit content of cmdline in vim crtl x ctrl e; to set vi mode for readline "set -o vi"
@@ -26,9 +27,9 @@ alias ll='ls -lh'
 alias lt='du -sh * | sort -h'
 alias ls-l='ls -l'
 # $(type bat > /dev/null 2>&1) && alias o='bat --pager "less -RF"' || alias o='less'
-if [ $(type batcat > /dev/null 2>&1) ]; then
+if [ "$(type batcat > /dev/null 2>&1)" ]; then
   alias o='batcat --pager "less -RF"'
-elif [ $(type bat > /dev/null 2>&1) ]; then
+elif [ "$(type bat > /dev/null 2>&1)" ]; then
   alias o='bat --pager "less -RF"'
 else
   alias o='less'
@@ -122,9 +123,9 @@ fi
 
 # wsl
 [[ -d '/mnt/c/Users/AdriánBíro' ]] && WHOME='/mnt/c/Users/AdriánBíro'; \
-        alias cwh="cd $WHOME"; \
-        alias cwd="cd $WHOME/Downloads"; \
-        alias dockerdesktop="/mnt/c/Program\ Files/docker/Docker/Docker\ Desktop.exe"; \
+        alias cwh='cd $WHOME'; \
+        alias cwd='cd $WHOME/Downloads'; \
+        alias dockerdesktop='/mnt/c/Program\ Files/docker/Docker/Docker\ Desktop.exe'; \
         ONEDRIVE='/mnt/c/Users/AdriánBíro/OneDrive\ -\ IC\ GROUP/'
 [[ -n "${WHOME}" ]] && \
         eval `keychain --quiet --eval --agents ssh ~/.ssh/win11GITed25519-8-11-2022`
@@ -134,7 +135,7 @@ fi
 alias glsla='"gio list -a "standard::display-name"'
 alias gls='"gio list -d"'
 alias gcp='gio copy -p'
-export GITS="~/gits"
+export GITS="${HOME}/gits"
 export DOTFILES="$GITS/dot_files"
 export LEARN="$GITS/learn"
 export CDPATH=".:$HOME"  #CDPATH=".:$DOTFILES:$HOME"
@@ -169,13 +170,13 @@ export LESS_TERMCAP_us=$'\E[01;36m'
 alias ,fprettify='fprettify.py -i 4 -l 80 --strict-indent'
 function ,gfortran()
 {
-  clear; gfortran ${1} && ./a.out
+  clear; gfortran "${1}" && ./a.out
 }
 
 ## c
 function ,gcc()
 {
-  clear; gcc ${1} && ./a.out && rm a.out
+  clear; gcc "${1}" && ./a.out && rm a.out
 }
 
 ## golnang
@@ -189,7 +190,7 @@ function completego()
 function gomih()
 {
     local here; here=$(pwd)
-    go mod init ${here##*/}
+    go mod init "${here##*/}"
 }
 # set go path and call completego func
 if [ -d "/usr/local/go/" ] ; then
@@ -278,16 +279,16 @@ function TODO() {
 
 
 function mhelp() {
-  whatis $1
-  man $1 \
-  | sed -n "/^\s*$2/,/^$/p"
+  whatis "$1"
+  man "$1" \
+  | sed -n "/^\s*${2}/,/^$/p"
 
 }
 
 
 function mman() {
-  man ${1} |\
-  grep -e ${2}
+  man "${1}" |\
+  grep -e "${2}"
 }
 
 function bak() {
@@ -307,7 +308,7 @@ function tmuxs() {
 
 function tmuxe() {
   local dir; dir=$(pwd); dir="${dir##*/}"
-  tmux new-session -s "${dir^^}" \vim $1 \; split-window -v \; resize-pane -D 18 \; attach
+  tmux new-session -s "${dir^^}" \vim "${1}" \; split-window -v \; resize-pane -D 18 \; attach
 }
 
 function thistory(){
@@ -318,8 +319,8 @@ function thistory(){
 
 # man XDG-OPEN(1)
 function gopen() {
-  if [[ ! -z "$1" ]]; then
-    xdg-open $1
+  if [[ -n "$1" ]]; then
+    xdg-open "$1"
   else
     xdg-open .
   fi
