@@ -1,5 +1,10 @@
 [user]
 	email = biroadrian@protonmail.com
-	name = Adrián Bíro
+	name = Adrian Biro
 [core]
 	pager = less -R
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
