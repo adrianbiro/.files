@@ -208,9 +208,9 @@ function prompt()
   local emulator; emulator=$(basename "/"$(ps -o cmd -f -p $(cat /proc/$(echo $$)/stat \
           | cut -d \  -f 4) | tail -1 | sed 's/ .*$//'))
   case $emulator in
-        code)
-                PS1="% "
-                ;;
+        #code)
+        #        PS1="% "
+        #        ;;
         *)
                 local col; col='\[\033[36m\]'
                 #local col; col=$([ "$?" == 0 ] && echo "\[\033[36m\]" || echo "\[\033[31m\]")
