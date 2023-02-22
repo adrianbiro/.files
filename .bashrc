@@ -47,6 +47,7 @@ alias count='find . -type f | wc -l'
 alias rfree="watch -n 5 -d 'free -mht'"
 alias mcache="sudo sh -c \"echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'\""
 alias chelp='curl -s cheat.sh'
+alias="host -t a ${@}"
 ## PATH
 #export PATH=$HOME/bin:$PATH
 #PATH="/usr/local/go/bin:$PATH"
