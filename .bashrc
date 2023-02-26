@@ -1,4 +1,9 @@
 #!/bin/bash
+# If not running interactively, don't do anything
+case $- in
+  *i*) ;;
+  *) return;;
+esac
 #global config
 #MAN_POSIXLY_CORRECT=1
 # to edit content of cmdline in vim crtl x ctrl e; to set vi mode for readline "set -o vi"
@@ -14,7 +19,7 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
 alias ip='ip --color=auto'
-alias portstate='ss -ltpn'
+alias portstate='sudo ss -tnlp'
 alias mip="curl http://ipecho.net/plain; echo"
 alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -"
 alias cp='cp -v'
@@ -47,7 +52,7 @@ alias count='find . -type f | wc -l'
 alias rfree="watch -n 5 -d 'free -mht'"
 alias mcache="sudo sh -c \"echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'\""
 alias chelp='curl -s cheat.sh'
-alias="host -t a ${@}"
+alias hostip="host -t a ${@}"
 ## PATH
 #export PATH=$HOME/bin:$PATH
 #PATH="/usr/local/go/bin:$PATH"
@@ -78,14 +83,10 @@ pathprepend \
   "$HOME/.local/bin" \
   /usr/local/go/bin \
   /usr/local/opt/openjdk/bin \
-  /usr/local/bin
+  "$HOME/.dotnet" \
+  "$HOME/.dotnet/tools"
 
 pathappend \
-  /usr/local/opt/coreutils/libexec/gnubin \
-  '/mnt/c/Program Files/Oracle/VirtualBox' \
-  '/mnt/c/Windows' \
-  '/mnt/c/Program Files (x86)/VMware/VMware Workstation' \
-  /mingw64/bin \
   /usr/local/bin \
   /usr/local/sbin \
   /usr/local/games \
@@ -96,13 +97,8 @@ pathappend \
   /sbin \
   /bin
 
-# If not running interactively, don't do anything
-case $- in
-  *i*) ;;
-  *) return;;
-esac
 # enable programmable completion features
-if ! shopt -oq posix; then
+if ! shopt -oq posix ; then
   if [ -f /usr/share/bash-completion/bash_completion ]; then
     . /usr/share/bash-completion/bash_completion
   elif [ -f /etc/bash_completion ]; then
@@ -120,11 +116,11 @@ fi
 ##local config
 
 # wsl
-[[ -d '/mnt/c/Users/AdriánBíro' ]] && WHOME='/mnt/c/Users/AdriánBíro'; \
+[[ -d '/mnt/c/Users/biroa' ]] && WHOME='/mnt/c/Users/biroa'; \
         alias cwh='cd $WHOME'; \
         alias cwd='cd $WHOME/Downloads'; \
         alias dockerdesktop='/mnt/c/Program\ Files/docker/Docker/Docker\ Desktop.exe'; \
-        ONEDRIVE='/mnt/c/Users/AdriánBíro/OneDrive\ -\ IC\ GROUP/'
+        ONEDRIVE='/mnt/c/Users/biroa/OneDrive\ -\ IC\ GROUP/'
 [[ -n "${WHOME}" ]] && \
         eval `keychain --quiet --eval --agents ssh ~/.ssh/win11GITed25519-8-11-2022`
 #$(ls /run/user/${UID}/gvfs > /dev/null 2>&1) && \
@@ -165,17 +161,17 @@ export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;36m'
 
 ## fortran
-alias ,fprettify='fprettify.py -i 4 -l 80 --strict-indent'
-function ,gfortran()
-{
-  clear; gfortran "${1}" && ./a.out
-}
-
-## c
-function ,gcc()
-{
-  clear; gcc "${1}" && ./a.out && rm a.out
-}
+#alias ,fprettify='fprettify.py -i 4 -l 80 --strict-indent'
+#function ,gfortran()
+#{
+#  clear; gfortran "${1}" && ./a.out
+#}
+#
+### c
+#function ,gcc()
+#{
+#  clear; gcc "${1}" && ./a.out && rm a.out
+#}
 
 ## golnang
 function completego()
@@ -194,6 +190,10 @@ function gomih()
 if [ -d "/usr/local/go/" ] ; then
     #PATH="/usr/local/go/bin:$PATH"
     completego
+fi
+# dotnet
+if [ -d "${HOME}/.dotnet" ] ; then
+    export DOTNET_ROOT="${HOME}/.dotnet"
 fi
 
 # to disable -u	it's for extended glob patterns like ls **/*
@@ -226,7 +226,7 @@ function prompt()
   esac
 }
 prompt
-function mprompt()
+function simpleprompt()
 {
   PS1="$ "
 }
@@ -271,9 +271,9 @@ function getjsonschema()
 }
 
 
-function TODO() {
-  python3 -c "import webbrowser; webbrowser.open('https://www.notion.so/')"
-}
+#function TODO() {
+#  python3 -c "import webbrowser; webbrowser.open('https://www.notion.so/')"
+#}
 
 
 function mhelp() {
@@ -300,14 +300,14 @@ function bak() {
 }
 
 
-function tmuxs() {
-  tmux new-session -s "${1^^}" \; split-window -v \; resize-pane -D 18 \; attach
-}
-
-function tmuxe() {
-  local dir; dir=$(pwd); dir="${dir##*/}"
-  tmux new-session -s "${dir^^}" \vim "${1}" \; split-window -v \; resize-pane -D 18 \; attach
-}
+#function tmuxs() {
+#  tmux new-session -s "${1^^}" \; split-window -v \; resize-pane -D 18 \; attach
+#}
+#
+#function tmuxe() {
+#  local dir; dir=$(pwd); dir="${dir##*/}"
+#  tmux new-session -s "${dir^^}" \vim "${1}" \; split-window -v \; resize-pane -D 18 \; attach
+#}
 
 function thistory(){
   local HISTTIMEFORMAT="%Y-%m-%d %T "
@@ -325,13 +325,13 @@ function gopen() {
 }
 
 
-function mnt() {
-  mount \
-          | awk -F' ' '{print $1,$3}' \
-          | column -t \
-          | egrep '^/dev/' \
-          | sort
-}
+#function mnt() {
+#  mount \
+#          | awk -F' ' '{print $1,$3}' \
+#          | column -t \
+#          | egrep '^/dev/' \
+#          | sort
+#}
 
 
 #Auto complete directory names.
@@ -427,10 +427,10 @@ function dlatestpull() {
 }
 
 #complete -W $(docker images | awk 'NR>1{printf("%s ", $1)} END{print ""}') drun
-function drun()
-{
-  docker run -it --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp "${@}"
-}
+#function drun()
+#{
+#  docker run -it --rm -v "$PWD":/usr/src/myapp -w /usr/src/myapp "${@}"
+#}
 
 function netrun() {
         docker run -it \
@@ -439,23 +439,23 @@ function netrun() {
                 jonlabelle/network-tools
 }
 
-function perlrun() {
-  docker run -it \
-          --rm --name "PERL" \
-          -v "$PWD":/usr/src/myapp \
-          -w /usr/src/myapp \
-          perl:latest \
-          perl "$1"
-}
+#function perlrun() {
+#  docker run -it \
+#          --rm --name "PERL" \
+#          -v "$PWD":/usr/src/myapp \
+#          -w /usr/src/myapp \
+#          perl:latest \
+#          perl "$1"
+#}
 
 function jupyrun() {
     ~/Applications/venv/bin/jupyter-lab
 }
-function jupyrunNp() {
-    docker run -it --rm \
-            -v $(pwd):/home/jovyan/work -p 8888:8888 \
-            jupyter/scipy-notebook
-}
+#function jupyrunNp() {
+#    docker run -it --rm \
+#            -v $(pwd):/home/jovyan/work -p 8888:8888 \
+#            jupyter/scipy-notebook
+#}
 
 
 function pythonrun() {
@@ -473,7 +473,7 @@ function blackrun() {
           --volume $(pwd):/src \
           --workdir /src \
           pyfound/black:latest \
-          black --check -l 120 -S "$@"
+          black --check -l 80 -S "$@"
 }
 
 
@@ -482,13 +482,13 @@ mcd() {
 }
 
 
-function hladaj(){
-  if [[ ! "$1" = "-f" ]]; then
-    grep -irnT --word-regexp --color=always "$*" --binary-files=without-match --exclude=GLOB".*.swp" --exclude-dir=".git" . | less -R
-  else
-    find . -name "$2" | less -R
-  fi
-}
+#function hladaj(){
+#  if [[ ! "$1" = "-f" ]]; then
+#    grep -irnT --word-regexp --color=always "$*" --binary-files=without-match --exclude=GLOB".*.swp" --exclude-dir=".git" . | less -R
+#  else
+#    find . -name "$2" | less -R
+#  fi
+#}
 
 
 
