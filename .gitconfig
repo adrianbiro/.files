@@ -3,6 +3,11 @@
 	name = Adrian Biro
 [core]
 	pager = less -R
+    compression = -1
+    # win
+    #sshCommand = C:/Windows/System32/OpenSSH/ssh.exe
+    packedGitLimit = 512m
+	packedGitWindowSize = 512m
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
@@ -10,3 +15,9 @@
 	required = true
 [init]
     defaultBranch = main
+[pack]
+	deltaCacheSize = 2047m
+	packSizeLimit = 2047m
+	windowMemory = 2047m
+#[http]
+#	proxy = http://<user>:<passwd>@wpadweb.csin.cz/wpad.pac:3128 #8080
