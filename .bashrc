@@ -4,13 +4,18 @@ case $- in
 *i*) ;;
 *) return ;;
 esac
-# fix potential infinite sourcing 
+# fix potential infinite sourcing
 if [[ -z "${__CUSTOM__BASHRC__}" ]]; then
   __CUSTOM__BASHRC__="true"
 else
   return
 fi
-#global config
+# to disable -u	it's for extended glob patterns like ls **/*
+# grep -d skip 'text_string' **/* this is similar to grep -d skip -R 'text_string'
+shopt -s globstar
+# Allow multiple terminals write to history file
+shopt -s histappend
+shopt -s autocd #cd just by typing the name of directory; to unset -u
 #MAN_POSIXLY_CORRECT=1
 # to edit content of cmdline in vim crtl x ctrl e; to set vi mode for readline "set -o vi"
 export EDITOR="/usr/bin/vim"
@@ -139,6 +144,7 @@ fi
 # wsl
 if [[ -d '/mnt/c/Users/biroa' ]]; then
   WHOME='/mnt/c/Users/biroa'
+  export WHOME
   alias cwh='cd $WHOME'
   alias cwd='cd $WHOME/Downloads'
   alias dockerdesktop='/mnt/c/Program\ Files/docker/Docker/Docker\ Desktop.exe'
@@ -175,69 +181,10 @@ else # Msys git-bash
       ls -AF
     }
     export CDPATH=".:$HOME" #CDPATH=".:$DOTFILES:$HOME"
+    ## git-bash specific
+    alias xecho="powershell.exe -c 'Get-Clipboard'"
   fi
-
 fi
-if [[ "$(type xclip 1>"/dev/null" 2>&1)" ]]; then
-  alias cpath="pwd | xclip -selection clipboard"
-fi
-
-if [[ ! "$(type jq 1>"/dev/null" 2>&1)" ]]; then
-
-  function jless() { jq '.' -C | less -R; }
-  export -f jless
-
-  function curljson() { curl "${1}" | jless; } && export -f curljson
-
-  function getjsonschema() {
-    jq -r 'path(..) | map(tostring) | join("/")' "${1}" | less -R
-  } && export -f getjsonschema
-fi
-
-if [[ "$(type batcat 1>"/dev/null" 2>&1)" ]]; then
-  alias o='batcat --pager "less -RF"'
-fi
-
-if [[ "$(type fprettify 1>"/dev/null" 2>&1)" ]]; then
-  alias ,fprettify='fprettify.py -i 4 -l 80 --strict-indent'
-fi
-
-if [[ "$(type xdg-open 1>"/dev/null" 2>&1)" ]]; then
-  # man XDG-OPEN(1)
-  function gopen() {
-    if [[ -n "$1" ]]; then
-      xdg-open "$1"
-    else
-      xdg-open .
-    fi
-  }
-fi
-
-## golnang
-if [[ -d "/usr/local/go/" ]]; then
-  #PATH="/usr/local/go/bin:$PATH"
-  if [[ -d "${HOME}/dot_files/go-pkg-completion" ]]; then
-    # shellcheck disable=SC1091
-    source "${HOME}/dot_files/go-pkg-completion"
-  fi
-  function gomih() {
-    local here
-    here=$(pwd)
-    go mod init "${here##*/}"
-  } && export -f gomih
-fi
-
-# dotnet
-if [[ -d "${HOME}/.dotnet" ]]; then
-  export DOTNET_ROOT="${HOME}/.dotnet"
-fi
-
-# to disable -u	it's for extended glob patterns like ls **/*
-# grep -d skip 'text_string' **/* this is similar to grep -d skip -R 'text_string'
-shopt -s globstar
-# Allow multiple terminals write to history file
-shopt -s histappend
-shopt -s autocd #cd just by typing the name of directory; to unset -u
 
 # in man bash PROMPTING
 function prompt() {
@@ -287,38 +234,15 @@ function simpleprompt() {
 #  command ls $LS_OPTIONS ${1+"$@"}
 #}
 
-function xecho() {
-  if [[ "${WHOME}" ]]; then
-    powershell.exe -c 'Get-Clipboard -Value'
-  else
-    xclip -o clip
-  fi
-}
-
-#function TODO() {
-#  python3 -c "import webbrowser; webbrowser.open('https://www.notion.so/')"
-#}
-
 function mhelp() {
   whatis "$1"
   man "$1" |
     sed -n "/^\s*${2}/,/^$/p"
-
 }
 
 function mman() {
   man "${1}" |
     grep -e "${2}"
-}
-
-function bak() {
-  cp -r "$1" "${1}.bak"
-  #  cp --backup=numbered --recursive "$1"
-  if [[ "$2" == "+i" ]]; then
-    sudo chattr -R +i "${1}.bak"
-  elif [[ "$2" == "+a" ]]; then
-    sudo chattr -R +a "${1}.bak"
-  fi
 }
 
 #function tmuxs() {
@@ -353,15 +277,74 @@ function cl() {
   ls --color=auto --classify --almost-all
 }
 
+## for local machine
+# clipboard
+if command -v xclip 1>"/dev/null" 2>&1; then
+  alias cpath="pwd | xclip -selection clipboard"
+  alias xecho="xclip -o clip"
+fi
+
+if command -v jq 1>"/dev/null" 2>&1; then
+
+  function jless() { jq '.' -C | less -R; }
+  export -f jless
+
+  function curljson() { curl "${1}" | jless; }
+  export -f curljson
+
+  function getjsonschema() {
+    jq -r 'path(..) | map(tostring) | join("/")' "${1}" | less -R
+  }
+  export -f getjsonschema
+fi
+
+if command -v batcat 1>"/dev/null" 2>&1; then
+  alias o='batcat --pager "less -RF"'
+fi
+
+if command -v fprettify 1>"/dev/null" 2>&1; then
+  alias ,fprettify='fprettify.py -i 4 -l 80 --strict-indent'
+fi
+
+if command -v xdg-open 1>"/dev/null" 2>&1; then
+  # man XDG-OPEN(1)
+  function gopen() {
+    if [[ -n "$1" ]]; then
+      xdg-open "$1"
+    else
+      xdg-open .
+    fi
+  }
+  export -f gopen
+fi
+
+## golnang
+if command -v go 1>"/dev/null" 2>&1; then
+  #PATH="/usr/local/go/bin:$PATH"
+  if [[ -d "${DOTFILES}/go-pkg-completion" ]]; then
+    # shellcheck disable=SC1091
+    source "${DOTFILES}/go-pkg-completion"
+  fi
+  alias gomih='go mod init "${PWD##*/}"'
+fi
+
+# dotnet
+if [[ -d "${HOME}/.dotnet" ]]; then
+  export DOTNET_ROOT="${HOME}/.dotnet"
+fi
+
 ## Git
-if [[ "$(type git 1>"/dev/null" 2>&1)" ]]; then
+if command -v git 1>"/dev/null" 2>&1; then
+  unset gitap gita gitt ,gitofetch
   function ,gitofetch() {
     git checkout "${1}" && git fetch origin && git pull origin "${1}"
-  } && export -f ,gitofetch
+  }
+  export -f ,gitofetch
 
   function gitt() {
     cd "$(git rev-parse --show-toplevel)" || return
   }
+  export -f gitt
 
   function gita() {
     cd "$(git rev-parse --show-toplevel)" || return
@@ -372,7 +355,8 @@ if [[ "$(type git 1>"/dev/null" 2>&1)" ]]; then
     fi
     git status -s
     cd - || return
-  } && export -f gita
+  }
+  export -f gita
 
   function gitap() {
     local cbranch
@@ -386,10 +370,11 @@ if [[ "$(type git 1>"/dev/null" 2>&1)" ]]; then
     else
       printf '\e[31m%s\033[0m\n' "Quit."
     fi
-  } && export -f gitap
+  }
+  export -f gitap
 fi
 ## Docker
-if [[ "$(type docker 1>"/dev/null" 2>&1)" ]]; then
+if command -v docker 1>"/dev/null" 2>&1; then
   function dins() {
     docker inspect "${*}" | jless
   }
