@@ -237,6 +237,7 @@ function prompt() {
   esac
   unset psgit1 pscolor1 emulator arr
 }
+prompt
 
 #### for local machine non portable
 if command -v screen 1>"/dev/null" 2>&1; then
