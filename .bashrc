@@ -30,7 +30,7 @@ alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
 alias ip='ip --color=auto'
-alias portstate='sudo ss -tnlp'
+alias ports='sudo ss -tnlp'
 alias mip="curl http://ipecho.net/plain; echo"
 alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -"
 alias cp='cp -v'
@@ -39,7 +39,7 @@ alias l='ls -AlF'
 alias la="ls -AlSGhB --ignore='.*.swp'"
 alias lsa="ls --classify --almost-all"
 alias ll='ls -lh'
-[[ $(type -t _ls) == function ]] && alias ls='_ls' #SUSE
+[[ $(type -t _ls) == function ]] && alias ls='_ls' #SUSE function _ls () { local IFS=' '; command ls $LS_OPTIONS ${1+"$@"}; }
 alias lt='du -sh * | sort -h'
 alias ls-l='ls -l'
 alias rehash='hash -r'
@@ -57,11 +57,41 @@ alias rfree="watch -n 5 -d 'free -mht'"
 alias mcache="sudo sh -c \"echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'\""
 function hostip() { host -t a "${*}"; }
 function stdbuf-python() { stdbuf -o0 python3 "${*}"; }
-mcd() { mkdir -p -- "$1" && builtin cd "$1" || return; }
+function mcd() { mkdir -p -- "$1" && builtin cd "$1" || return; }
 alias pve='python3 -m venv ./venv'
 alias pva='source ./venv/bin/activate'
 alias pir="pip install -r requirements.txt"
 alias pfr="pip freeze --local > requirements.txt"
+
+function mhelp() {
+  whatis "$1"
+  man "$1" | sed -n "/^\s*${2}/,/^$/p"
+}
+
+function mman() { man "${1}" | grep -e "${2}"; }
+
+# Stopwatch
+function timer() {
+  local green="\033[0;32m"
+  local clear="\033[0m"
+  echo -e "${green}Timer started. Stop with Ctrl-D.${clear}\n", && date && time cat && date
+}
+
+function thistory() {
+  local HISTTIMEFORMAT="%Y-%m-%d %T "
+  history
+}
+
+#Auto complete directory names.
+complete -A directory cl
+function cl() {
+  if [[ -n "$1" ]]; then
+    builtin cd "${1}" || return
+  else
+    cd ~ || return
+  fi
+  ls --color=auto --classify --almost-all
+}
 
 #export MANPAGER="vim -M +MANPAGER -"
 # Pretty-print man(1) pages.
@@ -155,8 +185,8 @@ if [[ -n "${WHOME}" ]]; then
 fi
 #$(ls /run/user/${UID}/gvfs > "/dev/null" 2>&1) && \
 if [[ -d "/run/user/${UID}/gvfs" ]]; then
-  DRIVE="/run/user/${UID}/gvfs/$(ls /run/user/${UID}/gvfs/)"
-  export DRIVE
+  GDRIVE="/run/user/${UID}/gvfs/$(ls /run/user/${UID}/gvfs/)"
+  export GDRIVE
   alias glsla='"gio list -a "standard::display-name"'
   alias gls='gio list -d'
   alias gcp='gio copy -p'
@@ -188,96 +218,61 @@ fi
 
 # in man bash PROMPTING
 function prompt() {
-  #local emulator; emulator=$(basename "/"$(ps -o cmd -f -p "$(cat /proc/$(echo $$)/stat | cut -d \  -f 4)" | tail -1 | sed 's/ .*$//'))"
-  local emulator
-  emulator="temp"
-  case $emulator in
-  #code)
-  #        PS1="% "
-  #        ;;
+  ## just posix https://askubuntu.com/questions/640096/how-do-i-check-which-terminal-i-am-using#640105
+  local emulator psgit1 pscolor1
+  #emulator=$(basename "/"$(ps -o cmd -f -p "$(cat /proc/${$}/stat | cut -d ' ' -f 4)" | tail -1 | sed 's/ .*$//'))"
+  emulator=$(ps -p ${$} | tail -n 1)
+  psgit1="\$(git branch 2>'/dev/null' | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')"
+  pscolor1="\[\033[36m\]${psgit1}\[\033[0m\]"
+
+  case "${emulator##*\ }" in
+  code)
+    export PS1="${PWD##*/}${pscolor1} "
+    ;;
   *)
-    #local col; col='\[\033[36m\]'
-    #local col; col=$([ "$?" == 0 ] && echo "\[\033[36m\]" || echo "\[\033[31m\]")
-    #local col; col=$(( "${?}" == 0 ? "\[\033[36m\]" : "\[\033[31m\]" ))
-    #local col; if [ "{?}" == 0 ]; then col="\[\033[36m\]"; else col="\[\033[31m\]"; fi
-    #local cl; cl="\[\033[0m\]"
-    #local ps1; ps1="\u@\h:\w>\$(git branch 2>"/dev/null" | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/') "
-    local ps1
-    ps1="\w%\$(git branch 2>'/dev/null' | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/') "
-    #ps1=""${col}""${ps1}""${cl}""
-    export PS1="${ps1}"
+    local arr
+    declare -A arr=(["hp-win11"]=1 ["pc"]=1)
+    [[ -v arr[$(hostname)] ]] && export PS1="\w%${pscolor1} "
     ;;
   esac
-}
-prompt
-function simpleprompt() {
-  PS1="$ "
-}
-#PS1="\u@\h:\w> " #SUSE default prompt
-
-#case ${TERM} in
-#  xterm*?|rxvt*|Eterm|aterm|kterm|gnome*|interix)
-#      #PROMPT_COMMAND='echo -ne "\033]0;${PWD/$HOME/~}\007"'
-#      PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}\033\\"'
-#      #PROMPT_COMMAND='echo -ne "${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}"'
-#      ;;
-#  screen) # tmux too
-#      PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/$HOME/~}\033\\"'
-#      ;;
-#esac
-
-## functions
-
-# SUSE predefined alias for this function
-#function _ls () {
-#  local IFS=' ';
-#  command ls $LS_OPTIONS ${1+"$@"}
-#}
-
-function mhelp() {
-  whatis "$1"
-  man "$1" |
-    sed -n "/^\s*${2}/,/^$/p"
+  unset psgit1 pscolor1 emulator arr
 }
 
-function mman() {
-  man "${1}" |
-    grep -e "${2}"
-}
-
-#function tmuxs() {
-#  tmux new-session -s "${1^^}" \; split-window -v \; resize-pane -D 18 \; attach
-#}
-#
-#function tmuxe() {
-#  local dir; dir=$(pwd); dir="${dir##*/}"
-#  tmux new-session -s "${dir^^}" \vim "${1}" \; split-window -v \; resize-pane -D 18 \; attach
-#}
-
-# Stopwatch
-function timer() {
-  local green="\033[0;32m"
-  local clear="\033[0m"
-  echo -e "${green}Timer started. Stop with Ctrl-D.${clear}\n", && date && time cat && date
-}
-
-function thistory() {
-  local HISTTIMEFORMAT="%Y-%m-%d %T "
-  history
-}
-
-#Auto complete directory names.
-complete -A directory cl
-function cl() {
-  if [[ -n "$1" ]]; then
-    builtin cd "${1}" || return
-  else
-    cd ~ || return
+#### for local machine non portable
+if command -v screen 1>"/dev/null" 2>&1; then
+  alias screenr="screen -D -RR"
+  #fix permission in wsl
+  if [[ -v "${WHOME}" ]]; then
+    export SCREENDIR="${HOME}/.screen"
+    [[ -d "${SCREENDIR}" ]] || mkdir -m 700 "${SCREENDIR}"
   fi
-  ls --color=auto --classify --almost-all
-}
+  # set .screenrc
+  if [[ ! -f "${HOME}/.screenrc" ]]; then
+    cat <<HERE_DOC >>"${HOME}/.screenrc"
+# change meta bind from ctrl-a to alt-a
+escape ^||
+bindkey "^[a" command
+#
+vbell off
+bell_msg ""
+startup_message off
 
-## for local machine
+HERE_DOC
+  fi
+fi
+
+if command -v tmux 1>"/dev/null" 2>&1; then
+  function tmuxs() {
+    tmux new-session -s "${1^^}" \; split-window -v \; resize-pane -D 18 \; attach
+  }
+
+  function tmuxe() {
+    local dir
+    dir="${PWD##*/}"
+    # shellcheck disable=SC1001
+    tmux new-session -s "${dir^^}" \vim "${1}" \; split-window -v \; resize-pane -D 18 \; attach
+  }
+fi
 # clipboard
 if command -v xclip 1>"/dev/null" 2>&1; then
   alias cpath="pwd | xclip -selection clipboard"
@@ -318,7 +313,7 @@ if command -v xdg-open 1>"/dev/null" 2>&1; then
   export -f gopen
 fi
 
-## golnang
+## golang
 if command -v go 1>"/dev/null" 2>&1; then
   #PATH="/usr/local/go/bin:$PATH"
   if [[ -d "${DOTFILES}/go-pkg-completion" ]]; then
@@ -467,4 +462,36 @@ if command -v docker 1>"/dev/null" 2>&1; then
       pyfound/black:latest \
       black --check -l 80 -S "$@"
   }
+fi
+## Kubectl
+if command -v kubectl 1>"/dev/null" 2>&1; then
+  compdir="${HOME}/.config/completion/"
+  compfile="kubectl-completion-kubectl.sh"
+  if [[ -f "${compdir}/${compfile}" ]]; then
+    # shellcheck disable=SC1090
+    source "${compdir}/${compfile}"
+    unset compdir compfile
+  else
+    mkdir -p "${compdir}" 1>"/dev/null" 2>&1
+    kubectl completion bash >"${compdir}/${compfile}"
+    # shellcheck disable=SC1090
+    source "${compdir}/${compfile}"
+    unset compdir compfile
+  fi
+fi
+## OC openshift
+if command -v oc 1>"/dev/null" 2>&1; then
+  compdir="${HOME}/.config/completion/"
+  compfile="oc-completion-bash.sh"
+  if [[ -f "${compdir}/${compfile}" ]]; then
+    # shellcheck disable=SC1090
+    source "${compdir}/${compfile}"
+    unset compdir compfile
+  else
+    mkdir -p "${compdir}" 1>"/dev/null" 2>&1
+    oc completion bash >"${compdir}/${compfile}"
+    # shellcheck disable=SC1090
+    source "${compdir}/${compfile}"
+    unset compdir compfile
+  fi
 fi

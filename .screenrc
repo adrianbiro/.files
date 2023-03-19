@@ -1,0 +1,7 @@
+# change meta bind from ctrl-a to alt-a
+escape ^||
+bindkey "^[a" command
+#
+vbell off
+bell_msg ""
+startup_message off
