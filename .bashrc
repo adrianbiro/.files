@@ -231,7 +231,7 @@ function prompt() {
     ;;
   *)
     local arr
-    declare -A arr=(["hp-win11"]=1 ["pc"]=1  ["NP48412"]=1)
+    declare -A arr=(["hp-win11"]=1 ["pc"]=1 ["NP48412"]=1)
     [[ -v arr[$(hostname)] ]] && export PS1="\w%${pscolor1} "
     ;;
   esac
@@ -295,11 +295,17 @@ if command -v jq 1>"/dev/null" 2>&1; then
 fi
 
 if command -v batcat 1>"/dev/null" 2>&1; then
-  alias o='batcat --pager "less -RF"'
+  alias o='batcat --pager "less -RF" --plain'
+  help() {
+    "$@" --help 2>&1 | batcat --plain --language=help
+  }
 fi
 
 if command -v bat 1>"/dev/null" 2>&1; then
-  alias o='bat --pager "less -RF"'
+  alias o='bat --pager "less -RF" --plain'
+  help() {
+    "$@" --help 2>&1 | batcat --plain --language=help
+  }
 fi
 
 if command -v fprettify 1>"/dev/null" 2>&1; then
