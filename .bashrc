@@ -506,3 +506,18 @@ if command -v oc 1>"/dev/null" 2>&1; then
     unset compdir compfile
   fi
 fi
+
+if (command -v oc 1>"/dev/null" 2>&1) || (command -v kubectl 1>"/dev/null" 2>&1); then
+  # shellcheck disable=2139
+  function oContReady() {
+    oc get pods -o wide | awk 'NR==1{print} {split($2, arr, "/"); if(arr[1] != arr[2]) print}'
+  }
+  # shellcheck disable=2139
+  function oContRestarts() {
+    oc get pods -o wide | awk 'NR==1{print} {if($4 > 0) print}'
+  }
+
+  function oContAge() {
+    oc get pods -o wide | awk -v days="${1:-7}" 'NR==1{print} $5!~/.*d/{next}; {tmp=$5; gsub("d","",tmp); if(int(tmp) > days ){print}}'
+  }
+fi
