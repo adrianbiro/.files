@@ -170,7 +170,8 @@ if [[ -x "/usr/bin/dircolors" ]]; then
   alias egrep='egrep --color=auto'
 fi
 ##local config
-
+# ssh
+complete -W $(awk '/^Host\s\*/{next}; /^Host/{print $2}' "${HOME}/.ssh/config" 2>'/dev/null') ssh
 # wsl
 if [[ -d '/mnt/c/Users/biroa' ]]; then
   WHOME='/mnt/c/Users/biroa'
