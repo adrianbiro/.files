@@ -216,6 +216,10 @@ else # Msys git-bash
     alias xecho="powershell.exe -c 'Get-Clipboard'"
   fi
 fi
+## vim
+if [[ -n ${DOTFILES} ]]; then
+  export VIMINIT="source ${DOTFILES}/.vimrc"
+fi
 
 # in man bash PROMPTING
 function prompt() {
