@@ -182,7 +182,7 @@ if [[ -d '/mnt/c/Users/biroa' ]]; then
   # ONEDRIVE='/mnt/c/Users/biroa/OneDrive\ -\ IC\ GROUP/'
 fi
 if [[ -n "${WHOME}" ]]; then
-  eval "$(keychain --quiet --eval --agents ssh ~/.ssh/win11GITed25519-8-11-2022)"
+  eval "$(keychain --quiet --eval --agents ssh ~/.ssh/wsl-GITed25519-25-3-2023)"
 fi
 #$(ls /run/user/${UID}/gvfs > "/dev/null" 2>&1) && \
 if [[ -d "/run/user/${UID}/gvfs" ]]; then
