@@ -226,10 +226,10 @@ function prompt() {
   ## just posix https://askubuntu.com/questions/640096/how-do-i-check-which-terminal-i-am-using#640105
   local emulator psgit1 pscolor1
   #emulator=$(basename "/"$(ps -o cmd -f -p "$(cat /proc/${$}/stat | cut -d ' ' -f 4)" | tail -1 | sed 's/ .*$//'))"
-  emulator=$(ps -p ${$} | tail -n 1)
-  if [[ "${emulator}" =~ .*"bash" ]]; then
-    emulator="${TERM_PROGRAM}"
-  fi
+  #emulator=$(ps -p ${$} | tail -n 1)
+  #if [[ "${emulator}" =~ .*"bash" ]]; then
+  emulator="${TERM_PROGRAM}"
+  #fi
   psgit1="\$(git branch 2>'/dev/null' | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')"
   pscolor1="\[\033[36m\]${psgit1}\[\033[0m\]"
 
