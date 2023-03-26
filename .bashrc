@@ -171,7 +171,7 @@ if [[ -x "/usr/bin/dircolors" ]]; then
 fi
 ##local config
 # ssh
-complete -W $(awk '/^Host\s\*/{next}; /^Host/{print $2}' "${HOME}/.ssh/config" 2>'/dev/null') ssh
+complete -W "$(awk '/^Host\s\*/{next}; /^Host/{print $2}' "${HOME}/.ssh/config" 2>'/dev/null')" ssh
 # wsl
 if [[ -d '/mnt/c/Users/biroa' ]]; then
   WHOME='/mnt/c/Users/biroa'
@@ -227,14 +227,20 @@ function prompt() {
   local emulator psgit1 pscolor1
   #emulator=$(basename "/"$(ps -o cmd -f -p "$(cat /proc/${$}/stat | cut -d ' ' -f 4)" | tail -1 | sed 's/ .*$//'))"
   emulator=$(ps -p ${$} | tail -n 1)
+  if [[ "${emulator}" =~ .*"bash" ]]; then
+    emulator="${TERM_PROGRAM}"
+  fi
   psgit1="\$(git branch 2>'/dev/null' | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')"
   pscolor1="\[\033[36m\]${psgit1}\[\033[0m\]"
 
   case "${emulator##*\ }" in
-  code)
-    export PS1="${PWD##*/}${pscolor1} "
+  *code)
+    #export PS1="${PWD##*/}%${pscolor1} "
+    export PS1="\W%${pscolor1} "
     ;;
   *)
+    #local hostnames=${POSHOSTNAMES:-"hp-win11 pc NP48412"}
+    #if echo "$hostnames" | grep -q $(hostname); then
     local arr
     declare -A arr=(["hp-win11"]=1 ["pc"]=1 ["NP48412"]=1)
     [[ -v arr[$(hostname)] ]] && export PS1="\w%${pscolor1} "
