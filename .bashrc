@@ -254,7 +254,7 @@ prompt
 #### for local machine non portable
 if command -v screen 1>"/dev/null" 2>&1; then
   alias screenr="screen -D -RR"
-  function ,screenKillAllDeatached() {
+  function ,screenKillAllDetached() {
     screen -ls | awk '/Detached/{print $1}' | xargs -I{} screen -X -S {} quit
   }
 
