@@ -254,6 +254,10 @@ prompt
 #### for local machine non portable
 if command -v screen 1>"/dev/null" 2>&1; then
   alias screenr="screen -D -RR"
+  function ,screenKillAllDeatached() {
+    screen -ls | awk '/Detached/{print $1}' | xargs -I{} screen -X -S {} quit
+  }
+
   #fix permission in wsl
   if [[ -v "${WHOME}" ]]; then
     export SCREENDIR="${HOME}/.screen"
@@ -390,10 +394,11 @@ if command -v git 1>"/dev/null" 2>&1; then
     fi
   }
   export -f gitap
-  ,gblame (){
-    git blame $(git branch | sed -e '/^[^]/d' -e 's/ \(.*\)/\1/') -w $(echo "${1}" | sed 's/\\/\//g')
+
+  ,gblame() {
+    git blame "$(git branch | sed -e '/^[^*]/d' -e 's/*\s\(.*\)/\1/')" -w "$(echo "${1}" | sed 's/\\/\//g')"
   }
-  wxport -f ,gblame
+  export -f ,gblame
 fi
 ## Docker
 if command -v docker 1>"/dev/null" 2>&1; then
