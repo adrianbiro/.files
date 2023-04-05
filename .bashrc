@@ -214,6 +214,7 @@ else # Msys git-bash
     export CDPATH=".:$HOME" #CDPATH=".:$DOTFILES:$HOME"
     ## git-bash specific
     alias xecho="powershell.exe -c 'Get-Clipboard'"
+    alias find='/usr/bin/find'
   fi
 fi
 ## vim
@@ -389,6 +390,10 @@ if command -v git 1>"/dev/null" 2>&1; then
     fi
   }
   export -f gitap
+  ,gblame (){
+    git blame $(git branch | sed -e '/^[^]/d' -e 's/ \(.*\)/\1/') -w $(echo "${1}" | sed 's/\\/\//g')
+  }
+  wxport -f ,gblame
 fi
 ## Docker
 if command -v docker 1>"/dev/null" 2>&1; then
