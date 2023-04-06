@@ -213,7 +213,8 @@ else # Msys git-bash
     }
     export CDPATH=".:$HOME" #CDPATH=".:$DOTFILES:$HOME"
     ## git-bash specific
-    alias xecho="powershell.exe -c 'Get-Clipboard'"
+    alias Get-Clipboard="powershell.exe -c 'Get-Clipboard'"
+    alias Set-Clipboard="clip"
     alias find='/usr/bin/find'
   fi
 fi
@@ -293,7 +294,8 @@ fi
 # clipboard
 if command -v xclip 1>"/dev/null" 2>&1; then
   alias cpath="pwd | xclip -selection clipboard"
-  alias xecho="xclip -o clip"
+  alias Get-Clipboard="xclip -o clip"
+  alias Set-Clipboard="xclip -selection clipboard"
 fi
 
 if command -v jq 1>"/dev/null" 2>&1; then
