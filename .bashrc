@@ -314,16 +314,32 @@ fi
 
 if command -v batcat 1>"/dev/null" 2>&1; then
   alias o='batcat --pager "less -RF" --plain'
-  help() {
-    "$@" --help 2>&1 | batcat --plain --language=help
-  }
+  if [[ -f "${DOTFILES}/bat-completion" ]]; then
+    # shellcheck disable=SC1091
+    source "${DOTFILES}/bat-completion"
+  fi
 fi
 
 if command -v bat 1>"/dev/null" 2>&1; then
+  if [[ "${GITS##*/}" == "src" ]]; then
+    function bat() {
+      local index
+      local args=("$@")
+      for index in $(seq 0 ${#args[@]}); do
+        case "${args[index]}" in
+        -*) continue ;;
+        *) [ -e "${args[index]}" ] && args[index]="$(cygpath --windows "${args[index]}")" ;;
+        esac
+      done
+      command bat "${args[@]}"
+    }
+    export -f bat
+  fi
   alias o='bat --pager "less -RF" --plain'
-  help() {
-    "$@" --help 2>&1 | batcat --plain --language=help
-  }
+  if [[ -f "${DOTFILES}/bat-completion" ]]; then
+    # shellcheck disable=SC1091
+    source "${DOTFILES}/bat-completion"
+  fi
 fi
 
 if command -v fprettify 1>"/dev/null" 2>&1; then
