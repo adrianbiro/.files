@@ -259,6 +259,13 @@ if command -v screen 1>"/dev/null" 2>&1; then
     screen -ls | awk '/Detached/{print $1}' | xargs -I{} screen -X -S {} quit
   }
 
+  function ,screenmv() {
+    local old new
+    old="${1:? ,screenmv <old_name> <new_name>}"
+    new="${2:? ,screenmv <old_name> <new_name>}"
+    screen -S "${old}" -X sessionname "${new}"
+  }
+
   #fix permission in wsl
   if [[ -v "${WHOME}" ]]; then
     export SCREENDIR="${HOME}/.screen"
