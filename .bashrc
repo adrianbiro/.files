@@ -382,11 +382,6 @@ fi
 
 ## Git
 if command -v git 1>"/dev/null" 2>&1; then
-  unset gitap gita gitt ,gitofetch
-  function ,gitofetch() {
-    git checkout "${1}" && git fetch origin && git pull origin "${1}"
-  }
-  export -f ,gitofetch
 
   function gitt() {
     cd "$(git rev-parse --show-toplevel)" || return
@@ -424,6 +419,9 @@ if command -v git 1>"/dev/null" 2>&1; then
     git blame "$(git branch | sed -e '/^[^*]/d' -e 's/*\s\(.*\)/\1/')" -w "$(echo "${1}" | sed 's/\\/\//g')"
   }
   export -f ,gblame
+  alias git-fetchPruAll="git fetch --prune --prune-tags"
+  alias git-pullPruAll="git pull --all --prune"
+  
 fi
 ## Docker
 if command -v docker 1>"/dev/null" 2>&1; then
