@@ -213,9 +213,10 @@ else # Msys git-bash
     }
     export CDPATH=".:$HOME" #CDPATH=".:$DOTFILES:$HOME"
     ## git-bash specific
+    export PATH=/bin:/usr/bin:$PATH  # fix conflicts with win utils find,sort
     alias Get-Clipboard="powershell.exe -c 'Get-Clipboard'"
     alias Set-Clipboard="clip"
-    alias find='/usr/bin/find'
+
   fi
 fi
 ## vim
