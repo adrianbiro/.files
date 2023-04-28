@@ -417,7 +417,7 @@ if command -v git 1>"/dev/null" 2>&1; then
   export -f gitap
 
   ,gblame() {
-    git blame "$(git branch | sed -e '/^[^*]/d' -e 's/*\s\(.*\)/\1/')" -w "$(echo "${1}" | sed 's/\\/\//g')"
+    git blame "$(git branch | sed -e '/^[^*]/d' -e 's/*\s\(.*\)/\1/')" -w "$(sed 's/\\/\//g' <<< "${1}")"
   }
   export -f ,gblame
   alias git-fetchPruAll="git fetch --prune --prune-tags"
