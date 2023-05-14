@@ -23,35 +23,6 @@ augroup configgroup
   autocmd BufEnter *.sh setlocal softtabstop=2
   autocmd BufNewFile,BufRead *.groff set filetype=groff
 augroup END"
-""""""""""""""""""""""""""""""""""""""""
-"fun! FormatGOfmt()
-"    let view = winsaveview()
-"    " call format tool
-"    silent execute "%!gofmt"
-"    if v:shell_error
-"        let errors = []
-"        for line in getline(1, line('$'))
-"            let tokens = matchlist(line, '^\(.\{-}\):\(\d\+\):\(\d\+\)\s*\(.*\)')
-"            if !empty(tokens)
-"                call add(errors, {"filename": @%,
-"                                 \"lnum":     tokens[2],
-"                                 \"col":      tokens[3],
-"                                 \"text":     tokens[4]})
-"            endif
-"        endfor
-"        if empty(errors)
-"            % | " Couldn't detect gofmt error format, output errors
-"        endif
-"        undo
-"        if !empty(errors)
-"            call setloclist(0, errors, 'r')
-"        endif
-"        echohl Error | echomsg "Gofmt returned error" | echohl None
-"    endif
-"    call winrestview(view)
-"endfun
-"command! Fmt call FormatGOfmt()
-""""""""""""""""""""""""""""""""""""""""""""
 " auto delete all trailing whitespace on save
 fun! StripTrailingWhitespace()
     " ignore this file, to make show break work
@@ -174,9 +145,6 @@ set background=dark
 abbr zyper zypper
 abbr sefl self
 abbr retunr return
-abbr Meuro €
-abbr Mcelsius °
-iabbrev Mtime  <C-R>=strftime("%Y-%m-%d %H:%M:%S")
 abbr mmmgroff .SH NAME<CR>.B<CR>\-<CR>.SS SYNOPSIS<CR>\fB \fR<CR>.TP<CR>.\fB \fR<CR>.TP<CR>S\fB \fR<CR>.TP<CR>.B<CR>[\fI\, $1, $2 \/\fR]<CR>.TP<CR>.SS DESCRIPTION<CR><CR>.SS SEE ALSO<CR>
 abbr mmmstartgroff .\" Manpage for<CR>.\" Contact Adrián Bíro to correct errors or typos.<CR>.TH TODOname 1 "15 March 2022" "0.1" "TODOname man page"<CR>.SH NAME<CR>.B<CR>\-<CR>.SS SYNOPSIS<CR>\fB \fR<CR>.TP<CR>.\fB \fR<CR>.TP<CR>S\fB \fR<CR>.TP<CR>S\fB \fR<CR>.TP<CR> DESCRIPTION<CR><CR>.SS SEE ALSO<CR><CR><CR><CR>.SH AUTHOR<CR>Adrián Bíro<CR>.SH BUGS<CR>I'm the bug.<CR>.SH SEE ALSO<Cr>BASH(1), vimrc(1), tmux.conf(1)TODO<CR>.PP<CR>.br<CR><https://github.com/adrianbiro/.files>TODO<CR>.br
 "}}}
@@ -201,18 +169,6 @@ let g:netrw_banner=0
 "let g:netrw_list_hide=ghregex
 "current dir and browsing dir are synced
 "let g:netrw_keepdir = 0
-"}}}
-
-"PLUGIN "{{{
-"nmap <leader>4 :let g:syntastic_check_on_open       = 1 <CR> :w <CR>
-"set runtimepath^=~/.vim/pack/syntastic-master
-"let g:syntastic_check_on_open       = 1
-"let g:syntastic_check_on_wq         = 0
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 1
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
 "}}}
 
 "folding for this file "{{{
