@@ -14,7 +14,8 @@
         "/home/adrian/gits/sslmonitoring",
         "/home/adrian/gits/my_templates",
         "/home/adrian/gits/script",
-        "/home/adrian/gits/m_bin"
+        "/home/adrian/gits/m_bin",
+        "/home/adrian/gits/terraform"
     ],
     "redhat.telemetry.enabled": false,
     "editor.minimap.enabled": false

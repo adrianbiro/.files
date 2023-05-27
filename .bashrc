@@ -213,7 +213,7 @@ else # Msys git-bash
     }
     export CDPATH=".:$HOME" #CDPATH=".:$DOTFILES:$HOME"
     ## git-bash specific
-    export PATH=/bin:/usr/bin:$PATH  # fix conflicts with win utils find,sort
+    export PATH=/bin:/usr/bin:$PATH # fix conflicts with win utils find,sort
     alias Get-Clipboard="powershell.exe -c 'Get-Clipboard'"
     alias Set-Clipboard="clip"
 
@@ -417,12 +417,12 @@ if command -v git 1>"/dev/null" 2>&1; then
   export -f gitap
 
   ,gblame() {
-    git blame "$(git branch | sed -e '/^[^*]/d' -e 's/*\s\(.*\)/\1/')" -w "$(sed 's/\\/\//g' <<< "${1}")"
+    git blame "$(git branch | sed -e '/^[^*]/d' -e 's/*\s\(.*\)/\1/')" -w "$(sed 's/\\/\//g' <<<"${1}")"
   }
   export -f ,gblame
   alias git-fetchPruAll="git fetch --prune --prune-tags"
   alias git-pullPruAll="git pull --all --prune"
-  
+
 fi
 ## Docker
 if command -v docker 1>"/dev/null" 2>&1; then
@@ -565,4 +565,8 @@ if (command -v oc 1>"/dev/null" 2>&1) || (command -v kubectl 1>"/dev/null" 2>&1)
   function oContAge() {
     oc get pods -o wide | awk -v days="${1:-7}" 'NR==1{print; next} $5!~/.*d/{next}; {tmp=$5; gsub("d","",tmp); if(int(tmp) > days ){print}}'
   }
+fi
+
+if command -v terraform 1>"/dev/null" 2>&1; then
+  complete -C /usr/bin/terraform terraform
 fi
