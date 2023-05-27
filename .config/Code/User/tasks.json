@@ -1,0 +1,17 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "gitstat",
+            "type": "shell",
+            "command": "echo IyEvYmluL2Jhc2gKCmZ1bmN0aW9uIGdldGluZm8gewogICAgcHJpbnRmICJTdGF0dXMgb3ZlcnZpZXcgb2YgbG9jYWwgZ2l0IHJlcG9zaXRvcmllcyBmcm9tOiAlc1xuT3duZWQgYnk6ICVzXG5cbiIgIiR7V0RJUn0iICIkKGdpdCBjb25maWcgdXNlci5uYW1lKSIKfQpmdW5jdGlvbiBnZXRzdGF0KCkgewogICAgaWYgW1sgLW4gIiQoZ2l0IHN0YXR1cyAtLXBvcmNlbGFpbikiIF1dOyB0aGVuCiAgICAgICAgZWNobyAiJHtQV0R9IgogICAgICAgIGdpdCBzdGF0dXMgLXNiCiAgICBmaQp9CgpmdW5jdGlvbiBtYWluIHsKICAgIGxvY2FsIFdESVIKICAgIFdESVI9IiR7R0lUUzo/IlRvIHJ1biAkezAjIyovfSBleHBvcnQgR0lUUz0vcGF0aC90by9hbGwvcmVwb3MifSIKCiAgICBwdXNoZCAiJHtQV0R9IiA+Ii9kZXYvbnVsbCIgfHwgcmV0dXJuCiAgICB0cmFwICJwb3BkID4nL2Rldi9udWxsJyB8fCByZXR1cm4iIEVYSVQKCiAgICBnZXRpbmZvCgogICAgZmluZCAiJHtXRElSfSIgLXR5cGUgZCAtbmFtZSAiLmdpdCIgLXBydW5lIC1wcmludDAgfCB3aGlsZSBJRlM9IHJlYWQgLXIgLWQgJycgcmVwbzsgZG8KICAgICAgICBjZCAiJHtyZXBvJS8qfSIgJiYgZ2V0c3RhdAogICAgZG9uZQp9Cm1haW4gIiR7QH0iCg== | base64 --decode --wrap=0 | /bin/bash"
+        },
+        {
+            "label": "smart-refresh-repos",
+            "type": "shell",
+            "command": "echo IyEvYmluL2Jhc2gKZmluZCAiJHtIT01FfS9zcmMiIC10eXBlIGQgLW5hbWUgInNtYXIqIiAtcHJ1bmUgLXByaW50MCB8IHdoaWxlIElGUz0gcmVhZCAtciAtZCAnJyByZXBvOyBkbyBjZCAiJHtyZXBvfSIgfHwgcmV0dXJuOyBnaXQgcHVsbCAtLWFsbCAtLXBydW5lIC0tbm8tdGFnczsgZG9uZQojaHR0cHM6Ly9naXRodWIuY29tL2dvb2dsZS9jb2Rlc2VhcmNoCmlmIGNvbW1hbmQgLXYgY2luZGV4IDE+Ii9kZXYvbnVsbCIgMj4mMTsgdGhlbiBjaW5kZXggIiQoZmluZCAiJHtIT01FfS9zcmMiIC10eXBlIGQgLW5hbWUgInNtYXIqIiAtcHJ1bmUgLXByaW50KSI7IGZp | base64 --decode --wrap=0 | /bin/bash"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "workbench.colorTheme": "Tomorrow Night Blue",
+    "workbench.startupEditor": "none",
+    "[python]": {
+        "editor.formatOnType": true,
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+    "editor.codeActionsOnSave": {},
+    "gitProjectManager.baseProjectsFolders": [
+        "/home/adrian/gits/dot_files",
+        "/home/adrian/gits/learn",
+        "/home/adrian/gits/winbin",
+        "/home/adrian/gits/ROZROBENE",
+        "/home/adrian/gits/sslmonitoring",
+        "/home/adrian/gits/my_templates",
+        "/home/adrian/gits/script",
+        "/home/adrian/gits/m_bin"
+    ],
+    "redhat.telemetry.enabled": false,
+    "editor.minimap.enabled": false
+}
