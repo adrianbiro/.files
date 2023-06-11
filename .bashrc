@@ -454,19 +454,13 @@ if command -v docker 1>"/dev/null" 2>&1; then
   }
 
   function dlatestpull() {
-    docker images |
-      grep -v REPOSITORY |
-      awk '{print $1}' |
-      xargs -L1 docker pull
+    docker image list --format "{{.Repository}}" | xargs -L1 docker pull
     printf '\n%s\n%s\n' "Delete old images?" "yes no"
     docker images | grep '<none>'
     read -r answer
     case $answer in
     y | j | o | ok | yes)
-      docker images |
-        grep '<none>' |
-        awk '{print  $3}' |
-        xargs -L1 docker rmi
+      docker rmi "$(docker image list --format "table {{.ID}}\t{{.Tag}}" | awk '/<none>/{print $1}')"
       ;;
     *)
       return
