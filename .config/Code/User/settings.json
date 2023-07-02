@@ -4,10 +4,10 @@
     "[python]": {
         "editor.formatOnType": true,
         "editor.defaultFormatter": "ms-python.black-formatter",
-        "editor.formatOnSave": true,
-        "editor.codeActionsOnSave": {
-            "source.organizeImports": true
-        }
+        //"editor.formatOnSave": true,
+        //"editor.codeActionsOnSave": {
+        //    "source.organizeImports": true
+        //}
     },
     "editor.codeActionsOnSave": {},
     "gitProjectManager.baseProjectsFolders": [
@@ -19,6 +19,7 @@
         "/home/adrian/gits/my_templates",
         "/home/adrian/gits/script",
         "/home/adrian/gits/m_bin",
+        "/home/adrian/gits/fastAPI",
         "/home/adrian/gits/terraform"
     ],
     "python.pipenvPath": "${env:HOME}/.local/bin/pipenv",
@@ -31,11 +32,12 @@
     "python.linting.pylintPath": "${env:HOME}/.local/bin/pylint",
     "python.linting.mypyPath": "${env:HOME}/.local/bin/mypy",
     "python.linting.flake8Path": "${env:HOME}/.local/bin/flake8",
-    "python.formatting.blackPath": "${env:HOME}/.local/bin/black",
+    //"python.formatting.blackPath": "${env:HOME}/.local/bin/black",
     "redhat.telemetry.enabled": false,
     "editor.minimap.enabled": false,
     "python.analysis.typeCheckingMode": "basic",
     "python.linting.lintOnSave": true,
+    "python.terminal.activateEnvironment": true,
     "python.autoComplete.extraPaths": [],
     "python.analysis.extraPaths": []
 }
