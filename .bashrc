@@ -15,7 +15,7 @@ fi
 shopt -s globstar
 # Allow multiple terminals write to history file
 shopt -s histappend
-shopt -s autocd #cd just by typing the name of directory; to unset -u
+#shopt -s autocd #cd just by typing the name of directory; to unset -u
 #MAN_POSIXLY_CORRECT=1
 # to edit content of cmdline in vim crtl x ctrl e; to set vi mode for readline "set -o vi"
 export EDITOR="/usr/bin/vim"
@@ -24,14 +24,14 @@ export HISTFILESIZE=1000000
 export HISTCONTROL=ignoredups:ignoreboth:ignorespace
 export HISTIGNORE="exit:pwd"
 alias getpurebash="bash --norc"
-alias getpurevim='vim -u $(mktemp)'
+function getpurevim() { vim -u NONE -U NONE -N -i NONE "${@}"; }
 alias path='echo -e ${PATH//:/\\n}'
 alias egrep='egrep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
 alias ip='ip --color=auto'
 alias ports='sudo ss -tnlp'
-alias mip="curl http://ipecho.net/plain; echo"
+alias mip="curl --silent http://ipecho.net/plain; echo"
 alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -"
 alias cp='cp -v'
 alias cpv='rsync -ah --info=progress2'
@@ -513,54 +513,62 @@ if command -v docker 1>"/dev/null" 2>&1; then
       black --check -l 80 -S "$@"
   }
 fi
-## Kubectl
-if command -v kubectl 1>"/dev/null" 2>&1; then
-  compdir="${HOME}/.config/completion/"
-  compfile="kubectl-completion-kubectl.sh"
-  if [[ -f "${compdir}/${compfile}" ]]; then
-    # shellcheck disable=SC1090
-    source "${compdir}/${compfile}"
-    unset compdir compfile
-  else
-    mkdir -p "${compdir}" 1>"/dev/null" 2>&1
-    kubectl completion bash >"${compdir}/${compfile}"
-    # shellcheck disable=SC1090
-    source "${compdir}/${compfile}"
-    unset compdir compfile
+
+## source completion by function call not by default
+function ,completion_k8s_oc_tf() {
+  ## Kubectl
+  if command -v kubectl 1>"/dev/null" 2>&1; then
+    compdir="${HOME}/.config/completion/"
+    compfile="kubectl-completion-kubectl.sh"
+    if [[ -f "${compdir}/${compfile}" ]]; then
+      # shellcheck disable=SC1090
+      source "${compdir}/${compfile}"
+      unset compdir compfile
+    else
+      mkdir -p "${compdir}" 1>"/dev/null" 2>&1
+      kubectl completion bash >"${compdir}/${compfile}"
+      # shellcheck disable=SC1090
+      source "${compdir}/${compfile}"
+      unset compdir compfile
+    fi
   fi
-fi
-## OC openshift
-if command -v oc 1>"/dev/null" 2>&1; then
-  compdir="${HOME}/.config/completion/"
-  compfile="oc-completion-bash.sh"
-  if [[ -f "${compdir}/${compfile}" ]]; then
-    # shellcheck disable=SC1090
-    source "${compdir}/${compfile}"
-    unset compdir compfile
-  else
-    mkdir -p "${compdir}" 1>"/dev/null" 2>&1
-    oc completion bash >"${compdir}/${compfile}"
-    # shellcheck disable=SC1090
-    source "${compdir}/${compfile}"
-    unset compdir compfile
+  ## OC openshift
+  if command -v oc 1>"/dev/null" 2>&1; then
+    compdir="${HOME}/.config/completion/"
+    compfile="oc-completion-bash.sh"
+    if [[ -f "${compdir}/${compfile}" ]]; then
+      # shellcheck disable=SC1090
+      source "${compdir}/${compfile}"
+      unset compdir compfile
+    else
+      mkdir -p "${compdir}" 1>"/dev/null" 2>&1
+      oc completion bash >"${compdir}/${compfile}"
+      # shellcheck disable=SC1090
+      source "${compdir}/${compfile}"
+      unset compdir compfile
+    fi
   fi
-fi
 
-if (command -v oc 1>"/dev/null" 2>&1) || (command -v kubectl 1>"/dev/null" 2>&1); then
-  # shellcheck disable=2139
-  function oContReady() {
-    oc get pods -o wide | awk 'NR==1{print; next} {split($2, arr, "/"); if(arr[1] != arr[2]) print}'
-  }
-  # shellcheck disable=2139
-  function oContRestarts() {
-    oc get pods -o wide | awk 'NR==1{print; next} {if($4 > 0) print}'
-  }
+  if (command -v oc 1>"/dev/null" 2>&1) || (command -v kubectl 1>"/dev/null" 2>&1); then
+    # shellcheck disable=2139
+    function oContReady() {
+      # shellcheck disable=SC2317  # Don't warn about unreachable commands in this function
+      oc get pods -o wide | awk 'NR==1{print; next} {split($2, arr, "/"); if(arr[1] != arr[2]) print}'
+    } && export -f oContReady
+    # shellcheck disable=2139
+    function oContRestarts() {
+      # shellcheck disable=SC2317  # Don't warn about unreachable commands in this function
+      oc get pods -o wide | awk 'NR==1{print; next} {if($4 > 0) print}'
+    } && export -f oContRestarts
 
-  function oContAge() {
-    oc get pods -o wide | awk -v days="${1:-7}" 'NR==1{print; next} $5!~/.*d/{next}; {tmp=$5; gsub("d","",tmp); if(int(tmp) > days ){print}}'
-  }
-fi
+    function oContAge() {
+      # shellcheck disable=SC2317  # Don't warn about unreachable commands in this function
+      oc get pods -o wide | awk -v days="${1:-7}" 'NR==1{print; next} $5!~/.*d/{next}; {tmp=$5; gsub("d","",tmp); if(int(tmp) > days ){print}}'
+    } && export -f oContAge
+  fi
 
-if command -v terraform 1>"/dev/null" 2>&1; then
-  complete -C /usr/bin/terraform terraform
-fi
+  if command -v terraform 1>"/dev/null" 2>&1; then
+    complete -C /usr/bin/terraform terraform
+  fi
+}
+#,completion_k8s_oc_tf
