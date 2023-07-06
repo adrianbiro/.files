@@ -20,7 +20,8 @@
         "/home/adrian/gits/script",
         "/home/adrian/gits/m_bin",
         "/home/adrian/gits/fastAPI",
-        "/home/adrian/gits/terraform"
+        "/home/adrian/gits/terraform",
+        "/home/adrian/gits/adrianbiro.github.io"
     ],
     "python.pipenvPath": "${env:HOME}/.local/bin/pipenv",
     "python.poetryPath": "${env:HOME}/.local/bin/poetry",
