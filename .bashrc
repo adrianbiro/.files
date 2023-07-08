@@ -58,6 +58,7 @@ alias mcache="sudo sh -c \"echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && s
 function hostip() { host -t a "${*}"; }
 function stdbuf-python() { stdbuf -o0 python3 "${*}"; }
 function mcd() { mkdir -p -- "$1" && builtin cd "$1" || return; }
+function ,mktemp() { builtin cd "$(mktemp -d "/tmp/${*:-zmaz}XXXXXX")" || return; }
 alias pve='python3 -m venv ./venv'
 alias pva='source ./venv/bin/activate'
 alias pir="pip install -r requirements.txt"
