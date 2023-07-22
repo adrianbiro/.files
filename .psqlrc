@@ -2,3 +2,12 @@
 \set COMP_KEYWORD_CASE upper
 \pset pager always
 \pset null '[null]'
+\timing
+\x auto
+\encoding unicode
+\set HISTFILE ~/.psql_history- :HOST - :DBNAME
+\set HISTSIZE 5000
+\set HISTCONTROL ignoredups
+\set ECHO_HIDDEN ON
+\set VERBOSITY verbose
+
