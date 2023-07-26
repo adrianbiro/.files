@@ -40,7 +40,6 @@
     "python.linting.lintOnSave": true,
     "python.terminal.activateEnvironment": true,
     "python.autoComplete.extraPaths": [],
-    "python.analysis.extraPaths": [],
+    "python.analysis.extraPaths": []
     //"window.zoomLevel": 1.6 //
-    "window.zoomLevel": 1.6
 }
