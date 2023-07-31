@@ -286,6 +286,7 @@ startup_message off
 
 HERE_DOC
   fi
+  [[ -z "${STY}" && -n "${SSH_CLIENT}" ]] && screen -RDR
 fi
 
 if command -v tmux 1>"/dev/null" 2>&1; then
