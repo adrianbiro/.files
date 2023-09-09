@@ -283,6 +283,8 @@ bindkey "^[a" command
 vbell off
 bell_msg ""
 startup_message off
+terminal "screen-256color"
+defutf8 on
 
 HERE_DOC
   fi
