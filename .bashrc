@@ -325,7 +325,7 @@ if command -v jq 1>"/dev/null" 2>&1; then
 fi
 
 if command -v batcat 1>"/dev/null" 2>&1; then
-  alias o='batcat --pager "less -RF" --plain'
+  alias o='batcat --pager "less -R" --plain'
   if [[ -f "${DOTFILES}/bat-completion" ]]; then
     # shellcheck disable=SC1091
     source "${DOTFILES}/bat-completion"
