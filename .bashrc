@@ -18,11 +18,12 @@ shopt -s histappend
 #shopt -s autocd #cd just by typing the name of directory; to unset -u
 #MAN_POSIXLY_CORRECT=1
 # to edit content of cmdline in vim crtl x ctrl e; to set vi mode for readline "set -o vi"
-export EDITOR="/usr/bin/vim"
+# man bash(1)
 export HISTSIZE=10000
 export HISTFILESIZE=1000000
 export HISTCONTROL=ignoredups:ignoreboth:ignorespace
 export HISTIGNORE="exit:pwd"
+export EDITOR="/usr/bin/vim"
 alias getpurebash="bash --norc"
 function getpurevim() { vim -u NONE -U NONE -N -i NONE "${@}"; }
 alias path='echo -e ${PATH//:/\\n}'
