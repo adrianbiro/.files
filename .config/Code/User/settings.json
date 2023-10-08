@@ -5,9 +5,10 @@
         "editor.formatOnType": true,
         "editor.defaultFormatter": "ms-python.black-formatter",
         //"editor.formatOnSave": true,
-        //"editor.codeActionsOnSave": {
-        //    "source.organizeImports": true
-        //}
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        },
+        "path"
     },
     "editor.codeActionsOnSave": {},
     "gitProjectManager.baseProjectsFolders": [
@@ -26,20 +27,23 @@
     "python.pipenvPath": "${env:HOME}/.local/bin/pipenv",
     "python.poetryPath": "${env:HOME}/.local/bin/poetry",
     "python.condaPath": "${env:HOME}/.local/bin/conda",
+    "python.analysis.autoImportCompletions": true,
     "python.linting.enabled": true,
     "python.linting.banditPath": "${env:HOME}/.local/bin/bandit",
     "python.linting.banditEnabled": true,
     "python.linting.pylintEnabled": true,
-    "python.linting.pylintPath": "${env:HOME}/.local/bin/pylint",
-    "python.linting.mypyPath": "${env:HOME}/.local/bin/mypy",
-    "python.linting.flake8Path": "${env:HOME}/.local/bin/flake8",
-    //"python.formatting.blackPath": "${env:HOME}/.local/bin/black",
+    "pylint.path": [], //"python.linting.pylintPath": "${env:HOME}/.local/bin/pylint",
+    "mypy.dmypyExecutable": "${env:HOME}/.local/bin/mypy", // "python.linting.mypyPath": "${env:HOME}/.local/bin/mypy",
+    "flake8.path": "${env:HOME}/.local/bin/flake8", // "python.linting.flake8Path": "${env:HOME}/.local/bin/flake8",
+    "python.formatting.blackPath": "${env:HOME}/.local/bin/black",
     "redhat.telemetry.enabled": false,
     "editor.minimap.enabled": false,
     "python.analysis.typeCheckingMode": "basic",
     "python.linting.lintOnSave": true,
     "python.terminal.activateEnvironment": true,
     "python.autoComplete.extraPaths": [],
-    "python.analysis.extraPaths": []
-    //"window.zoomLevel": 1.6 //
+    "python.analysis.extraPaths": [],
+    //"window.zoomLevel": 1.6 //,
+    "git.autofetch": false,
+    "extensions.ignoreRecommendations": true
 }
