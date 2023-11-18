@@ -22,7 +22,8 @@
         "/home/adrian/gits/m_bin",
         "/home/adrian/gits/fastAPI",
         "/home/adrian/gits/terraform",
-        "/home/adrian/gits/adrianbiro.github.io"
+        "/home/adrian/gits/adrianbiro.github.io",
+        "/home/adrian/gits/jednorazove/personal_list_of_books"
     ],
     "python.pipenvPath": "${env:HOME}/.local/bin/pipenv",
     "python.poetryPath": "${env:HOME}/.local/bin/poetry",
@@ -43,6 +44,10 @@
     "python.terminal.activateEnvironment": true,
     "python.autoComplete.extraPaths": [],
     "python.analysis.extraPaths": [],
+    "diffEditor.ignoreTrimWhitespace": false,
+    "files.associations": {
+        "*.md ": "markdown"
+    },
     //"window.zoomLevel": 1.6 //,
     "git.autofetch": false,
     "extensions.ignoreRecommendations": true
