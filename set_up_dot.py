@@ -18,8 +18,8 @@ for i in os.listdir():
     src = os.path.abspath(i)
     #if i.startswith("pomoc.md"):
     #    dest = os.path.join(vim_targetdir, i)
-    else:
-        dest = os.path.join(os.path.expanduser("~"), i)
+    #else:
+    dest = os.path.join(os.path.expanduser("~"), i)
     if os.path.islink(dest):
         continue
     if os.path.isfile(dest) or os.path.isdir(dest):
