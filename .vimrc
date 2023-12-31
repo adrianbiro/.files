@@ -108,6 +108,13 @@ set listchars=eol:§,tab:⦙𝂅,trail:𝂅,extends:>,precedes:<
 nmap <F4> :set list! <CR>
 imap <F4> <ESC> :set list! <CR>i
 """"""""""""""""""""""""""""""""""""""
+"Write to file with sudo
+"cnoremap w= w !sudo tee /dev/null %
+function! Mwrite()
+        w !sudo tee /dev/null %
+endfunction
+command! Mwrite call Mwrite() 
+""""""""""""""""""""""""""""""""""""""
 nmap <F12> :! less ~/.vim/pomoc.md <CR>
 "nmap <F12> :vsp ~/.vim/pomoc.md <CR>
 "Map F2 Buffers to tabs Normal mode
