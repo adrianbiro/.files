@@ -15,6 +15,7 @@ set expandtab
 augroup configgroup
 "  autocmd BufWinEnter,WinEnter,BufWritePost *.go call FormatGOfmt()
   autocmd FileType go set noet ci pi sts=0 sw=4 ts=4 " abbreviated for next line
+  autocmd BufNewFile,BufRead,BufReadPost *.json,*.json.txt,*.har set syntax=json
  "autocmd FileType go setl tabstop=4|setl shiftwidth=4|setl softtabstop=0| set noexpandtab| set copyindent set preserveindent"
   autocmd FileType python setl tabstop=4|setl shiftwidth=4|setl softtabstop=4"
   autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab autoindent
