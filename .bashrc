@@ -237,18 +237,19 @@ function prompt() {
   #fi
   psgit1="\$(git branch 2>'/dev/null' | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')"
   pscolor1="\[\033[36m\]${psgit1}\[\033[0m\]"
+  if_err_set_red="\$([ \$? == 0 ] && echo '%' || echo '\e[01;31m%') \e[00m"
 
   case "${emulator##*\ }" in
   *code)
     #export PS1="${PWD##*/}%${pscolor1} "
-    export PS1="\W%${pscolor1} "
+    export PS1="\W${if_err_set_red}${pscolor1} "
     ;;
   *)
     #local hostnames=${POSHOSTNAMES:-"hp-win11 pc NP48412"}
     #if echo "$hostnames" | grep -q $(hostname); then
     local arr
     declare -A arr=(["hp-win11"]=1 ["black"]=1 ["CZ-108881"]=1 ["silver"]=1)
-    [[ -v arr[$(hostname)] ]] && export PS1="\w%${pscolor1} "
+    [[ -v arr[$(hostname)] ]] && export PS1="\w${if_err_set_red}${pscolor1} "
     ;;
   esac
   unset psgit1 pscolor1 emulator arr
