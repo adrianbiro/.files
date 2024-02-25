@@ -237,7 +237,8 @@ function prompt() {
   #fi
   psgit1="\$(git branch 2>'/dev/null' | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/')"
   pscolor1="\[\033[36m\]${psgit1}\[\033[0m\]"
-  if_err_set_red="\$([ \$? == 0 ] && echo '%' || echo '\e[01;31m%') \e[00m"
+  #if_err_set_red="\$([ \$? == 0 ] && echo '%' || echo '\e[01;31m%') \e[00m"
+  if_err_set_red='%'
 
   case "${emulator##*\ }" in
   *code)
