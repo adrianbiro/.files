@@ -25,45 +25,33 @@ export HISTCONTROL=ignoredups:ignoreboth:ignorespace
 export HISTIGNORE="exit:pwd"
 export EDITOR="/usr/bin/vim"
 alias getpurebash="bash --norc"
-function getpurevim() { vim -u NONE -U NONE -N -i NONE "${@}"; }
+#function getpurevim() { vim -u NONE -U NONE -N -i NONE "${@}"; }
 alias path='echo -e ${PATH//:/\\n}'
-alias egrep='egrep --color=auto'
-alias fgrep='fgrep --color=auto'
 alias grep='grep --color=auto'
 alias ip='ip --color=auto'
-alias ports='sudo ss -tnlp'
 alias mip="curl --silent http://ipecho.net/plain; echo"
 alias speedtest="curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -"
 alias cp='cp -v'
-alias cpv='rsync -ah --info=progress2'
-alias l='ls -AlF'
-alias la="ls -AlSGhB --ignore='.*.swp'"
+#alias cpv='rsync -ah --info=progress2'
+#alias la="ls -AlSFGhB --ignore='.*.swp'"
 alias lsa="ls --classify --almost-all"
 alias ll='ls -lh'
-[[ $(type -t _ls) == function ]] && alias ls='_ls' #SUSE function _ls () { local IFS=' '; command ls $LS_OPTIONS ${1+"$@"}; }
-alias lt='du -sh * | sort -h'
+#[[ $(type -t _ls) == function ]] && alias ls='_ls' #SUSE function _ls () { local IFS=' '; command ls $LS_OPTIONS ${1+"$@"}; }
+#alias lt='du -sh * | sort -h'
 alias ls-l='ls -l'
 alias rehash='hash -r'
 alias ncdu="ncdu --color=dark -x"
-alias mnetstat='sudo netstat -ltnp'
-alias pscpu='ps aux --sort -pcpu | head -n30 | less -S'
-alias mps='ps aux | grep -v grep | grep -i -e VSZ -e' #$1
 alias mtree='tree -pFRC -h --dirsfirst . | less -R'
 alias atree='tree -apFRC -h -L 3 --dirsfirst -I .git . | less -R'
 alias stree='tree -aFC -s -h --du . | less -R'
-alias mmnt='mount | column -t | less -S'
-alias gh='history | grep'
-alias count='find . -type f | wc -l'
-alias rfree="watch -n 5 -d 'free -mht'"
-alias mcache="sudo sh -c \"echo 3 >'/proc/sys/vm/drop_caches' && swapoff -a && swapon -a && printf '\n%s\n' 'Ram-cache and Swap Cleared'\""
-function hostip() { host -t a "${*}"; }
+alias count-files='find . -type f | wc -l'
 function stdbuf-python() { stdbuf -o0 python3 "${*}"; }
 function mcd() { mkdir -p -- "$1" && builtin cd "$1" || return; }
 function ,mktemp() { builtin cd "$(mktemp -d "/tmp/${*:-zmaz}XXXXXX")" || return; }
-alias pve='python3 -m venv ./venv'
-alias pva='source ./venv/bin/activate'
-alias pir="pip install -r requirements.txt"
-alias pfr="pip freeze --local > requirements.txt"
+#alias pve='python3 -m venv ./venv'
+#alias pva='source ./venv/bin/activate'
+#alias pir="pip install -r requirements.txt"
+#alias pfr="pip freeze --local > requirements.txt"
 
 function mhelp() {
   whatis "$1"
@@ -72,28 +60,21 @@ function mhelp() {
 
 function mman() { man "${1}" | grep -e "${2}"; }
 
-# Stopwatch
-function timer() {
-  local green="\033[0;32m"
-  local clear="\033[0m"
-  echo -e "${green}Timer started. Stop with Ctrl-D.${clear}\n", && date && time cat && date
-}
-
-function thistory() {
-  local HISTTIMEFORMAT="%Y-%m-%d %T "
-  history
-}
+#function thistory() {
+#  local HISTTIMEFORMAT="%Y-%m-%d %T "
+#  history
+#}
 
 #Auto complete directory names.
-complete -A directory cl
-function cl() {
-  if [[ -n "$1" ]]; then
-    builtin cd "${1}" || return
-  else
-    cd ~ || return
-  fi
-  ls --color=auto --classify --almost-all
-}
+#complete -A directory cl
+#function cl() {
+#  if [[ -n "$1" ]]; then
+#    builtin cd "${1}" || return
+#  else
+#   cd ~ || return
+#  fi
+#  ls --color=auto --classify --almost-all
+#}
 
 #export MANPAGER="vim -M +MANPAGER -"
 # Pretty-print man(1) pages.
@@ -180,20 +161,20 @@ if [[ -d '/mnt/c/Users/biroa' ]]; then
   export WHOME
   alias cwh='cd $WHOME'
   alias cwd='cd $WHOME/Downloads'
-  alias dockerdesktop='/mnt/c/Program\ Files/docker/Docker/Docker\ Desktop.exe'
+  #alias dockerdesktop='/mnt/c/Program\ Files/docker/Docker/Docker\ Desktop.exe'
   # ONEDRIVE='/mnt/c/Users/biroa/OneDrive\ -\ IC\ GROUP/'
 fi
 if [[ -n "${WHOME}" ]]; then
   eval "$(keychain --quiet --eval --agents ssh ~/.ssh/wsl-GITed25519-25-3-2023)"
 fi
 #$(ls /run/user/${UID}/gvfs > "/dev/null" 2>&1) && \
-if [[ -d "/run/user/${UID}/gvfs" ]]; then
-  GDRIVE="/run/user/${UID}/gvfs/$(ls /run/user/${UID}/gvfs/)"
-  export GDRIVE
-  alias glsla='"gio list -a "standard::display-name"'
-  alias gls='gio list -d'
-  alias gcp='gio copy -p'
-fi
+#if [[ -d "/run/user/${UID}/gvfs" ]]; then
+#  GDRIVE="/run/user/${UID}/gvfs/$(ls /run/user/${UID}/gvfs/)"
+#  export GDRIVE
+#  alias glsla='"gio list -a "standard::display-name"'
+#  alias gls='gio list -d'
+# alias gcp='gio copy -p'
+#fi
 ## dot_files dir
 if [[ $(uname -o) =~ "Linux" ]]; then
   if [[ -d "${HOME}/gits" ]]; then
@@ -203,7 +184,7 @@ if [[ $(uname -o) =~ "Linux" ]]; then
       cd "${DOTFILES}" || return
       ls -AF
     }
-    export CDPATH=".:$HOME" #CDPATH=".:$DOTFILES:$HOME"
+    #export CDPATH=".:$HOME" #CDPATH=".:$DOTFILES:$HOME"
   fi
 else # Msys git-bash
   if [[ -d "${HOME}/src" ]]; then
@@ -213,7 +194,7 @@ else # Msys git-bash
       cd "${DOTFILES}" || return
       ls -AF
     }
-    export CDPATH=".:$HOME" #CDPATH=".:$DOTFILES:$HOME"
+    #export CDPATH=".:$HOME" #CDPATH=".:$DOTFILES:$HOME"
     ## git-bash specific
     export PATH=/bin:/usr/bin:$PATH # fix conflicts with win utils find,sort
     alias Get-Clipboard="powershell.exe -c 'Get-Clipboard'"
@@ -259,17 +240,20 @@ prompt
 
 #### for local machine non portable
 if command -v screen 1>"/dev/null" 2>&1; then
-  alias screenr="screen -D -RR"
-  function ,screenKillAllDetached() {
-    screen -ls | awk '/Detached/{print $1}' | xargs -I{} screen -X -S {} quit
-  }
+  # attach to screen session if on remote server
+  [[ -z "${STY}" && -n "${SSH_CLIENT}" ]] && screen -RDR
 
-  function ,screenmv() {
-    local old new
-    old="${1:? ,screenmv <old_name> <new_name>}"
-    new="${2:? ,screenmv <old_name> <new_name>}"
-    screen -S "${old}" -X sessionname "${new}"
-  }
+  #alias screenr="screen -D -RR"
+  #function ,screenKillAllDetached() {
+  #  screen -ls | awk '/Detached/{print $1}' | xargs -I{} screen -X -S {} quit
+  #}
+
+  #function ,screenmv() {
+  #  local old new
+  #  old="${1:? ,screenmv <old_name> <new_name>}"
+  #  new="${2:? ,screenmv <old_name> <new_name>}"
+  #  screen -S "${old}" -X sessionname "${new}"
+  #}
 
   #fix permission in wsl
   if [[ -v "${WHOME}" ]]; then
@@ -291,21 +275,20 @@ defutf8 on
 
 HERE_DOC
   fi
-  [[ -z "${STY}" && -n "${SSH_CLIENT}" ]] && screen -RDR
 fi
 
-if command -v tmux 1>"/dev/null" 2>&1; then
-  function tmuxs() {
-    tmux new-session -s "${1^^}" \; split-window -v \; resize-pane -D 18 \; attach
-  }
-
-  function tmuxe() {
-    local dir
-    dir="${PWD##*/}"
-    # shellcheck disable=SC1001
-    tmux new-session -s "${dir^^}" \vim "${1}" \; split-window -v \; resize-pane -D 18 \; attach
-  }
-fi
+#if command -v tmux 1>"/dev/null" 2>&1; then
+#  function tmuxs() {
+#    tmux new-session -s "${1^^}" \; split-window -v \; resize-pane -D 18 \; attach
+#  }
+#
+#  function tmuxe() {
+#    local dir
+#    dir="${PWD##*/}"
+#    # shellcheck disable=SC1001
+#    tmux new-session -s "${dir^^}" \vim "${1}" \; split-window -v \; resize-pane -D 18 \; attach
+#  }
+#fi
 # clipboard
 if command -v xclip 1>"/dev/null" 2>&1; then
   alias cpath="pwd | xclip -selection clipboard"
@@ -313,20 +296,13 @@ if command -v xclip 1>"/dev/null" 2>&1; then
   alias Set-Clipboard="xclip -selection clipboard"
 fi
 
+# jq
 if command -v jq 1>"/dev/null" 2>&1; then
 
   function jless() { jq '.' -C | less -R; }
   export -f jless
-
-  function curljson() { curl "${1}" | jless; }
-  export -f curljson
-
-  function getjsonschema() {
-    jq -r 'path(..) | map(tostring) | join("/")' "${1}" | less -R
-  }
-  export -f getjsonschema
 fi
-
+# bat batcat
 if command -v batcat 1>"/dev/null" 2>&1; then
   alias o='batcat --pager "less -R" --plain'
   if [[ -f "${DOTFILES}/bat-completion" ]]; then
@@ -357,9 +333,9 @@ if command -v bat 1>"/dev/null" 2>&1; then
   fi
 fi
 
-if command -v fprettify 1>"/dev/null" 2>&1; then
-  alias ,fprettify='fprettify.py -i 4 -l 80 --strict-indent'
-fi
+#if command -v fprettify 1>"/dev/null" 2>&1; then
+#  alias ,fprettify='fprettify.py -i 4 -l 80 --strict-indent'
+#fi
 
 if command -v xdg-open 1>"/dev/null" 2>&1; then
   # man XDG-OPEN(1)
@@ -375,18 +351,21 @@ fi
 
 ## golang
 if command -v go 1>"/dev/null" 2>&1; then
-  #PATH="/usr/local/go/bin:$PATH"
-  if [[ -d "${DOTFILES}/go-pkg-completion" ]]; then
-    # shellcheck disable=SC1091
-    source "${DOTFILES}/go-pkg-completion"
-  fi
-  alias gomih='go mod init "${PWD##*/}"'
+  # source completion and helper by fuction call no by default
+  function ,go() {
+    #PATH="/usr/local/go/bin:$PATH"
+    if [[ -d "${DOTFILES}/go-pkg-completion" ]]; then
+      # shellcheck disable=SC1091
+      source "${DOTFILES}/go-pkg-completion"
+    fi
+    alias gomih='go mod init "${PWD##*/}"'
+  }
 fi
 
 # dotnet
-if [[ -d "${HOME}/.dotnet" ]]; then
-  export DOTNET_ROOT="${HOME}/.dotnet"
-fi
+#if [[ -d "${HOME}/.dotnet" ]]; then
+#  export DOTNET_ROOT="${HOME}/.dotnet"
+#fi
 
 ## Git
 if command -v git 1>"/dev/null" 2>&1; then
@@ -423,103 +402,97 @@ if command -v git 1>"/dev/null" 2>&1; then
   }
   export -f gitap
 
-  ,gblame() {
-    git blame "$(git branch | sed -e '/^[^*]/d' -e 's/*\s\(.*\)/\1/')" -w "$(sed 's/\\/\//g' <<<"${1}")"
-  }
-  export -f ,gblame
-  alias git-fetchPruAll="git fetch --prune --prune-tags"
-  alias git-pullPruAll="git pull --all --prune"
-
 fi
 ## Docker
+## source helper functions by function call not by default
 if command -v docker 1>"/dev/null" 2>&1; then
-  function dins() {
-    docker inspect "${*}" | jless
-  }
+  function ,docker_helper_functions() {
 
-  # Removes all containers, and prints their names and image base. "q" argument will suppress output, but "q" followed by "v" prints container id.
-  function dockrmall() {
-    local all
-    all=$(docker ps -aq)
-    if [[ -z "${all}" ]]; then
-      printf '\e[21m%s\n\033[0m' "No containers found."
-      return
-    fi
-    if [[ "$1" == "q" ]]; then
-      if [[ "$2" == "v" ]]; then
-        docker rm -f "${all}"
-      else
-        docker rm -f "${all}" >"/dev/null"
+    # shellcheck disable=SC2317  # Don't warn about unreachable commands in this function
+    function dockrmall() {
+      # Removes all containers, and prints their names and image base. "q" argument will suppress output, but "q" followed by "v" prints container id.
+      local all
+      all=$(docker ps -aq)
+      if [[ -z "${all}" ]]; then
+        printf '\e[21m%s\n\033[0m' "No containers found."
+        return
       fi
-    else
-      local DNI
-      DNI="$(docker ps -a --format '{{.Names}}:{{.Image}}')"
-      #    docker rm -f $(docker ps -a | awk 'NR>1 {print $NF}')
-      docker rm -f "$(docker ps -a --format '{{.Names}}')" >"/dev/null"
-      printf '%s\n' "${DNI}"
-    fi
+      if [[ "$1" == "q" ]]; then
+        if [[ "$2" == "v" ]]; then
+          docker rm -f "${all}"
+        else
+          docker rm -f "${all}" >"/dev/null"
+        fi
+      else
+        local DNI
+        DNI="$(docker ps -a --format '{{.Names}}:{{.Image}}')"
+        #    docker rm -f $(docker ps -a | awk 'NR>1 {print $NF}')
+        docker rm -f "$(docker ps -a --format '{{.Names}}')" >"/dev/null"
+        printf '%s\n' "${DNI}"
+      fi
+    } && export -f dockrmall
+
+    # shellcheck disable=SC2317  # Don't warn about unreachable commands in this function
+    function dlatestpull() {
+      docker image list --format "{{.Repository}}" | xargs -L1 docker pull
+      printf '\n%s\n%s\n' "Delete old images?" "yes no"
+      docker images | grep '<none>'
+      read -r answer
+      case $answer in
+      y | j | o | ok | yes)
+        docker rmi "$(docker image list --format "table {{.ID}}\t{{.Tag}}" | awk '/<none>/{print $1}')"
+        ;;
+      *)
+        return
+        ;;
+
+      esac
+    } && export -f dlatestpull
+
+    #complete -W $(docker images | awk 'NR>1{printf("%s ", $1)} END{print ""}') drun
+    # shellcheck disable=SC2317  # Don't warn about unreachable commands in this function
+    function netrun() {
+      docker run -it \
+        --network host \
+        --rm --name netwb \
+        jonlabelle/network-tools
+    } && export -f netrun
+
+    #function perlrun() {
+    #  docker run -it \
+    #          --rm --name "PERL" \
+    #          -v "$PWD":/usr/src/myapp \
+    #          -w /usr/src/myapp \
+    #          perl:latest \
+    #          perl "$1"
+    #}
+
+    #function jupyrunNp() {
+    #    docker run -it --rm \
+    #            -v $(pwd):/home/jovyan/work -p 8888:8888 \
+    #            jupyter/scipy-notebook
+    #}
+    # shellcheck disable=SC2317  # Don't warn about unreachable commands in this function
+    function pythonrun() {
+      docker run -it \
+        --rm --name "PYTHON" \
+        -v "${PWD}":/usr/src/myapp \
+        -w /usr/src/myapp \
+        python:latest \
+        python3 "${1}"
+    } && export pythonrun
+    # shellcheck disable=SC2317  # Don't warn about unreachable commands in this function
+    function blackrun() {
+      docker run --rm \
+        --volume "$(pwd)":/src \
+        --workdir /src \
+        pyfound/black:latest \
+        black --check -l 80 -S "$@"
+    } && export -f blackrun
   }
 
-  function dlatestpull() {
-    docker image list --format "{{.Repository}}" | xargs -L1 docker pull
-    printf '\n%s\n%s\n' "Delete old images?" "yes no"
-    docker images | grep '<none>'
-    read -r answer
-    case $answer in
-    y | j | o | ok | yes)
-      docker rmi "$(docker image list --format "table {{.ID}}\t{{.Tag}}" | awk '/<none>/{print $1}')"
-      ;;
-    *)
-      return
-      ;;
-
-    esac
-  }
-
-  #complete -W $(docker images | awk 'NR>1{printf("%s ", $1)} END{print ""}') drun
-
-  function netrun() {
-    docker run -it \
-      --network host \
-      --rm --name netwb \
-      jonlabelle/network-tools
-  }
-
-  #function perlrun() {
-  #  docker run -it \
-  #          --rm --name "PERL" \
-  #          -v "$PWD":/usr/src/myapp \
-  #          -w /usr/src/myapp \
-  #          perl:latest \
-  #          perl "$1"
-  #}
-
-  function jupyrun() {
-    ~/Applications/venv/bin/jupyter-lab
-  }
-  #function jupyrunNp() {
-  #    docker run -it --rm \
-  #            -v $(pwd):/home/jovyan/work -p 8888:8888 \
-  #            jupyter/scipy-notebook
-  #}
-
-  function pythonrun() {
-    docker run -it \
-      --rm --name "PYTHON" \
-      -v "${PWD}":/usr/src/myapp \
-      -w /usr/src/myapp \
-      python:latest \
-      python3 "${1}"
-  }
-
-  function blackrun() {
-    docker run --rm \
-      --volume "$(pwd)":/src \
-      --workdir /src \
-      pyfound/black:latest \
-      black --check -l 80 -S "$@"
-  }
 fi
+# ,docker_helper_functions
 
 ## source completion by function call not by default
 function ,completion_k8s_oc_tf() {
