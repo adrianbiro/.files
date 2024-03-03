@@ -290,11 +290,10 @@ fi
 #  }
 #fi
 # clipboard
-if command -v xclip 1>"/dev/null" 2>&1; then
-  alias cpath="pwd | xclip -selection clipboard"
-  alias Get-Clipboard="xclip -o clip"
-  alias Set-Clipboard="xclip -selection clipboard"
-fi
+#if command -v xclip 1>"/dev/null" 2>&1; then
+#  alias Get-Clipboard="xclip -o clip"
+#  alias Set-Clipboard="xclip -selection clipboard"
+#fi
 
 # jq
 if command -v jq 1>"/dev/null" 2>&1; then
@@ -496,36 +495,33 @@ fi
 
 ## source completion by function call not by default
 function ,completion_k8s_oc_tf() {
+  local compdir
+  local compfile
+  compdir="${DOTFILES}/completions/"
   ## Kubectl
   if command -v kubectl 1>"/dev/null" 2>&1; then
-    compdir="${DOTFILES}/completions/"
     compfile="kubectl-completion-kubectl.sh"
     if [[ -f "${compdir}/${compfile}" ]]; then
       # shellcheck disable=SC1090
       source "${compdir}/${compfile}"
-      unset compdir compfile
     else
       mkdir -p "${compdir}" 1>"/dev/null" 2>&1
       kubectl completion bash >"${compdir}/${compfile}"
       # shellcheck disable=SC1090
       source "${compdir}/${compfile}"
-      unset compdir compfile
     fi
   fi
   ## OC openshift
   if command -v oc 1>"/dev/null" 2>&1; then
-    compdir="${DOTFILES}/completions/"
     compfile="oc-completion-bash.sh"
     if [[ -f "${compdir}/${compfile}" ]]; then
       # shellcheck disable=SC1090
       source "${compdir}/${compfile}"
-      unset compdir compfile
     else
       mkdir -p "${compdir}" 1>"/dev/null" 2>&1
       oc completion bash >"${compdir}/${compfile}"
       # shellcheck disable=SC1090
       source "${compdir}/${compfile}"
-      unset compdir compfile
     fi
   fi
 
@@ -548,7 +544,8 @@ function ,completion_k8s_oc_tf() {
   fi
 
   if command -v terraform 1>"/dev/null" 2>&1; then
-    complete -C /usr/bin/terraform terraform
+    complete -C "$(command -v terraform)" terraform
   fi
 }
 #,completion_k8s_oc_tf
+
