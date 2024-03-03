@@ -305,9 +305,9 @@ fi
 # bat batcat
 if command -v batcat 1>"/dev/null" 2>&1; then
   alias o='batcat --pager "less -R" --plain'
-  if [[ -f "${DOTFILES}/bat-completion" ]]; then
+  if [[ -f "${DOTFILES}/completions/go-pkg-completion" ]]; then
     # shellcheck disable=SC1091
-    source "${DOTFILES}/bat-completion"
+    source "${DOTFILES}/completions/go-pkg-completion"
   fi
 fi
 
@@ -327,9 +327,9 @@ if command -v bat 1>"/dev/null" 2>&1; then
     export -f bat
   fi
   alias o='bat --pager "less -RF" --plain'
-  if [[ -f "${DOTFILES}/bat-completion" ]]; then
+  if [[ -f "${DOTFILES}/completions/go-pkg-completion" ]]; then
     # shellcheck disable=SC1091
-    source "${DOTFILES}/bat-completion"
+    source "${DOTFILES}/completions/go-pkg-completion"
   fi
 fi
 
@@ -354,9 +354,9 @@ if command -v go 1>"/dev/null" 2>&1; then
   # source completion and helper by fuction call no by default
   function ,go() {
     #PATH="/usr/local/go/bin:$PATH"
-    if [[ -d "${DOTFILES}/go-pkg-completion" ]]; then
+    if [[ -d "${DOTFILES}/completions/go-pkg-completion" ]]; then
       # shellcheck disable=SC1091
-      source "${DOTFILES}/go-pkg-completion"
+      source "${DOTFILES}/completions/go-pkg-completion"
     fi
     alias gomih='go mod init "${PWD##*/}"'
   }
@@ -498,7 +498,7 @@ fi
 function ,completion_k8s_oc_tf() {
   ## Kubectl
   if command -v kubectl 1>"/dev/null" 2>&1; then
-    compdir="${HOME}/.config/completion/"
+    compdir="${DOTFILES}/completions/"
     compfile="kubectl-completion-kubectl.sh"
     if [[ -f "${compdir}/${compfile}" ]]; then
       # shellcheck disable=SC1090
@@ -514,7 +514,7 @@ function ,completion_k8s_oc_tf() {
   fi
   ## OC openshift
   if command -v oc 1>"/dev/null" 2>&1; then
-    compdir="${HOME}/.config/completion/"
+    compdir="${DOTFILES}/completions/"
     compfile="oc-completion-bash.sh"
     if [[ -f "${compdir}/${compfile}" ]]; then
       # shellcheck disable=SC1090
