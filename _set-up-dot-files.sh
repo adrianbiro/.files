@@ -2,6 +2,7 @@
 declare -a files
 files=(
     ".bashrc"
+    ".kshrc"
     #".vimrc"  # cf. in .bashrc VIMINIT
     ".bash_profile"
     ".curlrc"

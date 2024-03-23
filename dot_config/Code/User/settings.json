@@ -16,7 +16,8 @@
         "/home/adrian/gits/adrianbiro.github.io",
         "/home/adrian/gits/jednorazove/PwCveci",
         "/home/adrian/gits/Entra_ID_Stuff",
-        "/home/adrian/gits/jednorazove/personal_list_of_books"
+        "/home/adrian/gits/jednorazove/personal_list_of_books",
+        "/home/adrian/gits/jednorazove/JavaFullStackEnterpriseWeb"
     ],
     "[python]": {
         "editor.formatOnType": true,
@@ -51,5 +52,7 @@
     },
     //"window.zoomLevel": 1.6 //,
     "git.autofetch": false,
-    "extensions.ignoreRecommendations": true
+    "extensions.ignoreRecommendations": true,
+    "java.debug.settings.exceptionBreakpoint.skipClasses": [],
+    "editor.largeFileOptimizations": false
 }
