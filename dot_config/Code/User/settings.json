@@ -50,6 +50,7 @@
     "files.associations": {
         "*.md ": "markdown"
     },
+    "editor.rulers": [80],
     //"window.zoomLevel": 1.6 //,
     "git.autofetch": false,
     "extensions.ignoreRecommendations": true,
