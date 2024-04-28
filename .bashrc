@@ -548,4 +548,3 @@ function ,completion_k8s_oc_tf() {
   fi
 }
 #,completion_k8s_oc_tf
-
