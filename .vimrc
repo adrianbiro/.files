@@ -10,6 +10,8 @@ set encoding=utf-8
 set fileformat=unix
 set autoindent smartindent
 set nocompatible
+set shortmess-=S " show match count as [1/5]
+set ttyfast
 set tabstop=4 softtabstop=4
 set expandtab
 augroup configgroup
