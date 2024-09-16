@@ -72,7 +72,7 @@ set title       "set window title by currently edited file (terminal tab dialog)
 "hi Todo ctermbg=DarkGray ctermfg=NONE
 """"""""""""""""""""""""""""""""""""""""""
 set colorcolumn=80
-colorscheme desert
+"colorscheme desert
 highlight ColorColumn ctermbg=DarkMagenta guibg=DarkMagenta
 highlight LineNr ctermfg=DarkGrey
 """"""""""""""""""""""""""""""""""""""""""
