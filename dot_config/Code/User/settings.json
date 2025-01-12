@@ -55,5 +55,6 @@
     "git.autofetch": false,
     "extensions.ignoreRecommendations": true,
     "java.debug.settings.exceptionBreakpoint.skipClasses": [],
-    "editor.largeFileOptimizations": false
+    "editor.largeFileOptimizations": false,
+    "sonarlint.rules": {}
 }
