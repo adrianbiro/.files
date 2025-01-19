@@ -24,3 +24,7 @@ fi
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+
+# >>> coursier install directory >>>
+export PATH="$PATH:/home/adrian/.local/share/coursier/bin"
+# <<< coursier install directory <<<

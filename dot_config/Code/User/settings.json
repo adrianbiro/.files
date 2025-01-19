@@ -56,5 +56,10 @@
     "extensions.ignoreRecommendations": true,
     "java.debug.settings.exceptionBreakpoint.skipClasses": [],
     "editor.largeFileOptimizations": false,
-    "sonarlint.rules": {}
+    "sonarlint.rules": {},
+    "files.watcherExclude": {
+        "**/.bloop": true,
+        "**/.metals": true,
+        "**/.ammonite": true
+    }
 }

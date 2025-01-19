@@ -116,6 +116,7 @@ pathprepend \
   "$HOME/.local/bin" \
   /usr/local/go/bin \
   /usr/local/opt/openjdk/bin \
+  "$HOME/.local/share/coursier/bin" \
   "$HOME/.dotnet" \
   "$HOME/.dotnet/tools" && unset arg
 
@@ -390,7 +391,7 @@ if command -v git 1>"/dev/null" 2>&1; then
     local cbranch
     cbranch=$(git branch | sed -e '/^[^*]/d' -e 's/* //')
     printf '\e[36m%s\033[0m%s\n' "This will add, commit and push all the files to branch " "$cbranch"
-    read -p "Do you want that? y/n " -n 1 -r
+    read -p "Do you want that? y/N " -n 1 -r
     if [[ "$REPLY" =~ ^([yY][eE][sS]|[yY])+$ ]]; then
       git add .
       git commit -m "small fixes"
