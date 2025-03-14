@@ -21,3 +21,6 @@
 	windowMemory = 2047m
 #[http]
 #	proxy = http://<user>:<passwd>@wpadweb.csin.cz/wpad.pac:3128 #8080
+[safe]
+	directory = /srv
+	directory = *
