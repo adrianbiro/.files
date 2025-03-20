@@ -7,17 +7,11 @@
         "/home/adrian/gits/learn",
         "/home/adrian/gits/winbin",
         "/home/adrian/gits/ROZROBENE",
-        "/home/adrian/gits/sslmonitoring",
-        "/home/adrian/gits/my_templates",
-        "/home/adrian/gits/script",
         "/home/adrian/gits/m_bin",
-        "/home/adrian/gits/fastAPI",
-        "/home/adrian/gits/terraform",
         "/home/adrian/gits/adrianbiro.github.io",
-        "/home/adrian/gits/jednorazove/PwCveci",
-        "/home/adrian/gits/Entra_ID_Stuff",
-        "/home/adrian/gits/jednorazove/personal_list_of_books",
-        "/home/adrian/gits/jednorazove/JavaFullStackEnterpriseWeb"
+        "/home/adrian/gits/PwCveci",
+        "/home/adrian/gits/personal_list_of_books",
+        "/home/adrian/gits/rest-cli"
     ],
     "[python]": {
         "editor.formatOnType": true,
