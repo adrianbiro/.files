@@ -15,6 +15,7 @@
     - 'glances'
     - 'bruno'
     - 'onlyoffice-desktopeditors'
+    - 'vlc'
 
   - name: Install Flatpak packages
     command: flatpak install "{{ item }}"
