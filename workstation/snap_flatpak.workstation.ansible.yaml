@@ -15,10 +15,10 @@
     - 'glances'
     - 'bruno'
     - 'onlyoffice-desktopeditors'
-    - 'vlc'
 
   - name: Install Flatpak packages
     command: flatpak install "{{ item }}"
 
     with_items:
-    - 'io.gitlab.librewolf-community' 
+    - 'io.gitlab.librewolf-community'
+    - 'org.videolan.VLC' 
