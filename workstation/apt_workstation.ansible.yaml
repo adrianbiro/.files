@@ -1,0 +1,55 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: Update all packages to their latest version
+    ansible.builtin.apt:
+      name: "*"
+      state: latest
+      cache_valid_time: 3600
+  - name: Upgrade the OS (apt-get dist-upgrade)
+    ansible.builtin.apt:
+      upgrade: dist
+      cache_valid_time: 3600
+  - name: Install aptitude
+    apt:
+      name: aptitude
+      state: latest
+      update_cache: true
+  - name: Enable snap
+    ansible.builtin.file:
+      dest: /etc/apt/preferences.d/nosnap.pref
+      state: absent
+
+  - name: Install required system packages
+    apt:
+      pkg:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - wget
+      - python3-pip
+      - python3-venv
+      - git
+      - git-lfs
+      - htop
+      - vim
+      - jq
+      - snapd
+      - flatpak
+      - diodon
+      - libxcb-cursor0
+      state: latest
+      update_cache: true
+
+  - name: Prepare signal install
+    # https://signal.org/download/linux/
+    ansible.builtin.shell: |
+      wget -O- https://updates.signal.org/desktop/apt/keys.asc | gpg --dearmor | sudo tee /usr/share/keyrings/signal-desktop-keyring.gpg > /dev/null
+      echo 'deb [arch=amd64 signed-by=/usr/share/keyrings/signal-desktop-keyring.gpg] https://updates.signal.org/desktop/apt xenial main' | sudo tee /etc/apt/sources.list.d/signal-xenial.list
+      sudo apt update && sudo apt install signal-desktop
+
+  - name: Install Calibre
+    # https://calibre-ebook.com/download_linux
+    ansible.builtin.shell: |
+      sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.sh | sudo sh /dev/stdin

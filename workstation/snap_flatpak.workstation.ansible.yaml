@@ -1,0 +1,23 @@
+---
+- hosts: all
+  become: true
+  tasks:
+  - name: Install Snap --classic packages
+    command: snap install "{{ item.args }}" "{{ item.name }}"
+    with_items:
+    - { name: 'code', args: '--classic' }
+    - { name: 'powershell', args: '--classic' }
+  
+  - name: Install Snap packages
+    command: snap install "{{ item }}"
+    with_items:
+    - 'bitwarden'
+    - 'glances'
+    - 'bruno'
+    - 'onlyoffice-desktopeditors'
+
+  - name: Install Flatpak packages
+    command: flatpak install "{{ item }}"
+
+    with_items:
+    - 'io.gitlab.librewolf-community' 
