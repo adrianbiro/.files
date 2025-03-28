@@ -38,7 +38,8 @@
       - snapd
       - flatpak
       - diodon
-      - libxcb-cursor0
+      - libxcb-cursor0  # calibe dependency
+      - ncdu
       state: latest
       update_cache: true
 
