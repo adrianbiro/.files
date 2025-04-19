@@ -1,4 +1,5 @@
 ---
+
 - hosts: all
   become: true
   tasks:
@@ -7,7 +8,7 @@
     with_items:
     - { name: 'code', args: '--classic' }
     - { name: 'powershell', args: '--classic' }
-  
+
   - name: Install Snap packages
     command: snap install "{{ item }}"
     with_items:
@@ -15,10 +16,11 @@
     - 'glances'
     - 'bruno'
     - 'onlyoffice-desktopeditors'
+    - 'dbeaver-ce'
 
   - name: Install Flatpak packages
     command: flatpak install "{{ item }}"
 
     with_items:
     - 'io.gitlab.librewolf-community'
-    - 'org.videolan.VLC' 
+    - 'org.videolan.VLC'
