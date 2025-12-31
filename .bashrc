@@ -549,3 +549,6 @@ function ,completion_k8s_oc_tf() {
   fi
 }
 #,completion_k8s_oc_tf
+#RUST
+# shellcheck disable=SC1090
+[[ -f "${HOME}/.cargo/env" ]] && source "${HOME}/.cargo/env"

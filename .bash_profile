@@ -28,3 +28,6 @@ fi
 # >>> coursier install directory >>>
 export PATH="$PATH:/home/adrian/.local/share/coursier/bin"
 # <<< coursier install directory <<<
+#RUST
+# shellcheck disable=SC1090
+[[ -f "${HOME}/.cargo/env" ]] && source "${HOME}/.cargo/env"
