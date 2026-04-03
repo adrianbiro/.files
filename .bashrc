@@ -10,6 +10,7 @@ if [[ -z "${__CUSTOM__BASHRC__}" ]]; then
 else
   return
 fi
+export LC_ALL="en_US.UTF-8"
 # to disable -u	it's for extended glob patterns like ls **/*
 # grep -d skip 'text_string' **/* this is similar to grep -d skip -R 'text_string'
 shopt -s globstar
@@ -231,7 +232,7 @@ function prompt() {
     #local hostnames=${POSHOSTNAMES:-"hp-win11 pc NP48412"}
     #if echo "$hostnames" | grep -q $(hostname); then
     local arr
-    declare -A arr=(["hp-win11"]=1 ["black"]=1 ["CZ-108881"]=1 ["silver"]=1)
+    declare -A arr=(["hp-win11"]=1 ["black"]=1 ["CZ_LWV174WQ7M"]=1 ["silver"]=1)
     [[ -v arr[$(hostname)] ]] && export PS1="\w${if_err_set_red}${pscolor1} "
     ;;
   esac
